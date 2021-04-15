@@ -508,14 +508,12 @@ end
 function mod:Toggle()
 	if(E.db.benikui.misc.flightMode.enable) then
 		self:RegisterEvent("UPDATE_BONUS_ACTIONBAR", "OnEvent")
-		self:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR", "OnEvent")
 		self:RegisterEvent("LFG_PROPOSAL_SHOW", "OnEvent")
 		self:RegisterEvent("UPDATE_BATTLEFIELD_STATUS", "OnEvent")
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", "OnEvent")
 		BUI:LoadInFlightProfile(true)
 	else
 		self:UnregisterEvent("UPDATE_BONUS_ACTIONBAR")
-		self:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
 		self:UnregisterEvent("LFG_PROPOSAL_SHOW")
 		self:UnregisterEvent("UPDATE_BATTLEFIELD_STATUS")
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
