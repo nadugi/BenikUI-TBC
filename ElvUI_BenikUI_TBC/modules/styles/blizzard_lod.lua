@@ -773,7 +773,7 @@ local function style_TalentUI()
 		return
 	end
 
-	_G.PlayerTalentFrame:BuiStyle("Outside")
+	_G.PlayerTalentFrame.backdrop:BuiStyle("Outside")
 	for i = 1, 2 do
 		local tab = _G["PlayerSpecTab" .. i]
 		if tab then
@@ -783,7 +783,6 @@ local function style_TalentUI()
 			tab:GetNormalTexture():SetInside()
 		end
 	end
-	PlayerTalentFrameTalents.PvpTalentFrame.TalentList.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_TalentUI", "BenikUI_TalentUI", style_TalentUI)
 

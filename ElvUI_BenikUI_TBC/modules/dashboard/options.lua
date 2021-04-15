@@ -653,7 +653,7 @@ local function dashboardsTable()
 		},
 	}
 	-- update the options, when ElvUI Config fires
-	hooksecurefunc(E, "ToggleOptionsUI", UpdateProfessionOptions)
+	--hooksecurefunc(E, "ToggleOptionsUI", UpdateProfessionOptions)
 	hooksecurefunc(E, "ToggleOptionsUI", UpdateReputationOptions)
 end
 

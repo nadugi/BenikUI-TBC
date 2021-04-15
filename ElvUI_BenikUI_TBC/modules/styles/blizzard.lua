@@ -30,14 +30,13 @@ local function LoadSkin()
 	end
 
 	local function repUpdate()
-		if _G.ReputationDetailFrame.backdrop then
-			_G.ReputationDetailFrame.backdrop:BuiStyle("Outside")
+		if _G.ReputationDetailFrame then
+			_G.ReputationDetailFrame:BuiStyle("Outside")
 		end
 	end
 
 	if db.character then
-		_G.PaperDollFrame:BuiStyle("Outside")
-		_G.ReputationFrame:BuiStyle("Outside")
+		_G.CharacterFrame.backdrop:BuiStyle("Outside")
 		hooksecurefunc('ReputationFrame_Update', repUpdate)
 	end
 
@@ -167,7 +166,7 @@ local function LoadSkin()
 	end
 
 	if db.spellbook then
-		_G.SpellBookFrame:BuiStyle("Outside")
+		_G.SpellBookFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.tabard then
