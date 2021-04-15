@@ -461,10 +461,6 @@ function mod:SetFlightMode(status)
 end
 
 function mod:OnEvent(event, ...)
-	local forbiddenArea = BUI:CheckFlightMapID()
-
-	if forbiddenArea then return end
-
 	if(event == "LFG_PROPOSAL_SHOW" or event == "UPDATE_BATTLEFIELD_STATUS") then
 		if(event == "UPDATE_BATTLEFIELD_STATUS") then
 			local status = GetBattlefieldStatus(...);
