@@ -46,36 +46,6 @@ local function UpdateSystemOptions()
 	}
 end
 
-local function UpdateTokenOptions()
-	for i, info in ipairs(BUI.CurrencyList) do
-		local optionOrder = 1
-		local name, id = unpack(info)
-		if not info[2] then
-			E.Options.args.benikui.args.dashboards.args.tokens.args[tostring(i)] = {
-				order = i,
-				type = 'group',
-				name = name,
-				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
-				args = {
-				},
-			}
-		elseif info[3] then
-			local tname, amount, icon = BUID:GetTokenInfo(id)
-			if tname then
-				E.Options.args.benikui.args.dashboards.args.tokens.args[tostring(info[3])].args[tostring(i)] = {
-					order = optionOrder + 2,
-					type = 'toggle',
-					name = (icon and '|T'..icon..':18|t '..tname) or tname,
-					desc = format('%s %s\n\n|cffffff00%s: %s|r', L['Enable/Disable'], tname, L['Amount'], BreakUpLargeNumbers(amount)),
-					disabled = function() return not E.db.dashboards.tokens.enableTokens end,
-					get = function(info) return E.private.dashboards.tokens.chooseTokens[id] end,
-					set = function(info, value) E.private.dashboards.tokens.chooseTokens[id] = value; BUID:UpdateTokens(); BUID:UpdateTokenSettings(); end,
-				}
-			end
-		end
-	end
-end
-
 local function UpdateProfessionOptions()
 	local prof1, prof2, archy, fishing, cooking = GetProfessions()
 	local optionOrder = 1
@@ -683,13 +653,11 @@ local function dashboardsTable()
 		},
 	}
 	-- update the options, when ElvUI Config fires
-	hooksecurefunc(E, "ToggleOptionsUI", UpdateTokenOptions)
 	hooksecurefunc(E, "ToggleOptionsUI", UpdateProfessionOptions)
 	hooksecurefunc(E, "ToggleOptionsUI", UpdateReputationOptions)
 end
 
 tinsert(BUI.Config, dashboardsTable)
 tinsert(BUI.Config, UpdateSystemOptions)
-tinsert(BUI.Config, UpdateTokenOptions)
 tinsert(BUI.Config, UpdateProfessionOptions)
 tinsert(BUI.Config, UpdateReputationOptions)

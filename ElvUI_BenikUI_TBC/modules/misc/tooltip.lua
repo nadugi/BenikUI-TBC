@@ -145,12 +145,6 @@ function mod:SetupStyleAndShadow(tt)
 	end
 end
 
-function mod:StyleAceTooltip(tt)
-	if not tt.style then
-		tt:BuiStyle('Outside')
-	end
-end
-
 function mod:Initialize()
 	if E.db.benikui.general.benikuiStyle ~= true or E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.tooltip ~= true then return end
 
@@ -162,7 +156,6 @@ function mod:Initialize()
 	mod:SecureHookScript(GameTooltip, 'OnTooltipCleared', 'GameTooltip_OnTooltipCleared')
 	mod:SecureHookScript(GameTooltip, 'OnUpdate', 'RecolorTooltipStyle')
 	hooksecurefunc(TT, "GameTooltip_SetDefaultAnchor", mod.SetupStyleAndShadow)
-	hooksecurefunc(S, "Ace3_StyleTooltip", mod.StyleAceTooltip)
 end
 
 BUI:RegisterModule(mod:GetName())

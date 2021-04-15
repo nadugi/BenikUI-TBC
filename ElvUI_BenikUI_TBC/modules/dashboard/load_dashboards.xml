@@ -1,7 +1,6 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<script file="dashboards.lua"/>
 	<script file="system.lua"/>
-	<!--<Script file="tokens.lua"/>-->
 	<Script file="professions.lua"/>
 	<Script file="reputations.lua"/>
 	<Script file="options.lua"/>
