@@ -124,8 +124,6 @@ end
 function mod:Initialize()
 	self:LoadXP()
 	self:LoadRep()
-	self:LoadAzerite()
-	self:LoadHonor()
 	self:LoadThreat()
 end
 
