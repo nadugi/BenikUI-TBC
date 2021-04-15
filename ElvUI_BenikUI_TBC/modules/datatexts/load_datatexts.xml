@@ -4,5 +4,4 @@
 	<script file="AchievementPoints.lua"/>
 	<script file="mail.lua"/>
 	<script file="specswitch.lua"/>
-	<script file="missions.lua"/>
 </Ui>
