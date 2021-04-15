@@ -87,10 +87,6 @@ local function StyleBlizzardTooltips()
 			end
 		end
 
-		_G.QuestMapFrame.QuestsFrame.StoryTooltip:BuiStyle("Outside")
-		_G.QuestScrollFrame.StoryTooltip:BuiStyle("Outside")
-		_G.QuestScrollFrame.CampaignTooltip:BuiStyle("Outside")
-
 		local shoppingTooltips = {_G.WorldMapCompareTooltip1, _G.WorldMapCompareTooltip2}
 		for _, tooltip in pairs(shoppingTooltips) do
 			if not tooltip.style then
