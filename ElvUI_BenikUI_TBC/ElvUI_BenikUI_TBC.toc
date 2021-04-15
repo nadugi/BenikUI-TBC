@@ -1,14 +1,15 @@
-## Interface: 11306
+## Interface: 90005
 ## Author: Benik
-## Version: 1.18
-## Title: |cff1784d1ElvUI|r |cff00c0faBenikUI Classic|r
-## Notes: an ElvUI Classic decorative/enhancement edit
+## Version: 4.05
+## Title: |cff1784d1ElvUI|r |cff00c0faBenikUI|r
+## Notes: an ElvUI 12+ decorative/enhancement edit
 ## RequiredDeps: ElvUI
 ## DefaultState: Enabled
 ## OptionalDeps: SharedMedia, AddOnSkins, ProjectAzilroka
-## X-ElvuiVersion: 1.33
+## X-Tukui-ProjectID: 11
+## X-Tukui-ProjectFolders: ElvUI_BenikUI
+## X-ElvuiVersion: 12.18
 
-libs\load_libs.xml
 locales\load_locales.xml
 media\load_media.xml
 defaults\load_defaults.xml

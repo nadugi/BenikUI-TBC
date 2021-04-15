@@ -4,5 +4,7 @@
 	<script file="tooltip.lua"/>
 	<script file="afk.lua"/>
 	<script file="flightMode.lua"/>
+	<script file="ilevel.lua"/>
+	<script file="objectiveTracker.lua"/>
 	<script file="options.lua"/>
 </Ui>

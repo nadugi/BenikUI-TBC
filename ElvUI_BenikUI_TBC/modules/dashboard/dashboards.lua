@@ -1,21 +1,19 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
-local mod = BUI:NewModule('Dashboards', 'AceEvent-3.0', 'AceHook-3.0')
+local mod = BUI:GetModule('Dashboards')
 local LSM = E.LSM
-local DT = E:GetModule('DataTexts')
 
 local CreateFrame = CreateFrame
-local SECONDARY_SKILLS = SECONDARY_SKILLS
 
 local DASH_HEIGHT = 20
-local DASH_SPACING = 3
 local SPACING = 1
 
-local classColor = E.myclass == 'PRIEST' and E.PriestColors or (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[E.myclass] or RAID_CLASS_COLORS[E.myclass])
+local classColor = E:ClassColor(E.myclass, true)
 
 -- Dashboards bar frame tables
 BUI.SystemDB = {}
+BUI.TokensDB = {}
 BUI.ProfessionsDB = {}
-BUI.SecondarySkill = SECONDARY_SKILLS:gsub(":", '')
+BUI.FactionsDB = {}
 
 function mod:EnableDisableCombat(holder, option)
 	local db = E.db.dashboards[option]
@@ -42,10 +40,19 @@ function mod:ToggleTransparency(holder, option)
 	local db = E.db.dashboards[option]
 	if not db.backdrop then
 		holder.backdrop:SetTemplate("NoBackdrop")
+		if holder.backdrop.shadow then
+			holder.backdrop.shadow:Hide()
+		end
 	elseif db.transparency then
 		holder.backdrop:SetTemplate("Transparent")
+		if holder.backdrop.shadow then
+			holder.backdrop.shadow:Show()
+		end
 	else
 		holder.backdrop:SetTemplate("Default", true)
+		if holder.backdrop.shadow then
+			holder.backdrop.shadow:Show()
+		end
 	end
 end
 
@@ -53,11 +60,7 @@ function mod:ToggleStyle(holder, option)
 	if E.db.benikui.general.benikuiStyle ~= true then return end
 
 	local db = E.db.dashboards[option]
-	if db.style then
-		holder.backdrop.style:Show()
-	else
-		holder.backdrop.style:Hide()
-	end
+	holder.backdrop.style:SetShown(db.style)
 end
 
 function mod:FontStyle(tableName)
@@ -90,6 +93,26 @@ function mod:BarColor(tableName)
 	end
 end
 
+function mod:IconPosition(tableName, dashboard)
+	for _, bar in pairs(tableName) do
+		if not bar.hasIcon then return end
+
+		bar.IconBG:ClearAllPoints()
+		bar.dummy:ClearAllPoints()
+		if E.db.dashboards[dashboard].iconPosition == 'LEFT' then
+			bar.dummy:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', -2, 0)
+			bar.dummy:Point('BOTTOMLEFT', bar, 'BOTTOMLEFT', (E.PixelMode and 24 or 28), 0)
+			bar.IconBG:Point('BOTTOMLEFT', bar, 'BOTTOMLEFT', (E.PixelMode and 2 or 3), -SPACING)
+			bar.Text:Point('CENTER', bar, 'CENTER', 10, (E.PixelMode and -1 or -3))
+		else
+			bar.dummy:Point('BOTTOMLEFT', bar, 'BOTTOMLEFT', 2, 0)
+			bar.dummy:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (E.PixelMode and -24 or -28), 0)
+			bar.IconBG:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (E.PixelMode and -2 or -3), SPACING)
+			bar.Text:Point('CENTER', bar, 'CENTER', -10, (E.PixelMode and 1 or 3))
+		end
+	end
+end
+
 function mod:CreateDashboardHolder(holderName, option)
 	local db = E.db.dashboards[option]
 
@@ -97,7 +120,7 @@ function mod:CreateDashboardHolder(holderName, option)
 	holder:CreateBackdrop('Transparent')
 	holder:SetFrameStrata('BACKGROUND')
 	holder:SetFrameLevel(5)
-	holder.backdrop:Style('Outside')
+	holder.backdrop:BuiStyle('Outside')
 	holder:Hide()
 
 	if db.combat then
@@ -113,65 +136,54 @@ function mod:CreateDashboardHolder(holderName, option)
 	end
 	mod:EnableDisableCombat(holder, option)
 
-	E.FrameLocks[holder] = true;
+	E.FrameLocks[holder] = { parent = E.UIParent }
 
 	return holder
 end
 
-function mod:CreateDashboard(name, barHolder, option, hasIcon)
+function mod:CreateDashboard(barHolder, option, hasIcon)
 	local bar = CreateFrame('Button', nil, barHolder)
+	local barIconOffset = (hasIcon and -22) or -2
+
 	bar:Height(DASH_HEIGHT)
 	bar:Width(E.db.dashboards[option].width or 150)
 	bar:Point('TOPLEFT', barHolder, 'TOPLEFT', SPACING, -SPACING)
 	bar:EnableMouse(true)
 
-	bar.dummy = CreateFrame('Frame', nil, bar)
-	bar.dummy:Point('BOTTOMLEFT', bar, 'BOTTOMLEFT', 2, (E.PixelMode and 2 or 0))
-
-	if hasIcon then
-		bar.dummy:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (E.PixelMode and -24 or -28), 0)
-	else
-		bar.dummy:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (E.PixelMode and -2 or -4), 0)
-	end
-
-	bar.dummy:Height(E.PixelMode and 3 or 5)
-
-	bar.dummy.dummyStatus = bar.dummy:CreateTexture(nil, 'OVERLAY')
-	bar.dummy.dummyStatus:SetInside()
-	bar.dummy.dummyStatus:SetTexture(E['media'].BuiFlat)
-	bar.dummy.dummyStatus:SetVertexColor(1, 1, 1, .2)
+	bar.dummy = CreateFrame('Frame', nil, bar, 'BackdropTemplate')
+	bar.dummy:SetTemplate('Transparent', nil, true, true)
+	bar.dummy:SetBackdropBorderColor(0, 0, 0, 0)
+	bar.dummy:SetBackdropColor(1, 1, 1, .2)
+	bar.dummy:Point('BOTTOMLEFT', bar, 'BOTTOMLEFT', 2, 0)
+	bar.dummy:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (hasIcon and (E.PixelMode and -24 or -28) or -2), 0)
+	bar.dummy:Height(E.PixelMode and 1 or 3)
 
 	bar.Status = CreateFrame('StatusBar', nil, bar.dummy)
-	bar.Status:SetStatusBarTexture(E['media'].BuiFlat)
+	bar.Status:SetStatusBarTexture(E.Media.Textures.White8x8)
 	bar.Status:SetInside()
 
 	bar.spark = bar.Status:CreateTexture(nil, 'OVERLAY', nil);
 	bar.spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]]);
 	bar.spark:Size(12, 6);
 	bar.spark:SetBlendMode('ADD');
-	bar.spark:SetPoint('CENTER', bar.Status:GetStatusBarTexture(), 'RIGHT')
+	bar.spark:Point('CENTER', bar.Status:GetStatusBarTexture(), 'RIGHT')
 
 	bar.Text = bar.Status:CreateFontString(nil, 'OVERLAY')
 	bar.Text:FontTemplate()
-
-	if hasIcon then
-		bar.Text:Point('CENTER', bar, 'CENTER', -10, (E.PixelMode and 1 or 3))
-	else
-		bar.Text:Point('CENTER', bar, 'CENTER', 0, (E.PixelMode and 1 or 3))
-	end
-
-	bar.Text:Width(bar:GetWidth() - 20)
+	bar.Text:Point('CENTER', bar, 'CENTER', (hasIcon and -10) or 0, (E.PixelMode and 1 or 3))
+	bar.Text:Width(bar:GetWidth() + barIconOffset)
 	bar.Text:SetWordWrap(false)
 
 	if hasIcon then
-		bar.IconBG = CreateFrame('Button', nil, bar)
+		bar.IconBG = CreateFrame('Button', nil, bar, 'BackdropTemplate')
 		bar.IconBG:SetTemplate('Transparent')
-		bar.IconBG:Size(E.PixelMode and 18 or 20)
+		bar.IconBG:Size(E.PixelMode and 18 or 20, E.PixelMode and 18 or 20)
 		bar.IconBG:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (E.PixelMode and -2 or -3), SPACING)
 
 		bar.IconBG.Icon = bar.IconBG:CreateTexture(nil, 'ARTWORK')
 		bar.IconBG.Icon:SetInside()
 		bar.IconBG.Icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		bar.hasIcon = hasIcon
 	end
 
 	return bar
@@ -180,6 +192,8 @@ end
 function mod:Initialize()
 	mod:LoadSystem()
 	mod:LoadProfessions()
+	mod:LoadTokens()
+	mod:LoadReputations()
 end
 
 BUI:RegisterModule(mod:GetName())

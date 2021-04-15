@@ -2,15 +2,16 @@ local BUI, E, L, V, P, G = unpack(select(2, ...))
 local mod = BUI:GetModule('Dashboards');
 local DT = E:GetModule('DataTexts');
 
+local _G = _G
 local getn = getn
 local pairs, ipairs = pairs, ipairs
-local tinsert, twipe, tsort = table.insert, table.wipe, table.sort
+local tinsert, tsort = table.insert, table.sort
 
-local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local GetProfessions = GetProfessions
 local GetProfessionInfo = GetProfessionInfo
-local CastSpellByName = CastSpellByName
-local TRADE_SKILLS, PROFESSIONS_FISHING = TRADE_SKILLS, PROFESSIONS_FISHING
+local CastSpell = CastSpell
+local InCombatLockdown = InCombatLockdown
+local TRADE_SKILLS = TRADE_SKILLS
 
 -- GLOBALS: hooksecurefunc, MMHolder
 
@@ -18,15 +19,31 @@ local DASH_HEIGHT = 20
 local DASH_SPACING = 3
 local SPACING = 1
 
-local classColor = E.myclass == 'PRIEST' and E.PriestColors or (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[E.myclass] or RAID_CLASS_COLORS[E.myclass])
+local classColor = E:ClassColor(E.myclass, true)
 
 local function sortFunction(a, b)
-	return a.skillName < b.skillName
+	return a.name < b.name
+end
+
+local function OnMouseUp(frame, btn)
+	if InCombatLockdown() then return end
+	local SetOffset = frame.SetOffset
+	local name = frame.name
+
+	if btn == "RightButton" then
+		E:ToggleOptionsUI()
+		local ACD = E.Libs.AceConfigDialog
+		if ACD then ACD:SelectGroup("ElvUI", "benikui") end
+	else
+		if SetOffset > 0 then
+			CastSpell(SetOffset + 1, name)
+		end
+	end
 end
 
 function mod:UpdateProfessions()
 	local db = E.db.dashboards.professions
-	local holder = BUI_ProfessionsDashboard
+	local holder = _G.BUI_ProfessionsDashboard
 
 	if(BUI.ProfessionsDB[1]) then
 		for i = 1, getn(BUI.ProfessionsDB) do
@@ -54,17 +71,16 @@ function mod:UpdateProfessions()
 		end
 	end)
 
-	local hasSecondary = false
-	for skillIndex = 1, GetNumSkillLines() do
-		local skillName, isHeader, _, skillRank, _, skillModifier, skillMaxRank, isAbandonable = GetSkillLineInfo(skillIndex)
+	local prof1, prof2, archy, fishing, cooking = GetProfessions()
 
-        if hasSecondary and isHeader then
-            hasSecondary = false
-        end
+	if (prof1 or prof2 or archy or fishing or cooking) then
+		local proftable = { GetProfessions() }
 
-		if (skillName and isAbandonable) or hasSecondary then
-			if skillName and (skillRank < skillMaxRank or (not db.capped)) then
-				if E.private.dashboards.professions.choosePofessions[skillIndex] == true then
+		for _, id in pairs(proftable) do
+			local name, icon, rank, maxRank, _, offset, _, rankModifier, _, _, skillLineName = GetProfessionInfo(id)
+
+			if name and (rank < maxRank or (not db.capped)) then
+				if E.private.dashboards.professions.choosePofessions[id] == true then
 					holder:Show()
 					holder:Height(((DASH_HEIGHT + (E.PixelMode and 1 or DASH_SPACING)) * (#BUI.ProfessionsDB + 1)) + DASH_SPACING + (E.PixelMode and 0 or 2))
 					if ProfessionsMover then
@@ -72,72 +88,72 @@ function mod:UpdateProfessions()
 						holder:Point('TOPLEFT', ProfessionsMover, 'TOPLEFT')
 					end
 
-					self.ProFrame = self:CreateDashboard(nil, holder, 'professions', false)
+					local bar = self:CreateDashboard(holder, 'professions', true)
 
-					if (skillModifier and skillModifier > 0) then
-						self.ProFrame.Status:SetMinMaxValues(1, skillMaxRank + skillModifier)
-						self.ProFrame.Status:SetValue(skillRank + skillModifier)
-					else
-						self.ProFrame.Status:SetMinMaxValues(1, skillMaxRank)
-						self.ProFrame.Status:SetValue(skillRank)
-					end
-
-					if E.db.dashboards.barColor == 1 then
-						self.ProFrame.Status:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
-					else
-						self.ProFrame.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
-					end
-
-					if (skillModifier and skillModifier > 0) then
-						self.ProFrame.Text:SetFormattedText('%s: %s |cFF6b8df4+%s|r / %s', skillName, skillRank, skillModifier, skillMaxRank)
-					else
-						self.ProFrame.Text:SetFormattedText('%s: %s / %s', skillName, skillRank, skillMaxRank)
-					end
-
-					if E.db.dashboards.textColor == 1 then
-						self.ProFrame.Text:SetTextColor(classColor.r, classColor.g, classColor.b)
-					else
-						self.ProFrame.Text:SetTextColor(BUI:unpackColor(E.db.dashboards.customTextColor))
-					end
-
-					self.ProFrame:SetScript('OnEnter', function(self)
+					bar:SetScript('OnEnter', function(self)
+						self.Text:SetFormattedText('%s', name)
+						if skillLineName then
+							GameTooltip:SetOwner(self, 'ANCHOR_CURSOR');
+							GameTooltip:AddLine(format('%s', skillLineName), 0.7, 0.7, 1)
+							GameTooltip:Show()
+						end
 						if db.mouseover then
 							E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
 						end
 					end)
 
-					self.ProFrame:SetScript('OnLeave', function(self)
+					bar:SetScript('OnLeave', function(self)
+						if (rankModifier and rankModifier > 0) then
+							self.Text:SetFormattedText('%s |cFF6b8df4+%s|r / %s', rank, rankModifier, maxRank)
+						else
+							self.Text:SetFormattedText('%s / %s', rank, maxRank)
+						end
+						GameTooltip:Hide()
 						if db.mouseover then
 							E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
 						end
 					end)
 
-					self.ProFrame:SetScript('OnClick', function(self)
-						--[[if skillLine == 186 then
-							CastSpellByID(2656) -- mining skills
-						elseif skillLine == 182 then
-							CastSpellByID(193290) -- herbalism skills
-						elseif skillLine == 393 then
-							CastSpellByID(194174) -- skinning skills
-						elseif skillLine == 356 then
-							CastSpellByID(271990) -- fishing
-						else
-							CastSpellByName(skillName)
-						end]]
-					end)
+					if (rankModifier and rankModifier > 0) then
+						bar.Status:SetMinMaxValues(1, maxRank + rankModifier)
+						bar.Status:SetValue(rank + rankModifier)
+					else
+						bar.Status:SetMinMaxValues(1, maxRank)
+						bar.Status:SetValue(rank)
+					end
 
-					self.ProFrame.skillName = skillName
+					if E.db.dashboards.barColor == 1 then
+						bar.Status:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
+					else
+						bar.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
+					end
 
-					tinsert(BUI.ProfessionsDB, self.ProFrame)
+					if (rankModifier and rankModifier > 0) then
+						bar.Text:SetFormattedText('%s |cFF6b8df4+%s|r / %s', rank, rankModifier, maxRank)
+					else
+						bar.Text:SetFormattedText('%s / %s', rank, maxRank)
+					end
+
+					if E.db.dashboards.textColor == 1 then
+						bar.Text:SetTextColor(classColor.r, classColor.g, classColor.b)
+					else
+						bar.Text:SetTextColor(BUI:unpackColor(E.db.dashboards.customTextColor))
+					end
+
+					bar.IconBG.Icon:SetTexture(icon)
+
+					local SetOffset = offset or 0
+					bar.name = name
+					bar.SetOffset = SetOffset
+					bar.IconBG.SetOffset = SetOffset
+					bar.IconBG.name = name
+					bar:SetScript('OnMouseUp', OnMouseUp)
+					bar.IconBG:SetScript('OnMouseUp', OnMouseUp)
+
+					tinsert(BUI.ProfessionsDB, bar)
 				end
 			end
 		end
-
-        if isHeader then
-            if skillName == BUI.SecondarySkill then
-                hasSecondary = true
-            end
-        end
 	end
 
 	tsort(BUI.ProfessionsDB, sortFunction)
@@ -156,6 +172,7 @@ function mod:UpdateProfessionSettings()
 	mod:FontStyle(BUI.ProfessionsDB)
 	mod:FontColor(BUI.ProfessionsDB)
 	mod:BarColor(BUI.ProfessionsDB)
+	mod:IconPosition(BUI.ProfessionsDB, 'professions')
 end
 
 function mod:ProfessionsEvents()
@@ -164,25 +181,25 @@ function mod:ProfessionsEvents()
 end
 
 function mod:CreateProfessionsDashboard()
-	local mapholderWidth = E.private.general.minimap.enable and MMHolder:GetWidth() or 150
+	local mapholderWidth = E.private.general.minimap.enable and _G.MMHolder:GetWidth() or 150
 	local DASH_WIDTH = E.db.dashboards.professions.width or 150
 
-	self.proHolder = self:CreateDashboardHolder('BUI_ProfessionsDashboard', 'professions')
+	local holder = self:CreateDashboardHolder('BUI_ProfessionsDashboard', 'professions')
 
 	if E.private.general.minimap.enable then
-		self.proHolder:Point('TOPLEFT', MMHolder, 'BOTTOMLEFT', 0, -5)
+		holder:Point('TOPLEFT', _G.MMHolder, 'BOTTOMLEFT', 0, -5)
 	else
-		self.proHolder:Point('TOPLEFT', E.UIParent, 'TOPLEFT', 2, -120)
+		holder:Point('TOPRIGHT', E.UIParent, 'TOPRIGHT', -5, -184)
 	end
-	self.proHolder:Width(mapholderWidth or DASH_WIDTH)
+	holder:Width(mapholderWidth or DASH_WIDTH)
 
 	mod:UpdateProfessions()
 	mod:UpdateProfessionSettings()
-	mod:UpdateHolderDimensions(self.proHolder, 'professions', BUI.ProfessionsDB)
-	mod:ToggleStyle(self.proHolder, 'professions')
-	mod:ToggleTransparency(self.proHolder, 'professions')
+	mod:UpdateHolderDimensions(holder, 'professions', BUI.ProfessionsDB)
+	mod:ToggleStyle(holder, 'professions')
+	mod:ToggleTransparency(holder, 'professions')
 
-	E:CreateMover(self.proHolder, 'ProfessionsMover', TRADE_SKILLS, nil, nil, nil, 'ALL,BenikUI', nil, 'benikui,dashboards,professions')
+	E:CreateMover(_G.BUI_ProfessionsDashboard, 'ProfessionsMover', TRADE_SKILLS, nil, nil, nil, 'ALL,BENIKUI', nil, 'benikui,dashboards,professions')
 end
 
 function mod:LoadProfessions()

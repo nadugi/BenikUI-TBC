@@ -13,25 +13,56 @@ local hoverVisible = false
 local CreateFrame, ToggleFrame = CreateFrame, ToggleFrame
 local UIFrameFadeOut, UIFrameFadeIn, UISpecialFrames = UIFrameFadeOut, UIFrameFadeIn, UISpecialFrames
 
+local classColor = E:ClassColor(E.myclass, true)
+
 BUI.MenuList = {
 	{text = CHARACTER_BUTTON, func = function() ToggleCharacter("PaperDollFrame") end},
 	{text = SPELLBOOK_ABILITIES_BUTTON, func = function() if not SpellBookFrame:IsShown() then ShowUIPanel(SpellBookFrame) else HideUIPanel(SpellBookFrame) end end},
-	{text = REPUTATION, func = function() ToggleCharacter('ReputationFrame') end},
-	{text = COMMUNITIES_FRAME_TITLE, func = function() ToggleGuildFrame() end},
-	{text = MACROS, func = function() GameMenuButtonMacros:Click() end},
-	{text = SOCIAL_BUTTON, func = function() ToggleFriendsFrame() end},
-	{text = TALENTS,
+	{text = SPECIALIZATION,
 	func = function()
-		if not TalentFrame then
+		if not PlayerTalentFrame then
 			TalentFrame_LoadUI()
 		end
 
-		if not TalentFrame:IsShown() then
-			ShowUIPanel(TalentFrame)
+		if not PlayerTalentFrame:IsShown() then
+			ShowUIPanel(PlayerTalentFrame)
+			_G["PlayerTalentFrameTab"..SPECIALIZATION_TAB]:Click()
 		else
-			HideUIPanel(TalentFrame)
+			HideUIPanel(PlayerTalentFrame)
 		end
 	end},
+	{text = TALENTS,
+	func = function()
+		if not PlayerTalentFrame then
+			TalentFrame_LoadUI()
+		end
+
+		if not PlayerTalentFrame:IsShown() then
+			ShowUIPanel(PlayerTalentFrame)
+			_G["PlayerTalentFrameTab"..TALENTS_TAB]:Click()
+		else
+			HideUIPanel(PlayerTalentFrame)
+		end
+	end},
+	{text = LFG_TITLE, func = function() ToggleLFDParentFrame(); end},
+	{text = ACHIEVEMENT_BUTTON, func = function() ToggleAchievementFrame() end},
+	{text = REPUTATION, func = function() ToggleCharacter('ReputationFrame') end},
+	{text = GARRISON_TYPE_9_0_LANDING_PAGE_TITLE, func = function()
+		if (C_Garrison.HasGarrison(Enum.GarrisonType.Type_9_0)) then
+			ShowGarrisonLandingPage(Enum.GarrisonType.Type_9_0) -- errors the ElvUI Skin
+		end
+	end},
+	{text = COMMUNITIES_FRAME_TITLE, func = function() ToggleGuildFrame() end},
+	{text = L["Calendar"], func = function() GameTimeFrame:Click() end},
+	{text = MOUNTS, func = function() ToggleCollectionsJournal(1) end},
+	{text = PET_JOURNAL, func = function() ToggleCollectionsJournal(2) end},
+	{text = TOY_BOX, func = function() ToggleCollectionsJournal(3) end},
+	{text = HEIRLOOMS, func = function() ToggleCollectionsJournal(4) end},
+	{text = WARDROBE, func = function() ToggleCollectionsJournal(5) end},
+	{text = MACROS, func = function() GameMenuButtonMacros:Click() end},
+	{text = TIMEMANAGER_TITLE, func = function() ToggleFrame(TimeManagerFrame) end},
+	{text = ADVENTURE_JOURNAL, func = function() if not IsAddOnLoaded('Blizzard_EncounterJournal') then EncounterJournal_LoadUI(); end ToggleFrame(EncounterJournal) end},
+	{text = SOCIAL_BUTTON, func = function() ToggleFriendsFrame() end},
 	{text = MAINMENU_BUTTON,
 	func = function()
 		if ( not GameMenuFrame:IsShown() ) then
@@ -51,6 +82,7 @@ BUI.MenuList = {
 		end
 	end},
 	{text = HELP_BUTTON, func = function() ToggleHelpFrame() end},
+	{text = BLIZZARD_STORE, func = function() StoreMicroButton:Click() end}
 }
 
 local function sortFunction(a, b)
@@ -76,8 +108,6 @@ local function OnLeave(btn)
 	hoverVisible = false
 end
 
-local classColor = E.myclass == 'PRIEST' and E.PriestColors or (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[E.myclass] or RAID_CLASS_COLORS[E.myclass])
-
 -- added parent, removed the mouse x,y and set menu frame position to any parent corners.
 -- Also added delay to autohide
 function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSize)
@@ -88,8 +118,10 @@ function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSi
 		r, g, b = classColor.r, classColor.g, classColor.b
 	elseif db == 2 then
 		r, g, b = BUI:unpackColor(E.db.benikui.colors.customGameMenuColor)
-	else
+	elseif db == 3 then
 		r, g, b = unpack(E.media.rgbvaluecolor)
+	else
+		r, g, b = BUI:getCovenantColor()
 	end
 
 	if not frame.buttons then
@@ -110,7 +142,7 @@ function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSi
 
 	for i=1, #list do
 		if not frame.buttons[i] then
-			frame.buttons[i] = CreateFrame('Button', nil, frame)
+			frame.buttons[i] = CreateFrame('Button', nil, frame, 'BackdropTemplate')
 
 			frame.buttons[i].hoverTex = frame.buttons[i]:CreateTexture(nil, 'OVERLAY')
 			frame.buttons[i].hoverTex:SetAllPoints()
@@ -129,8 +161,8 @@ function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSi
 		end
 
 		frame.buttons[i]:Show()
-		frame.buttons[i]:SetHeight(BUTTON_HEIGHT)
-		frame.buttons[i]:SetWidth(BUTTON_WIDTH + (addedSize or 0))
+		frame.buttons[i]:Height(BUTTON_HEIGHT)
+		frame.buttons[i]:Width(BUTTON_WIDTH + (addedSize or 0))
 		frame.buttons[i].text:SetText(list[i].text)
 		frame.buttons[i].text:SetTextColor(r, g, b)
 		frame.buttons[i].hoverTex:SetVertexColor(r, g, b)
@@ -138,9 +170,9 @@ function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSi
 		frame.buttons[i]:SetScript('OnClick', OnClick)
 
 		if i == 1 then
-			frame.buttons[i]:SetPoint('TOPLEFT', frame, 'TOPLEFT', PADDING, -PADDING)
+			frame.buttons[i]:Point('TOPLEFT', frame, 'TOPLEFT', PADDING, -PADDING)
 		else
-			frame.buttons[i]:SetPoint('TOPLEFT', frame.buttons[i-1], 'BOTTOMLEFT')
+			frame.buttons[i]:Point('TOPLEFT', frame.buttons[i-1], 'BOTTOMLEFT')
 		end
 	end
 
@@ -158,18 +190,18 @@ function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSi
 		end
 	end)
 
-	frame:SetHeight((#list * BUTTON_HEIGHT) + PADDING * 2)
-	frame:SetWidth(BUTTON_WIDTH + PADDING * 2 + (addedSize or 0))
-	frame:Style('Outside')
+	frame:Height((#list * BUTTON_HEIGHT) + PADDING * 2)
+	frame:Width(BUTTON_WIDTH + PADDING * 2 + (addedSize or 0))
+	frame:BuiStyle('Outside')
 	frame:ClearAllPoints()
 	if pos == 'tLeft' then
-		frame:SetPoint('BOTTOMRIGHT', parent, 'TOPLEFT', xOffset, yOffset)
+		frame:Point('BOTTOMRIGHT', parent, 'TOPLEFT', xOffset, yOffset)
 	elseif pos == 'tRight' then
-		frame:SetPoint('BOTTOMLEFT', parent, 'TOPRIGHT', xOffset, yOffset)
+		frame:Point('BOTTOMLEFT', parent, 'TOPRIGHT', xOffset, yOffset)
 	elseif pos == 'bLeft' then
-		frame:SetPoint('TOPRIGHT', parent, 'BOTTOMLEFT', xOffset, yOffset)
+		frame:Point('TOPRIGHT', parent, 'BOTTOMLEFT', xOffset, yOffset)
 	elseif pos == 'bRight' then
-		frame:SetPoint('TOPLEFT', parent, 'BOTTOMRIGHT', xOffset, yOffset)
+		frame:Point('TOPLEFT', parent, 'BOTTOMRIGHT', xOffset, yOffset)
 	end
 
 	ToggleFrame(frame)

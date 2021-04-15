@@ -1,5 +1,5 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
-local mod = BUI:GetModule('Skins')
+local mod = BUI:GetModule('Styles')
 
 local pairs = pairs
 
@@ -24,7 +24,7 @@ function mod:styleAlertFrames()
 	local function StyleAlert(frame)
 		if frame.backdrop then
 			if not frame.backdrop.style then
-				frame.backdrop:Style('Outside')
+				frame.backdrop:BuiStyle('Outside')
 			end
 		end
 	end
@@ -46,7 +46,6 @@ function mod:styleAlertFrames()
 	hooksecurefunc(LootAlertSystem, "setUpFunction", StyleAlert)
 	hooksecurefunc(LootUpgradeAlertSystem, "setUpFunction", StyleAlert)
 	hooksecurefunc(MoneyWonAlertSystem, "setUpFunction", StyleAlert)
-	hooksecurefunc(StorePurchaseAlertSystem, "setUpFunction", StyleAlert)
 	hooksecurefunc(DigsiteCompleteAlertSystem, "setUpFunction", StyleAlert)
 	hooksecurefunc(NewRecipeLearnedAlertSystem, "setUpFunction", StyleAlert)
 	hooksecurefunc(NewPetAlertSystem, "setUpFunction", StyleAlert)
@@ -55,8 +54,8 @@ function mod:styleAlertFrames()
 	local function StyleAlertWithIcon(frame)
 		if frame.backdrop then
 			if not frame.backdrop.style then
-				frame.backdrop:Style('Outside')
-				frame.Icon.Texture.b:Style('Outside')
+				frame.backdrop:BuiStyle('Outside')
+				frame.Icon.Texture.b:BuiStyle('Outside')
 			end
 		end
 	end
@@ -65,7 +64,7 @@ function mod:styleAlertFrames()
 	for _, frame in pairs(staticAlertFrames) do
 		if frame.backdrop then
 			if not frame.backdrop.style then
-				frame.backdrop:Style('Outside')
+				frame.backdrop:BuiStyle('Outside')
 			end
 		end
 	end

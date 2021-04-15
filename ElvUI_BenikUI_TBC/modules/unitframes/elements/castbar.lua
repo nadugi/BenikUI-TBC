@@ -12,41 +12,82 @@ local LSM = LibStub("LibSharedMedia-3.0");
 
 local _G = _G
 
+local INVERT_ANCHORPOINT = {
+	TOPLEFT = 'BOTTOMRIGHT',
+	LEFT = 'RIGHT',
+	BOTTOMLEFT = 'TOPRIGHT',
+	RIGHT = 'LEFT',
+	TOPRIGHT = 'BOTTOMLEFT',
+	BOTTOMRIGHT = 'TOPLEFT',
+	CENTER = 'CENTER',
+	TOP = 'BOTTOM',
+	BOTTOM = 'TOP',
+}
+
 local units = {"Player", "Target", "Focus", "Pet"}
 
 -- GLOBALS: hooksecurefunc
 
 local function changeCastbarLevel(unit, unitframe)
-	unitframe.Castbar:SetFrameStrata("LOW")
-	unitframe.Castbar:SetFrameLevel(unitframe.InfoPanel:GetFrameLevel() + 10)
+	local castbar = unitframe.Castbar
+
+	castbar:SetFrameStrata("LOW")
+	castbar:SetFrameLevel(unitframe.InfoPanel:GetFrameLevel() + 10)
 end
 
 local function resetCastbarLevel(unit, unitframe)
-	unitframe.Castbar:SetFrameStrata("HIGH")
-	unitframe.Castbar:SetFrameLevel(6)
+	local db = E.db.unitframe.units[unit].castbar;
+	local castbar = unitframe.Castbar
+
+	if db.strataAndLevel and db.strataAndLevel.useCustomStrata then
+		castbar:SetFrameStrata(db.strataAndLevel.frameStrata)
+	else
+		castbar:SetFrameStrata("HIGH")
+	end
+
+	if db.strataAndLevel and db.strataAndLevel.useCustomLevel then
+		castbar:SetFrameLevel(db.strataAndLevel.frameLevel)
+	else
+		castbar:SetFrameLevel(6)
+	end
 end
 
 local function ConfigureCastbarShadow(unit, unitframe)
 	if not BUI.ShadowMode then return end
-
-	local db = E.db.unitframe.units[unit].castbar;
 	local castbar = unitframe.Castbar
+	local db = E.db.unitframe.units[unit].castbar;
 
 	if not castbar.backdrop.shadow then return end
 
-	if unitframe.USE_INFO_PANEL and db.insideInfoPanel then
-		castbar.backdrop.shadow:Hide()
-		castbar.ButtonIcon.bg.shadow:Hide()
-	else
+	if db.overlayOnFrame == 'None' then
 		castbar.backdrop.shadow:Show()
-		castbar.ButtonIcon.bg.shadow:Show()
+	else
+		castbar.backdrop.shadow:Hide()
+		if not db.iconAttached then
+			castbar.ButtonIcon.bg.shadow:Show()
+		else
+			castbar.ButtonIcon.bg.shadow:Hide()
+		end
+	end
+
+	if not db.iconAttached and db.icon then
+		local attachPoint = db.iconAttachedTo == "Frame" and unitframe or unitframe.Castbar
+		local anchorPoint = db.iconPosition
+		castbar.Icon.bg:ClearAllPoints()
+		castbar.Icon.bg:Point(INVERT_ANCHORPOINT[anchorPoint], attachPoint, anchorPoint, db.iconXOffset, db.iconYOffset)
+	elseif(db.icon) then
+		castbar.Icon.bg:ClearAllPoints()
+		if unitframe.ORIENTATION == "RIGHT" then
+			castbar.Icon.bg:Point("LEFT", castbar, "RIGHT", (UF.SPACING*3), 0)
+		else
+			castbar.Icon.bg:Point("RIGHT", castbar, "LEFT", -(UF.SPACING*3), 0)
+		end
 	end
 end
 
 --Initiate update/reset of castbar
 local function ConfigureCastbar(unit, unitframe)
 	local db = E.db.unitframe.units[unit].castbar;
-	local castbar = unitframe.Castbar
 
 	if unit == 'player' or unit == 'target' then
 		ConfigureCastbarShadow(unit, unitframe)
@@ -153,6 +194,33 @@ function mod:CastBarHooks()
 		if castbar then
 			if BUI.ShadowMode then
 				castbar.backdrop:CreateSoftShadow()
+				castbar.backdrop.shadow:SetFrameLevel(castbar.backdrop:GetFrameLevel())
+				castbar.ButtonIcon.bg:CreateSoftShadow()
+			end
+			hooksecurefunc(castbar, "PostCastStart", mod.PostCast)
+			hooksecurefunc(castbar, "PostCastInterruptible", mod.PostCastInterruptible)
+		end
+	end
+
+	for i = 1, 5 do
+		local castbar = _G["ElvUF_Arena"..i].Castbar
+		if castbar then
+			if BUI.ShadowMode then
+				castbar.backdrop:CreateSoftShadow()
+				castbar.backdrop.shadow:SetFrameLevel(castbar.backdrop:GetFrameLevel())
+				castbar.ButtonIcon.bg:CreateSoftShadow()
+			end
+			hooksecurefunc(castbar, "PostCastStart", mod.PostCast)
+			hooksecurefunc(castbar, "PostCastInterruptible", mod.PostCastInterruptible)
+		end
+	end
+
+	for i = 1, MAX_BOSS_FRAMES do
+		local castbar = _G["ElvUF_Boss"..i].Castbar
+		if castbar then
+			if BUI.ShadowMode then
+				castbar.backdrop:CreateSoftShadow()
+				castbar.backdrop.shadow:SetFrameLevel(castbar.backdrop:GetFrameLevel())
 				castbar.ButtonIcon.bg:CreateSoftShadow()
 			end
 			hooksecurefunc(castbar, "PostCastStart", mod.PostCast)

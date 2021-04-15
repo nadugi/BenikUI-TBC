@@ -13,10 +13,28 @@ Engine[6] = G
 _G[addon] = Engine
 
 BUI.Config = {}
-BUI.Title = format('|cff00c0fa%s |r', 'BenikUI Classic')
+BUI.Title = format('|cffffa500%s|r|cffffffff%s|r ', 'Benik', 'UI')
 BUI["RegisteredModules"] = {}
 BUI.Eversion = tonumber(E.version)
-BUI.Erelease = tonumber(GetAddOnMetadata("ElvUI_BenikUI_Classic", "X-ElvuiVersion"))
+BUI.Erelease = tonumber(GetAddOnMetadata("ElvUI_BenikUI", "X-ElvuiVersion"))
+
+BUI.Actionbars = BUI:NewModule('Actionbars', 'AceEvent-3.0')
+BUI.Bags = BUI:NewModule('Bags', 'AceHook-3.0')
+BUI.Chat = BUI:NewModule('Chat', 'AceHook-3.0', 'AceEvent-3.0')
+BUI.CustomPanels = BUI:NewModule('CustomPanels', 'AceEvent-3.0')
+BUI.Dashboards = BUI:NewModule('Dashboards', 'AceEvent-3.0', 'AceHook-3.0')
+BUI.Databars = BUI:NewModule('Databars', 'AceHook-3.0', 'AceEvent-3.0')
+BUI.DataTexts = BUI:NewModule('DataTexts', 'AceEvent-3.0')
+BUI.FlightMode = BUI:NewModule('FlightMode', 'AceHook-3.0', 'AceTimer-3.0', 'AceEvent-3.0')
+BUI.iLevel = BUI:NewModule('iLevel', 'AceEvent-3.0')
+BUI.Layout = BUI:NewModule('Layout', 'AceHook-3.0', 'AceEvent-3.0')
+BUI.Nameplates = BUI:NewModule('Nameplates', 'AceHook-3.0')
+BUI.Shadows = BUI:NewModule('Shadows', 'AceHook-3.0', 'AceEvent-3.0')
+BUI.Skins = BUI:NewModule('Skins', 'AceHook-3.0', 'AceEvent-3.0')
+BUI.Styles = BUI:NewModule('Styles', 'AceHook-3.0', 'AceEvent-3.0')
+BUI.Tooltip = BUI:NewModule('Tooltip', 'AceHook-3.0')
+BUI.Units = BUI:NewModule('Units', 'AceHook-3.0', 'AceEvent-3.0', 'AceTimer-3.0')
+BUI.Widgetbars = BUI:NewModule('Widgetbars', 'AceHook-3.0', 'AceEvent-3.0')
 
 function BUI:RegisterModule(name)
 	if self.initialized then
@@ -47,6 +65,11 @@ function BUI:AddOptions()
 end
 
 function BUI:Init()
+	if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+		E:Delay(2, function() E:StaticPopup_Show("BENIKUI_CLASSIC") end)
+		return	
+	end
+
 	--ElvUI's version check
 	if BUI.Eversion < 1 or (BUI.Eversion < BUI.Erelease) then
 		E:Delay(2, function() E:StaticPopup_Show("BENIKUI_VERSION_MISMATCH") end)
@@ -60,9 +83,19 @@ end
 
 E.Libs.EP:HookInitialize(BUI, BUI.Init)
 
+-- BenikUI retail on classic
+E.PopupDialogs["BENIKUI_CLASSIC"] = {
+	button1 = CLOSE,
+	OnAccept = E.noop,
+	text = (format(L["|cffff0000BenikUI Error|r\n\nIt seems like BenikUI Retail version is installed on WoW Classic. Please install BenikUI Classic version.\n|cff00c0faTip: Usually happens with Twitch Client|r"])),
+	timeout = 0,
+	whileDead = 1,
+	hideOnEscape = false,
+}
+
 --Version check
 E.PopupDialogs["BENIKUI_VERSION_MISMATCH"] = {
-	text = format(L["%s\n\nYour ElvUI version %.2f is not compatible with BenikUI.\nLatest ElvUI version is %.2f. Please download it from here:\n"], BUI.Title, BUI.Eversion, BUI.Erelease),
+	text = format(L["%s\n\nYour ElvUI version %.2f is not compatible with BenikUI.\nMinimum ElvUI version needed is %.2f. Please download it from here:\n"], BUI.Title, BUI.Eversion, BUI.Erelease),
 	button1 = CLOSE,
 	timeout = 0,
 	whileDead = 1,
@@ -73,8 +106,8 @@ E.PopupDialogs["BENIKUI_VERSION_MISMATCH"] = {
 		self.editBox.width = self.editBox:GetWidth()
 		self.editBox:Width(280)
 		self.editBox:AddHistoryLine("text")
-		self.editBox.temptxt = "https://www.tukui.org/classic-addons.php?id=2"
-		self.editBox:SetText("https://www.tukui.org/classic-addons.php?id=2")
+		self.editBox.temptxt = "https://www.tukui.org/download.php?ui=elvui"
+		self.editBox:SetText("https://www.tukui.org/download.php?ui=elvui")
 		self.editBox:HighlightText()
 		self.editBox:SetJustifyH("CENTER")
 	end,

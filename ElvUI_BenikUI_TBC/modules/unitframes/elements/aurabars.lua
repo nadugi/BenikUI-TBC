@@ -6,8 +6,8 @@ function BU:Create_AuraBarsWithShadow(statusBar)
 	statusBar:CreateBackdrop(nil, nil, nil, UF.thinBorders, true)
 	statusBar:CreateSoftShadow()
 	statusBar:SetScript('OnMouseDown', OnClick)
-	statusBar:SetPoint("LEFT")
-	statusBar:SetPoint("RIGHT")
+	statusBar:Point("LEFT")
+	statusBar:Point("RIGHT")
 
 	statusBar.icon:CreateBackdrop(nil, nil, nil, UF.thinBorders, true)
 	statusBar.icon.backdrop:CreateSoftShadow()
@@ -22,7 +22,7 @@ function BU:Create_AuraBarsWithShadow(statusBar)
 
 	statusBar.nameText:SetJustifyH('LEFT')
 	statusBar.nameText:SetJustifyV('MIDDLE')
-	statusBar.nameText:SetPoint("RIGHT", statusBar.timeText, "LEFT", -4, 0)
+	statusBar.nameText:Point("RIGHT", statusBar.timeText, "LEFT", -4, 0)
 
 	statusBar.bg = statusBar:CreateTexture(nil, 'BORDER')
 	statusBar.bg:Show()
@@ -34,7 +34,6 @@ end
 function BU:Configure_AuraBars(frame)
 	if not BUI.ShadowMode then return end
 
-	if not frame.VARIABLES_SET then return end
 	local auraBars = frame.AuraBars
 	local db = frame.db
 	auraBars.db = db.aurabar

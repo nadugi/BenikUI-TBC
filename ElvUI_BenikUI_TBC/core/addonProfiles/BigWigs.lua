@@ -2,7 +2,7 @@
 
 function BUI:LoadBigWigsProfile()
 	local font, fontsize
-	local key = BUI.Title
+	local key = BUI.AddonProfileKey
 
 	LoadAddOn("BigWigs_Options")
 	LoadAddOn("BigWigs")
@@ -15,10 +15,10 @@ function BUI:LoadBigWigsProfile()
 		fontsize = 10
 	end
 
-	if BigWigsClassicDB['profiles'] == nil then BigWigsClassicDB['profiles'] = {} end
+	if BigWigs3DB['profiles'] == nil then BigWigs3DB['profiles'] = {} end
 
-	if BigWigsClassicDB['profiles'][key] == nil then
-		BigWigsClassicDB = {
+	if BigWigs3DB['profiles'][key] == nil then
+		BigWigs3DB = {
 			["namespaces"] = {
 				["BigWigs_Plugins_Alt Power"] = {
 					["profiles"] = {
@@ -33,7 +33,7 @@ function BUI:LoadBigWigsProfile()
 					["profiles"] = {
 						[key] = {
 							["fontName"] = font,
-							["BigWigsAnchor_width"] = 199.999908447266,
+							["BigWigsAnchor_width"] = 200,
 							["texture"] = "BuiFlat",
 							["barStyle"] = "AddOnSkins Half-Bar",
 						},
@@ -59,10 +59,10 @@ function BUI:LoadBigWigsProfile()
 						[key] = {
 							["fontSize"] = 20,
 							["fontName"] = font,
-							["width"] = 139.999984741211,
-							["posy"] = 453.688899874687,
-							["posx"] = 976.355666002965,
-							["height"] = 120.000007629395,
+							["width"] = 140,
+							["posy"] = 454,
+							["posx"] = 976,
+							["height"] = 120,
 						},
 					},
 				},
@@ -74,10 +74,10 @@ function BUI:LoadBigWigsProfile()
 		}
 
 		if BUI.isInstallerRunning == false then -- don't print during Install, when applying profile that doesn't exist
-			print(BUI.profileStrings[1]..L['BigWigs'])
+			BUI:Print(format(BUI.profileStrings[1], L['BigWigs']))
 		end
 	else
-		print(BUI.Title.."- "..L['BigWigs']..BUI.profileStrings[2])
+		BUI:Print(format(BUI.profileStrings[2], L['BigWigs']))
 	end
 
 	BigWigs.db:SetProfile(key)

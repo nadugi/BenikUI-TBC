@@ -20,6 +20,9 @@ function BU:Update_PartyFrames(frame, db)
 		-- Portrait
 		BU:Configure_Portrait(frame)
 
+		-- Threat
+		BU:Configure_Threat(frame)
+
 		-- Target Glow
 		BU:Configure_TargetGlow(frame)
 	end

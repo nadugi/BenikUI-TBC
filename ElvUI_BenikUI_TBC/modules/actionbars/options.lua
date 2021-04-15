@@ -6,15 +6,10 @@ local tinsert = table.insert
 
 local function abTable()
 	E.Options.args.benikui.args.actionbars = {
-		order = 7,
+		order = 30,
 		type = 'group',
-		name = L['ActionBars'],
+		name = BUI:cOption(L['ActionBars'], "orange"),
 		args = {
-			name = {
-				order = 1,
-				type = 'header',
-				name = BUI:cOption(L['ActionBars']),
-			},
 			style = {
 				order = 2,
 				type = 'group',
@@ -51,22 +46,13 @@ local function abTable()
 					},
 				},
 			},
-			transparent = {
+			requestStop = {
 				order = 4,
-				type = 'toggle',
-				name = L['Transparent Backdrops'],
-				desc = L['Applies transparency in all actionbar backdrops and actionbar buttons.'],
-				disabled = function() return not E.private.actionbar.enable end,
-				get = function(info) return E.db.benikui.actionbars[ info[#info] ] end,
-				set = function(info, value) E.db.benikui.actionbars[ info[#info] ] = value; mod:TransparentBackdrops() end,
-			},
-			--[[requestStop = {
-				order = 5,
 				type = 'toggle',
 				name = L['Request Stop button'],
 				get = function(info) return E.db.benikui.actionbars[ info[#info] ] end,
 				set = function(info, value) E.db.benikui.actionbars[ info[#info] ] = value; E:StaticPopup_Show('PRIVATE_RL'); end,
-			},]]
+			},
 		},
 	}
 
@@ -91,28 +77,24 @@ local function abTable()
 		name = '',
 	}
 
-	E.Options.args.benikui.args.actionbars.args.style.args.petbar = {
-		order = 21,
-		type = 'toggle',
-		name = L["Pet Bar"],
-		disabled = function() return not E.private.actionbar.enable end,
-		get = function(info) return E.db.benikui.actionbars.style[ info[#info] ] end,
-		set = function(info, value)
-			E.db.benikui.actionbars.style[ info[#info] ] = value;
-			mod:ToggleStyle()
-		end,
+	local otherBars = {
+		{'petbar', L["Pet Bar"]},
+		{'stancebar', L["Stance Bar"]},
+		{'microbar', L["Micro Bar"]},
 	}
-
-	E.Options.args.benikui.args.actionbars.args.style.args.stancebar = {
-		order = 22,
-		type = 'toggle',
-		name = L["Stance Bar"],
-		disabled = function() return not E.private.actionbar.enable end,
-		get = function(info) return E.db.benikui.actionbars.style[ info[#info] ] end,
-		set = function(info, value)
-			E.db.benikui.actionbars.style[ info[#info] ] = value;
-			mod:ToggleStyle()
-		end,
-	}
+	for i, v in ipairs(otherBars) do
+		local option, name = unpack(v)
+		E.Options.args.benikui.args.actionbars.args.style.args[option] = {
+			order = 20 + i,
+			type = 'toggle',
+			name = name,
+			disabled = function() return not E.private.actionbar.enable end,
+			get = function(info) return E.db.benikui.actionbars.style[ info[#info] ] end,
+			set = function(info, value)
+				E.db.benikui.actionbars.style[ info[#info] ] = value;
+				mod:ToggleStyle()
+			end,
+		}
+	end
 end
 tinsert(BUI.Config, abTable)

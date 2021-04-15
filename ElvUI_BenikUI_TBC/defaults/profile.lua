@@ -18,20 +18,25 @@ P['unitframe']['units']['raid40']['classHover'] = false
 
 -- Databars text yOffset
 P['databars']['experience']['textYoffset'] = 0
+P['databars']['azerite']['textYoffset'] = 0
 P['databars']['reputation']['textYoffset'] = 0
+P['databars']['honor']['textYoffset'] = 0
 
 -- Add Minimap styling toggle default
 P['general']['minimap']['benikuiStyle'] = true
 
+-- Add Chat styling toggle default
+P['chat']['benikuiStyle'] = true
+
 -- Datatexts
 P['datatexts']['panels']['BuiLeftChatDTPanel'] = {
-	[1] = 'Spell/Heal Power',
-	[2] = 'Stamina',
+	[1] = 'Primary Stat',
+	[2] = 'Missions (BenikUI)',
 	[3] = 'BuiMail',
 }
 
 P['datatexts']['panels']['BuiRightChatDTPanel'] = {
-	[1] = 'Hit Chance',
+	[1] = 'Spec Switch (BenikUI)',
 	[2] = 'Gold',
 	[3] = 'Bags',
 }
@@ -39,7 +44,7 @@ P['datatexts']['panels']['BuiRightChatDTPanel'] = {
 P['datatexts']['panels']['BuiMiddleDTPanel'] = {
 	[1] = 'Haste',
 	[2] = 'Mastery',
-	[3] = 'Crit Chance',
+	[3] = 'Crit',
 }
 
 -- Core
@@ -50,7 +55,8 @@ P['benikui'] = {
 		['benikuiStyle'] = true,
 		['hideStyle'] = false,
 		['shadows'] = true,
-		['auras'] = true,
+		['shadowSize'] = 4,
+		['shadowAlpha'] = 0.6,
 		['loginMessage'] = true,
 		['splashScreen'] = true,
 	},
@@ -77,8 +83,12 @@ P['benikui'] = {
 			['color'] = {r = 1, g = 1, b = 0},
 			['position'] = 'INSIDE',
 		},
-		['flightMode'] = true,
+		['flightMode'] = {
+			['enable'] = true,
+			['logo'] = 'WOW',
+		},
 		['afkMode'] = true,
+		['alternativePower'] = true,
 	},
 
 	['datatexts'] = {
@@ -88,14 +98,7 @@ P['benikui'] = {
 			['editBoxPosition'] = 'BELOW_CHAT',
 			['styled'] = false,
 			['backdrop'] = true,
-		},
-		['middle'] = {
-			['enable'] = true,
-			['transparent'] = true,
-			['backdrop'] = false,
-			['width'] = 400,
-			['height'] = 19,
-			['styled'] = false,
+			['showChatDt'] = 'SHOWBOTH',
 		},
 		['mail'] = {
 			['toggle'] = true,
@@ -103,7 +106,6 @@ P['benikui'] = {
 	},
 
 	['actionbars'] = {
-		['transparent'] = true,
 		['toggleButtons'] = {
 			['enable'] = true,
 			['chooseAb'] = 'BAR2',
@@ -122,15 +124,16 @@ P['benikui'] = {
 			['bar10'] = true,
 			['petbar'] = true,
 			['stancebar'] = true,
+			['microbar'] = true,
 		},
 	},
-	
+
 	['unitframes'] = {
 		['player'] = {
 			['detachPortrait'] = false,
 			['portraitWidth'] = 110,
 			['portraitHeight'] = 85,
-			['portraitShadow'] = false,
+			['portraitShadow'] = true,
 			['portraitTransparent'] = true,
 			['portraitStyle'] = false,
 			['portraitStyleHeight'] = 6,
@@ -142,7 +145,7 @@ P['benikui'] = {
 			['getPlayerPortraitSize'] = true,
 			['portraitWidth'] = 110,
 			['portraitHeight'] = 85,
-			['portraitShadow'] = false,
+			['portraitShadow'] = true,
 			['portraitTransparent'] = true,
 			['portraitStyle'] = false,
 			['portraitStyleHeight'] = 6,
@@ -153,37 +156,40 @@ P['benikui'] = {
 			['detachPortrait'] = false,
 			['portraitWidth'] = 110,
 			['portraitHeight'] = 85,
-			['portraitShadow'] = false,
+			['portraitShadow'] = true,
 			['portraitTransparent'] = true,
 			['portraitFrameStrata'] = "MEDIUM",
+			['portraitBackdrop'] = true,
+		},
+		['focus'] = {
+			['detachPortrait'] = false,
+			['portraitWidth'] = 110,
+			['portraitHeight'] = 85,
+			['portraitShadow'] = true,
+			['portraitTransparent'] = true,
+			['portraitFrameStrata'] = "MEDIUM",
+			['portraitBackdrop'] = true,
 		},
 		['pet'] = {
 			['detachPortrait'] = false,
 			['portraitWidth'] = 110,
 			['portraitHeight'] = 85,
-			['portraitShadow'] = false,
+			['portraitShadow'] = true,
 			['portraitTransparent'] = true,
 			['portraitFrameStrata'] = "MEDIUM",
+			['portraitBackdrop'] = true,
 		},
 		['infoPanel'] = {
 			['fixInfoPanel'] = true,
 			['texture'] = 'BuiEmpty',
+			['enableColor'] = false,
 			['customColor'] = 2,
 			['color'] = {r = .9, g = .7, b = 0, a = .7},
+			['groupColor'] = {r = .9, g = .7, b = 0, a = .7},
 		},
 		['castbar'] = {
 			['text'] = {
-				['ShowInfoText'] = true,
-				['castText'] = true,
-				['forceTargetText'] = false,
-				['player'] = {
-					['yOffset'] = 0,
-					['textColor'] = {r = 1, g = 1, b = 1, a = 1},
-				},
-				['target'] = {
-					['yOffset'] = 0,
-					['textColor'] = {r = 1, g = 1, b = 1, a = 1},
-				},
+				['ShowInfoText'] = false,
 			},
 		},
 		['textures'] = {
@@ -198,8 +204,10 @@ P['benikui'] = {
 		},
 		['misc'] = {
 			['svui'] = true,
+			['portraitTransparency'] = 0.70,
 		},
 	},
+
 	['panels'] = {
 
 	},
@@ -208,14 +216,14 @@ P['benikui'] = {
 -- Skins and ElvUI addons Styling
 P['benikuiSkins'] = {
 	['elvuiAddons'] = {
-		['loclite'] = true,
 		['locplus'] = true,
 		['sle'] = true,
 		['enh'] = true,
-		['dtb2'] = true,
 		['pa'] = true,
+		['mer'] = true,
+		['elv'] = true,
 	},
-	
+
 	['addonSkins'] = {
 		['skada'] = true,
 		['recount'] = true,
@@ -223,21 +231,22 @@ P['benikuiSkins'] = {
 		['atlasloot'] = true,
 		['altoholic'] = true,
 		['clique'] = true,
+		['ora'] = true,
 		['pawn'] = true,
 		['dbm'] = true,
 		['bigwigs'] = true,
+		['zygor'] = true,
 		['immersion'] = true,
-		['adibags'] = true,
-		['spy'] = true,
-		['xtoLevel'] = true,
+		['allthethings'] = true,
+		['tinyinspect'] = true,
+		['arkinventory'] = true,
 	},
-	
+
 	['variousSkins'] = {
 		['talkingHead'] = true,
-		['decursive'] = true,
-		['storyline'] = true,
+		['objectiveTracker'] = true,
 		['inflight'] = true,
-		['zygor'] = true,
+		['kt'] = true,
 	},
 }
 
@@ -249,21 +258,70 @@ P['benikuiDatabars'] = {
 		['buttonStyle'] = "TRANSPARENT",
 		['notifiers'] = {
 			['enable'] = true,
-			['combat'] = false,
 			['position'] = 'RIGHT',
 		},
 	},
-	
+
 	['reputation'] = {
 		['enable'] = true,
 		['buiStyle'] = true,
 		['buttonStyle'] = "TRANSPARENT",
-		['autotrack'] = false,
 		['notifiers'] = {
 			['enable'] = true,
-			['combat'] = false,
 			['position'] = 'LEFT',
 		},
+	},
+
+	['azerite'] = {
+		['enable'] = true,
+		['buiStyle'] = true,
+		['buttonStyle'] = "TRANSPARENT",
+		['notifiers'] = {
+			['enable'] = true,
+			['position'] = 'LEFT',
+		},
+	},
+
+	['honor'] = {
+		['enable'] = true,
+		['buiStyle'] = true,
+		['buttonStyle'] = "TRANSPARENT",
+		['notifiers'] = {
+			['enable'] = true,
+			['position'] = 'RIGHT',
+		},
+	},
+
+	['threat'] = {
+		['enable'] = true,
+		['buiStyle'] = false,
+		['buttonStyle'] = "TRANSPARENT",
+		['notifiers'] = {
+			['enable'] = true,
+			['position'] = 'BELOW',
+		},
+	},
+}
+
+-- Widgetbars
+P['benikuiWidgetbars'] = {
+	['mawBar'] = {
+		['enable'] = true,
+		['width'] = 222,
+		['height'] = 5,
+		['textYoffset'] = 13,
+		['barColor'] = {r = 0.192, g = 0.858, b = 0.858, a = 100},
+		['barAutoColor'] = true,
+		['textColor'] = {r = 1, g = 1, b = 1},
+		['useDTfont'] = true,
+		['font'] = E.db.datatexts.font,
+		['fontsize'] = E.db.datatexts.fontSize,
+		['fontflags'] = E.db.datatexts.fontOutline,
+		['textFormat'] = 'PERCENT',
+	},
+	['halfBar'] = {
+		['altbar'] = true,
+		['mirrorbar'] = true,
 	},
 }
 
@@ -276,6 +334,7 @@ P['dashboards'] = {
 		['style'] = true,
 		['transparency'] = true,
 		['backdrop'] = true,
+		['mouseover'] = false,
 		['chooseSystem'] = {
 			['FPS'] = true,
 			['MS'] = true,
@@ -285,7 +344,7 @@ P['dashboards'] = {
 		},
 		['latency'] = 2,
 	},
-	
+
 	['tokens'] = {
 		['enableTokens'] = true,
 		['combat'] = true,
@@ -297,8 +356,9 @@ P['dashboards'] = {
 		['backdrop'] = true,
 		['zeroamount'] = false,
 		['weekly'] = true,
+		['iconPosition'] = 'LEFT'
 	},
-	
+
 	['professions'] = {
 		['enableProfessions'] = true,
 		['combat'] = true,
@@ -308,6 +368,21 @@ P['dashboards'] = {
 		['transparency'] = true,
 		['backdrop'] = true,
 		['capped'] = false,
+		['iconPosition'] = 'RIGHT'
+	},
+
+	['reputations'] = {
+		['enableReputations'] = true,
+		['combat'] = true,
+		['mouseover'] = false,
+		['width'] = 200,
+		['style'] = true,
+		['transparency'] = true,
+		['backdrop'] = true,
+		['barFactionColors'] = true,
+		['textFactionColors'] = true,
+		['tooltip'] = false,
+		['textAlign'] = 'LEFT',
 	},
 
 	['dashfont'] = {
@@ -316,7 +391,7 @@ P['dashboards'] = {
 		['dbfontsize'] = E.db.datatexts.fontSize,
 		['dbfontflags'] = E.db.datatexts.fontOutline,
 	},
-	
+
 	['barColor'] = 1,
 	['customBarColor'] = {r = 255/255,g = 128/255,b = 0/255},
 	['textColor'] = 2,

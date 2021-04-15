@@ -9,7 +9,9 @@ L["HOME"] = "Principale";
 L["WORLD"] = "Mondo";
 
 -- core
-L[' is loaded. For any issues or suggestions, please visit '] = true
+L['is loaded. For any issues or suggestions, please visit'] = true
+L["%s\n\nYour ElvUI version %.2f is not compatible with BenikUI.\nMinimum ElvUI version needed is %.2f. Please download it from here:\n"] = true
+L["|cffff0000BenikUI Error|r\n\nIt seems like BenikUI Retail version is installed on WoW Classic. Please install BenikUI Classic version.\n|cff00c0faTip: Usually happens with Twitch Client|r"] = true
 
 -- General options
 L["BenikUI is a completely external ElvUI mod. More available options can be found in ElvUI options (e.g. Actionbars, Unitframes, Player and Target Portraits), marked with "] = true
@@ -24,7 +26,10 @@ L['Style Color'] = true
 L['by Benik (EU-Emerald Dream)'] = true
 L['light blue color.'] = true
 L['Splash Screen'] = true
-L['Style Auras'] = true
+L['Shadow'] = true
+L['Shadow Size'] = true
+L['Shadow Alpha'] = true
+L['Covenant Color'] = true
 
 -- Layout
 L['LeftClick: Toggle Configuration'] = true
@@ -37,6 +42,7 @@ L['Clone'] = true
 L['Clone the Custom Panel: |cff00c0fa%s|r.\nPlease type the new Name'] = true
 L['Create'] = true
 L['Enable tooltip to reveal the panel name'] = true
+L['Hide in Pet Battle'] = true
 L['Name Tooltip'] = true
 L['New Custom Panel'] = true
 L['Style Position'] = true
@@ -49,8 +55,12 @@ L['Title Text Position'] = true
 L['Title'] = true
 L['Type a unique name for the new panel. \n|cff00c0faNote: "BenikUI_" will be added at the beginning, to ensure uniqueness|r'] = true
 
+-- Profiles
+L['Successfully created and applied profile(s) for |cffffff00%s|r'] = true -- %s is the addon name
+L['|cffffff00%s|r profile for this character already exists. Aborting.'] = true -- %s is the addon name
+
 -- Misc
-L['Camera rotation'] = true
+L['Shown Logo'] = true
 L['iLevel'] = true
 L['Show item level per slot, on the character info frame'] = true
 L['Inside the item slot'] = true
@@ -69,11 +79,13 @@ L['Hide Mail Icon'] = true
 L['Middle'] = true
 L['New Mail'] = true
 L['No Mail'] = true
+L['Set Datatext Values'] = true
 L['Show/Hide Chat DataTexts. ElvUI chat datatexts must be disabled'] = true
 L['Show/Hide Mail Icon on minimap'] = true
-L['Show/Hide garrison currency on the datatext tooltip'] = true
-L['Show/Hide oil on the datatext tooltip'] = true
 L['Styles the chat datetexts and buttons only if both chat backdrops are set to "Hide Both".'] = true
+L['Left Chat Panel'] = true
+L['Right Chat Panel'] = true
+L['Middle Panel'] = true
 
 -- install
 L["BenikUI didn't find any supported addons for profile creation"] = true
@@ -110,10 +122,9 @@ L['UnitFrames'] = true
 L['Unitframes Set'] = true
 L['Welcome to BenikUI version %s, for ElvUI %s.'] = true
 L['Welcome'] = true
-L['You are now finished with the installation process. If you are in need of technical support please visit us at http://www.tukui.org.'] = true
+L['You are now finished with the installation process. If you are in need of technical support please visit us at https://www.tukui.org.'] = true
 
 -- actionbar options
-L['Applies transparency in all actionbar backdrops and actionbar buttons.'] = true
 L['Bar 1'] = true
 L['Bar 2'] = true
 L['Choose Actionbar to show to'] = true
@@ -121,7 +132,6 @@ L['Request Stop button'] = true
 L['Show in:'] = true
 L['Show small buttons over Actionbar 1 or 2 decoration, to show/hide Actionbars 3 or 5.'] = true
 L['Switch Buttons (requires BenikUI Style)'] = true
-L['Transparent Backdrops'] = true
 
 -- Request stop button
 L['LeftClick to Request Stop'] = true
@@ -133,14 +143,21 @@ L["Random Stats"] = true
 L["remaining till level"] = true
 
 -- Dashboards
+L['Amount'] = true
 L['Bar Color'] = true
+L["Change the Professions Dashboard width."] = true
 L['Change the System Dashboard width.'] = true
+L["Change the Tokens Dashboard width."] = true
 L['Choose font for all dashboards.'] = true
 L['Click :'] = true
 L['Dashboards'] = true
+L["Enable the Professions Dashboard."] = true
 L['Enable the System Dashboard.'] = true
 L['Enable the Tokens Dashboard.'] = true
-L['Enable/Disable '] = true
+L['Enable/Disable'] = true
+L['Faction Colors'] = true
+L['Fast Volume +/-'] = true
+L["Filter Capped"] = true
 L['Latency (MS)'] = true
 L['MouseWheel :'] = true
 L['RightClick :'] = true
@@ -148,6 +165,7 @@ L['Select Professions'] = true
 L['Select System Board'] = true
 L['Select Tokens'] = true
 L['Set the font size.'] = true
+L['Shift+MouseWheel :'] = true
 L['Shift+RightClick to remove'] = true
 L['Show the token, even if the amount is 0'] = true
 L['Show Weekly max'] = true
@@ -155,20 +173,19 @@ L['Show Weekly max tokens instead of total max'] = true
 L['Show zero amount tokens'] = true
 L['Show/Hide System Dashboard when in combat'] = true
 L['Show/Hide Tokens Dashboard when in combat'] = true
+L['Show/Hide Professions Dashboard when in combat'] = true
+L['Show/Hide Reputations Dashboard when in combat'] = true
 L['Show/Hide Tooltips'] = true
 L['System'] = true
+L['Text Alignment'] = true
 L['Tip: Grayed tokens are not yet discovered'] = true
 L['Tip: Click to free memory'] = true
 L['Use DataTexts font'] = true
+L['Use Faction Colors on Bars'] = true
+L['Use Faction Colors on Text'] = true
 
 -- Databars Options
-L['AutoTrack'] = true
-L['Change the tracked Faction automatically when reputation changes'] = true
 L['Notifiers'] = true
-L['Show BenikUI decorative bars on the default ElvUI XP bar'] = true
-L['Show BenikUI decorative bars on the default ElvUI Azerite bar'] = true
-L['Show BenikUI decorative bars on the default ElvUI Reputation bar'] = true
-L['Show BenikUI decorative bars on the default ElvUI Honor bar'] = true
 L['Button Backdrop'] = true
 L['Without Backdrop'] = true
 
@@ -176,15 +193,12 @@ L['Without Backdrop'] = true
 L['AddOnSkins'] = true
 L['AddOns Decor'] = true
 L['Choose which addon you wish to be decorated to fit with BenikUI style'] = true
-L['Decursive'] = true
 L['ElvUI AddOns'] = true
 L['decor.'] = true
 L['This will create and apply profile for '] = true
 L['Profiles'] = true
-L[': Profile for this character already exists. Aborting.'] = true
 
 -- UnitFrame Options
-L['Adjust castbar text Y Offset'] = true
 L['Apply shadow under the portrait'] = true
 L['Apply transparency on the portrait backdrop.'] = true
 L['BenikUI Style on Portrait'] = true
@@ -202,7 +216,6 @@ L['Makes the portrait backdrop transparent'] = true
 L['Player Size'] = true
 L['Power statusbar texture.'] = true
 L['Replaces the default role icons with SVUI ones.'] = true
-L['Shadow'] = true
 L['Style Height'] = true
 L['SVUI Icons'] = true
 L['This will ignore ElvUI Health Transparency setting on all Group Frames.'] = true
@@ -259,7 +272,6 @@ L["Fri"] = true
 L["Sat"] = true
 
 -- Addon friendly names (no need to translate)
-L['AdiBags'] = true
 L['Altoholic'] = true
 L['AtlasLoot'] = true
 L['Clique'] = true
@@ -276,3 +288,4 @@ L['BigWigs'] = true
 L['Zygor Guides'] = true
 L['Immersion'] = true
 L['Project Azilroka'] = true
+L['Kaliels Tracker'] = true

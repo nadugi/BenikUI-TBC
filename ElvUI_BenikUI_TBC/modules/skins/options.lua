@@ -1,5 +1,5 @@
 local BUI, E, _, V, P, G = unpack(select(2, ...))
-local L = E.Libs.ACL:GetLocale('ElvUI', E.global.general.locale or 'enUS');
+local L = E.Libs.ACL:GetLocale('ElvUI', E.global.general.locale or 'enUS')
 
 local tinsert, format = table.insert, string.format
 local ipairs, unpack = ipairs, unpack
@@ -8,21 +8,30 @@ local IsAddOnLoaded = IsAddOnLoaded
 local ADDONS = ADDONS
 
 local DecorElvUIAddons = {
-	{'ElvUI_LocationPlus', L['LocationPlus'], 'locplus'},
+	{'ElvUI_LocPlus', L['LocationPlus'], 'locplus'},
 	{'ElvUI_SLE', L['Shadow & Light'], 'sle'},
 	{'ElvUI_Enhanced', L['ElvUI_Enhanced'], 'enh'},
-	{'ElvUI_DTBars2', L['DT Bars 2'], 'dtb2'},
+	{'ElvUI_MerathilisUI', L['MerathilisUI'], 'mer'},
+	{'ElvUI_OptionsUI', L['ElvUI Options'], 'elv'},
 }
 
-local PassToAddonSkins = {
+local DecorAddonSkins = {
 	{'Skada', L['Skada'], 'skada'},
 	{'Recount', L['Recount'], 'recount'},
+	{'TinyDPS', L['TinyDPS'], 'tinydps'},
 	{'AtlasLoot', L['AtlasLoot'], 'atlasloot'},
+	{'Altoholic', L['Altoholic'], 'altoholic'},
+	{'Clique', L['Clique'], 'clique'},
+	{'oRA3', L['oRA3'], 'ora'},
+	{'Pawn', L['Pawn'], 'pawn'},
 	{'DBM-Core', L['Deadly Boss Mods'], 'dbm'},
 	{'BigWigs', L['BigWigs'], 'bigwigs'},
+	{'ZygorGuidesViewer', L['Zygor Guides'], 'zygor'},
 	{'Immersion', L['Immersion'], 'immersion'},
-	{'Spy', L['Spy'], 'spy'},
-	{'XToLevel', L['XToLevel'], 'xtoLevel'},
+	{'AllTheThings', L['All The Things'], 'allthethings'},
+	{'TinyInspect', L['TinyInspect'], 'tinyinspect'},
+	{'ArkInventory', L['Ark Inventory'], 'arkinventory'},
+	{'Storyline', L['Storyline'], 'storyline'},
 }
 
 local SupportedProfiles = {
@@ -30,34 +39,29 @@ local SupportedProfiles = {
 	{'BigWigs', 'BigWigs'},
 	{'DBM-Core', 'Deadly Boss Mods'},
 	{'Details', 'Details'},
-	{'ElvUI_VisualAuraTimers', 'ElvUI VisualAuraTimers'},
-	{'ElvUI_LocationPlus', 'Location Plus'},
+	{'ElvUI_LocPlus', 'Location Plus'},
 	{'InFlight_Load', 'InFlight'},
 	{'MikScrollingBattleText', "Mik's Scrolling Battle Text"},
 	{'Pawn', 'Pawn'},
 	{'Recount', 'Recount'},
 	{'Skada', 'Skada'},
 	{'ProjectAzilroka', 'Project Azilroka'},
+	{'!KalielsTracker', 'Kaliels Tracker'},
 }
 
 BUI.profileStrings = {
-	[1] = format('|cfffff400%s |r', L['BenikUI successfully created and applied profile(s) for:']),
-	[2] = format('|cfffff400%s |r', L[': Profile for this character already exists. Aborting.']),
+	[1] = L['Successfully created and applied profile(s) for |cffffff00%s|r'],
+	[2] = L['|cffffff00%s|r profile for this character already exists. Aborting.'],
 }
 
 local pa = L['Project Azilroka']
 
 local function SkinTable()
 	E.Options.args.benikui.args.skins = {
-		order = 40,
+		order = 100,
 		type = 'group',
-		name = ADDONS,
+		name = BUI:cOption(ADDONS, "orange"),
 		args = {
-			name = {
-				order = 1,
-				type = 'header',
-				name = BUI:cOption(ADDONS),
-			},
 			desc = {
 				order = 2,
 				type = 'description',
@@ -110,7 +114,7 @@ local function SkinTable()
 		}
 
 	local addorder = 0
-	for i, v in ipairs(PassToAddonSkins) do
+	for i, v in ipairs(DecorAddonSkins) do
 		local addonName, addonString, addonOption = unpack( v )
 		E.Options.args.benikui.args.skins.args.addonskins.args[addonOption] = {
 			order = addorder + 1,
@@ -134,20 +138,13 @@ local function SkinTable()
 				type = 'toggle',
 				name = L["TalkingHead"],
 			},
-			decursive = {
+			objectiveTracker = {
 				order = 2,
 				type = 'toggle',
-				name = L['Decursive'],
-				disabled = function() return not IsAddOnLoaded('Decursive') end,
-			},
-			storyline = {
-				order = 3,
-				type = 'toggle',
-				name = L['Storyline'],
-				disabled = function() return not IsAddOnLoaded('Storyline') end,
+				name = OBJECTIVES_TRACKER_LABEL,
 			},
 			inflight = {
-				order = 4,
+				order = 3,
 				type = 'toggle',
 				name = L['InFlight'],
 				set = function(info, value) E.db.benikuiSkins.variousSkins[ info[#info] ] = value;
@@ -159,11 +156,11 @@ local function SkinTable()
 					E:StaticPopup_Show('PRIVATE_RL') end,
 				disabled = function() return not IsAddOnLoaded('InFlight_Load') end,
 			},
-			zygor = {
-				order = 5,
+			kt = {
+				order = 4,
 				type = 'toggle',
-				name = L['Zygor Guides'],
-				disabled = function() return not BUI.ZG end,
+				name = L['Kaliels Tracker'],
+				disabled = function() return not IsAddOnLoaded('!KalielsTracker') end,
 			},
 		},
 	}
@@ -198,7 +195,7 @@ local function SkinTable()
 					else
 						BUI:LoadInFlightProfile(false)
 					end
-				elseif addon == 'ElvUI_LocationPlus' then
+				elseif addon == 'ElvUI_LocPlus' then
 					BUI:LoadLocationPlusProfile()
 				elseif addon == 'MikScrollingBattleText' then
 					BUI:LoadMSBTProfile()
@@ -208,12 +205,12 @@ local function SkinTable()
 					BUI:LoadRecountProfile()
 				elseif addon == 'Skada' then
 					BUI:LoadSkadaProfile()
-				elseif addon == 'ElvUI_VisualAuraTimers' then
-					BUI:LoadVATProfile()
 				elseif addon == 'AddOnSkins' then
 					BUI:LoadAddOnSkinsProfile()
 				elseif addon == 'ProjectAzilroka' then
 					BUI:LoadPAProfile()
+				elseif addon == '!KalielsTracker' then
+					BUI:LoadKalielsProfile()
 				end
 				E:StaticPopup_Show('PRIVATE_RL')
 			end,

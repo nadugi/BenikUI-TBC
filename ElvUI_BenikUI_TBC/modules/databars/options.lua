@@ -2,9 +2,9 @@ local BUI, E, _, V, P, G = unpack(select(2, ...))
 local L = E.Libs.ACL:GetLocale('ElvUI', E.global.general.locale or 'enUS');
 local mod = BUI:GetModule('Databars');
 
-local tinsert = table.insert
+local tinsert, ipairs = table.insert, ipairs
 
-local REPUTATION, ENABLE, DEFAULT = REPUTATION, ENABLE, DEFAULT
+local REPUTATION, DEFAULT, HONOR = REPUTATION, DEFAULT, HONOR
 
 local backdropValues = {
 	TRANSPARENT = L['Transparent'],
@@ -12,182 +12,116 @@ local backdropValues = {
 	NO_BACK = L['Without Backdrop'],
 }
 
+local positionValues = {
+	['ABOVE'] = L['Above'],
+	['BELOW'] = L['Below'],
+	['LEFT'] = L['Left'],
+	['RIGHT'] = L['Right'],
+}
+
+local databarsTbl = {
+	-- bar, option, name
+	{'ElvUI_ExperienceBar', 'experience', L['XP Bar']},
+	{'ElvUI_AzeriteBar', 'azerite', L['Azerite Bar']},
+	{'ElvUI_ReputationBar', 'reputation', REPUTATION},
+	{'ElvUI_HonorBar', 'honor', HONOR},
+	{'ElvUI_ThreatBar', 'threat', L["Threat"]}
+}
+
+local textFormatValues = {
+	NONE = L["NONE"],
+	PERCENT = L["Percent"],
+}
+
 local function databarsTable()
 	E.Options.args.benikui.args.benikuiDatabars = {
-		order = 30,
+		order = 80,
 		type = 'group',
-		name = L['DataBars'],
+		name = BUI:cOption(L['DataBars'], "orange"),
 		childGroups = 'tab',
 		args = {
-			name = {
-				order = 1,
-				type = 'header',
-				name = BUI:cOption(L['DataBars']),
-			},
-			experience = {
-				order = 1,
-				type = 'group',
-				name = L['XP Bar'],
-				args = {
-					enable = {
-						order = 1,
-						type = 'toggle',
-						name = L["Enable"],
-						get = function(info) return E.db.benikuiDatabars.experience.enable end,
-						set = function(info, value) E.db.benikuiDatabars.experience.enable = value E:StaticPopup_Show('PRIVATE_RL'); end,
-					},
-					buiStyle = {
-						order = 2,
-						type = 'toggle',
-						name = L['BenikUI Style'],
-						disabled = function() return not E.db.benikuiDatabars.experience.enable end,
-						desc = L['Show BenikUI decorative bars on the default ElvUI XP bar'],
-						get = function(info) return E.db.benikuiDatabars.experience.buiStyle end,
-						set = function(info, value) E.db.benikuiDatabars.experience.buiStyle = value; mod:ApplyXpStyling(); end,
-					},
-					buttonStyle = {
-						order = 3,
-						type = 'select',
-						name = L['Button Backdrop'],
-						disabled = function() return not E.db.benikuiDatabars.experience.enable end,
-						values = backdropValues,
-						get = function(info) return E.db.benikuiDatabars.experience.buttonStyle end,
-						set = function(info, value) E.db.benikuiDatabars.experience.buttonStyle = value; mod:ToggleXPBackdrop(); end,
-					},
-					notifiers = {
-						order = 4,
-						type = 'group',
-						name = L['Notifiers'],
-						guiInline = true,
-						args = {
-							enable = {
-								order = 1,
-								type = 'toggle',
-								name = L["Enable"],
-								get = function(info) return E.db.benikuiDatabars.experience.notifiers.enable end,
-								set = function(info, value) E.db.benikuiDatabars.experience.notifiers.enable = value; E:StaticPopup_Show('PRIVATE_RL'); end,
-							},
-							combat = {
-								order = 2,
-								type = 'toggle',
-								name = L["Combat Fade"],
-								get = function(info) return E.db.benikuiDatabars.experience.notifiers.combat end,
-								set = function(info, value) E.db.benikuiDatabars.experience.notifiers.combat = value; E:StaticPopup_Show('PRIVATE_RL'); end,
-							},
-							position = {
-								order = 3,
-								type = 'select',
-								name = L['Position'],
-								disabled = function() return not E.db.benikuiDatabars.experience.notifiers.enable end,
-								values = {
-									['LEFT'] = L['Left'],
-									['RIGHT'] = L['Right'],
-								},
-								get = function(info) return E.db.benikuiDatabars.experience.notifiers.position end,
-								set = function(info, value) E.db.benikuiDatabars.experience.notifiers.position = value; mod:UpdateXpNotifierPositions(); end,
-							},
-						},
-					},
-					elvuiOption = {
-						order = 10,
-						type = "execute",
-						name = L["ElvUI"].." "..XPBAR_LABEL,
-						func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "databars", "experience") end,
-					},
-				},
-			},
-			reputation = {
-				order = 2,
-				type = 'group',
-				name = REPUTATION,
-				args = {
-					enable = {
-						order = 1,
-						type = 'toggle',
-						name = L["Enable"],
-						get = function(info) return E.db.benikuiDatabars.reputation.enable end,
-						set = function(info, value) E.db.benikuiDatabars.reputation.enable = value E:StaticPopup_Show('PRIVATE_RL'); end,
-					},
-					buiStyle = {
-						order = 2,
-						type = 'toggle',
-						name = L['BenikUI Style'],
-						disabled = function() return not E.db.benikuiDatabars.reputation.enable end,
-						desc = L['Show BenikUI decorative bars on the default ElvUI Reputation bar'],
-						get = function(info) return E.db.benikuiDatabars.reputation.buiStyle end,
-						set = function(info, value) E.db.benikuiDatabars.reputation.buiStyle = value; mod:ApplyRepStyling(); end,
-					},
-					buttonStyle = {
-						order = 3,
-						type = 'select',
-						name = L['Button Backdrop'],
-						disabled = function() return not E.db.benikuiDatabars.reputation.enable end,
-						values = backdropValues,
-						get = function(info) return E.db.benikuiDatabars.reputation.buttonStyle end,
-						set = function(info, value) E.db.benikuiDatabars.reputation.buttonStyle = value; mod:ToggleRepBackdrop(); end,
-					},
-					autotrack = {
-						order = 4,
-						type = 'toggle',
-						name = L['AutoTrack'],
-						desc = L['Change the tracked Faction automatically when reputation changes'],
-						get = function(info) return E.db.benikuiDatabars.reputation.autotrack end,
-						set = function(info, value) E.db.benikuiDatabars.reputation.autotrack = value; mod:ToggleRepAutotrack(); end,
-					},
-					notifiers = {
-						order = 5,
-						type = 'group',
-						name = L['Notifiers'],
-						guiInline = true,
-						args = {
-							enable = {
-								order = 1,
-								type = 'toggle',
-								name = L["Enable"],
-								get = function(info) return E.db.benikuiDatabars.reputation.notifiers.enable end,
-								set = function(info, value) E.db.benikuiDatabars.reputation.notifiers.enable = value; E:StaticPopup_Show('PRIVATE_RL'); end,
-							},
-							combat = {
-								order = 2,
-								type = 'toggle',
-								name = L["Combat Fade"],
-								get = function(info) return E.db.benikuiDatabars.reputation.notifiers.combat end,
-								set = function(info, value) E.db.benikuiDatabars.reputation.notifiers.combat = value; E:StaticPopup_Show('PRIVATE_RL'); end,
-							},
-							position = {
-								order = 3,
-								type = 'select',
-								name = L['Position'],
-								disabled = function() return not E.db.benikuiDatabars.reputation.notifiers.enable end,
-								values = {
-									['LEFT'] = L['Left'],
-									['RIGHT'] = L['Right'],
-								},
-								get = function(info) return E.db.benikuiDatabars.reputation.notifiers.position end,
-								set = function(info, value) E.db.benikuiDatabars.reputation.notifiers.position = value; mod:UpdateRepNotifierPositions(); end,
-							},
-						},
-					},
-					elvuiOption = {
-						order = 10,
-						type = "execute",
-						name = L["ElvUI"].." "..REPUTATION,
-						func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "databars", "reputation") end,
-					},
-				},
-			},
 		},
 	}
+	for i, v in ipairs(databarsTbl) do
+		local barname, option, optionName = unpack(v)
+		local bar = _G[barname]
+		E.Options.args.benikui.args.benikuiDatabars.args[option] = {
+			order = i+1,
+			type = 'group',
+			name = optionName,
+			args = {
+				enable = {
+					order = 1,
+					type = 'toggle',
+					name = L["Enable"],
+					get = function(info) return E.db.benikuiDatabars[option].enable end,
+					set = function(info, value) E.db.benikuiDatabars[option].enable = value E:StaticPopup_Show('PRIVATE_RL'); end,
+				},
+				spacer1 = {
+					order = 2,
+					type = 'description',
+					name = '',
+				},
+				buiStyle = {
+					order = 3,
+					type = 'toggle',
+					name = L['BenikUI Style'],
+					disabled = function() return not E.db.benikuiDatabars[option].enable end,
+					get = function(info) return E.db.benikuiDatabars[option].buiStyle end,
+					set = function(info, value) E.db.benikuiDatabars[option].buiStyle = value; mod:ApplyStyle(bar, option); end,
+				},
+				buttonStyle = {
+					order = 4,
+					type = 'select',
+					name = L['Button Backdrop'],
+					disabled = function() return not E.db.benikuiDatabars[option].enable end,
+					values = backdropValues,
+					get = function(info) return E.db.benikuiDatabars[option].buttonStyle end,
+					set = function(info, value) E.db.benikuiDatabars[option].buttonStyle = value; mod:ToggleBackdrop(bar, option); end,
+				},
+				notifiers = {
+					order = 5,
+					type = 'group',
+					name = L['Notifiers'],
+					guiInline = true,
+					args = {
+						enable = {
+							order = 1,
+							type = 'toggle',
+							name = L["Enable"],
+							get = function(info) return E.db.benikuiDatabars[option].notifiers.enable end,
+							set = function(info, value) E.db.benikuiDatabars[option].notifiers.enable = value; E:StaticPopup_Show('PRIVATE_RL'); end,
+						},
+						position = {
+							order = 2,
+							type = 'select',
+							name = L['Position'],
+							disabled = function() return not E.db.benikuiDatabars[option].notifiers.enable end,
+							values = positionValues,
+							get = function(info) return E.db.benikuiDatabars[option].notifiers.position end,
+							set = function(info, value) E.db.benikuiDatabars[option].notifiers.position = value; mod:UpdateNotifierPositions(bar, option); end,
+						},
+					},
+				},
+				elvuiOption = {
+					order = 10,
+					type = "execute",
+					name = L["ElvUI"].." "..optionName,
+					func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "databars", option) end,
+				},
+			},
+		}
+	end
 end
 tinsert(BUI.Config, databarsTable)
 
 local function injectElvUIDatabarOptions()
 	-- xp
 	E.Options.args.databars.args.experience.args.fontGroup.args.textYoffset = {
-		order = 20,
+		order = 100,
 		type = "range",
 		min = -30, max = 30, step = 1,
-		name = BUI:cOption(L['Text yOffset']),
+		name = BUI:cOption(L['Text yOffset'], "blue"),
 		get = function(info) return E.db.databars.experience[ info[#info] ] end,
 		set = function(info, value) E.db.databars.experience[ info[#info] ] = value; mod:XpTextOffset() end,
 	}
@@ -199,12 +133,29 @@ local function injectElvUIDatabarOptions()
 		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "experience") end,
 	}
 
-	-- reputation
-	E.Options.args.databars.args.reputation.args.fontGroup.args.textYoffset = {
-		order = 20,
+	-- azerite
+	E.Options.args.databars.args.azerite.args.fontGroup.args.textYoffset = {
+		order = 100,
 		type = "range",
 		min = -30, max = 30, step = 1,
-		name = BUI:cOption(L['Text yOffset']),
+		name = BUI:cOption(L['Text yOffset'], "blue"),
+		get = function(info) return E.db.databars.azerite[ info[#info] ] end,
+		set = function(info, value) E.db.databars.azerite[ info[#info] ] = value; mod:AzeriteTextOffset() end,
+	}
+
+	E.Options.args.databars.args.azerite.args.gotobenikui = {
+		order = -1,
+		type = "execute",
+		name = BUI.Title..L["Azerite Bar"],
+		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "azerite") end,
+	}
+
+	-- reputation
+	E.Options.args.databars.args.reputation.args.fontGroup.args.textYoffset = {
+		order = 100,
+		type = "range",
+		min = -30, max = 30, step = 1,
+		name = BUI:cOption(L['Text yOffset'], "blue"),
 		get = function(info) return E.db.databars.reputation[ info[#info] ] end,
 		set = function(info, value) E.db.databars.reputation[ info[#info] ] = value; mod:RepTextOffset() end,
 	}
@@ -214,6 +165,40 @@ local function injectElvUIDatabarOptions()
 		type = "execute",
 		name = BUI.Title..REPUTATION,
 		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "reputation") end,
+	}
+
+	-- honor
+	E.Options.args.databars.args.honor.args.fontGroup.args.textYoffset = {
+		order = 100,
+		type = "range",
+		min = -30, max = 30, step = 1,
+		name = BUI:cOption(L['Text yOffset'], "blue"),
+		get = function(info) return E.db.databars.honor[ info[#info] ] end,
+		set = function(info, value) E.db.databars.honor[ info[#info] ] = value; mod:HonorTextOffset() end,
+	}
+
+	E.Options.args.databars.args.honor.args.gotobenikui = {
+		order = -1,
+		type = "execute",
+		name = BUI.Title..HONOR,
+		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "honor") end,
+	}
+
+	-- threat
+	E.Options.args.databars.args.threat.args.fontGroup.args.textYoffset = {
+		order = 100,
+		type = "range",
+		min = -30, max = 30, step = 1,
+		name = BUI:cOption(L['Text yOffset'], "blue"),
+		get = function(info) return E.db.databars.threat[ info[#info] ] end,
+		set = function(info, value) E.db.databars.threat[ info[#info] ] = value; mod:ThreatTextOffset() end,
+	}
+
+	E.Options.args.databars.args.threat.args.gotobenikui = {
+		order = -1,
+		type = "execute",
+		name = BUI.Title..L["Threat"],
+		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "threat") end,
 	}
 end
 tinsert(BUI.Config, injectElvUIDatabarOptions)

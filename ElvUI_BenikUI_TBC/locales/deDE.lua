@@ -9,7 +9,9 @@ L["HOME"] = "Heim"; -- Changed the Blizzard default, it would make no sense othe
 L["WORLD"] = "Welt";
 
 --core
-L[' is loaded. For any issues or suggestions, please visit '] = " ist geladen. Für Fehler oder Vorschläge besucht bitte: "
+L['is loaded. For any issues or suggestions, please visit'] = "ist geladen. Für Fehler oder Vorschläge besucht bitte:"
+L["%s\n\nYour ElvUI version %.2f is not compatible with BenikUI.\nMinimum ElvUI version needed is %.2f. Please download it from here:\n"] = true
+L["|cffff0000BenikUI Error|r\n\nIt seems like BenikUI Retail version is installed on WoW Classic. Please install BenikUI Classic version.\n|cff00c0faTip: Usually happens with Twitch Client|r"] = true
 
 -- General options
 L["BenikUI is a completely external ElvUI mod. More available options can be found in ElvUI options (e.g. Actionbars, Unitframes, Player and Target Portraits), marked with "] = "BenikUI ist ein komplett externer ElvUI Mod. Weitere verfügbare Optionen findest Du in den ElvUI Optionen (z.B. Aktionsleisten, Einheitenfenster, Spieler und Ziel Portrait), markiert in "
@@ -24,7 +26,10 @@ L['Style Color'] = "Stil Farbe"
 L['by Benik (EU-Emerald Dream)'] = "von Benik (EU-Emerald Dream)"
 L['light blue color.'] = "hell blau"
 L['Splash Screen'] = "Startbildschirm"
-L['Style Auras'] = "Aura Stil"
+L['Shadow'] = "Schatten"
+L['Shadow Size'] = true
+L['Shadow Alpha'] = true
+L['Covenant Color'] = true
 
 -- Layout
 L['LeftClick: Toggle Configuration'] = "Links Klick: Einstellungen umschalten"
@@ -35,22 +40,27 @@ L['Click to show the Addon List'] = "Klicken um die AddOn-Liste zu zeigen"
 -- Custom Panels
 L['Clone'] = true
 L['Clone the Custom Panel: |cff00c0fa%s|r.\nPlease type the new Name'] = true
-L['Create'] = true
-L['Enable tooltip to reveal the panel name'] = true
-L['Name Tooltip'] = true
+L["Create"] = "Erstelle"
+L["Enable tooltip to reveal the panel name"] = "Aktiviere den Tooltip um den Panel Namen zu erfahren"
+L["Hide in Pet Battle"] = "Verstecke in Haustiefkämpfen"
+L["Name Tooltip"] = "Namenstooltip"
 L['New Custom Panel'] = true
 L['Style Position'] = true
-L['Texture Color'] = true
-L['The Custom Panel name |cff00c0fa%s|r already exists. Please choose another one.'] = true
-L['This will delete the Custom Panel named |cff00c0fa%s|r.\nContinue?'] = true
-L['This works like a macro, you can run different situations to get the panel to show/hide differently.\n Example: "[combat] show;hide"'] = true
-L['Title Bar Position'] = true
-L['Title Text Position'] = true
-L['Title'] = true
-L['Type a unique name for the new panel. \n|cff00c0faNote: "BenikUI_" will be added at the beginning, to ensure uniqueness|r'] = true
+L["Texture Color"] = true
+L["The Custom Panel name |cff00c0fa%s|r already exists. Please choose another one."] = "Der Name |cff00c0fa%s|r von einem Benutzerdefiniertem Panel existiert bereits. Bitte wähle einen anderen."
+L["This will delete the Custom Panel named |cff00c0fa%s|r.\nContinue?"] = "Dieses wird das Benutzerdefiniertes Panel mit dem Namen |cff00c0fa%s|r löschen.\nFortfahren?"
+L["This works like a macro, you can run different situations to get the panel to show/hide differently.\n Example: '[combat] show;hide'"] = true
+L["Title Bar Position"] = true
+L["Title Text Position"] = true
+L["Title"] = true
+L["Type a unique name for the new panel. \n|cff00c0faNote: 'BenikUI_' will be added at the beginning, to ensure uniqueness|r"] = "Gib einen einzigartigen Namen für das neue Panel ein. \n|cff00c0faHinweis: 'BenikUI_' wird am Anfang hinzugefügt um die Einzigarigkeit zu gewährleisten|r"
+
+-- Profiles
+L['Successfully created and applied profile(s) for |cffffff00%s|r'] = "Erfolgreich ein Profil erstellt und angewandt für |cffffff00%s|r" -- %s is the addon name
+L['|cffffff00%s|r profile for this character already exists. Aborting.'] = "|cffffff00%s|r Profil für diesen Charakter besteht bereits. Abbruch." -- %s is the addon name
 
 -- Misc
-L['Camera rotation'] = "Kamerarotation"
+L['Shown Logo'] = "Zeige Logo"
 L['iLevel'] = true --No need to translate
 L['Show item level per slot, on the character info frame'] = "Zeigt das Itemlevel pro Slot, im Spielerfenster"
 L['Inside the item slot'] = "Innerhalb des Ausrüstungsplatz"
@@ -69,11 +79,13 @@ L['Hide Mail Icon'] = "Verstecke das Postsymbol"
 L['Middle'] = "Mittlerer"
 L['New Mail'] = "Neue Post"
 L['No Mail'] = "Keine Post"
+L['Set Datatext Values'] = true
 L['Show/Hide Chat DataTexts. ElvUI chat datatexts must be disabled'] = "Chat Infotexte anzeigen/ausblenden. ElvUI Infotexte müssen dafür deaktiviert sein"
 L['Show/Hide Mail Icon on minimap'] = "Postsymbol an der Minimap anzeigen/ausblenden"
-L['Show/Hide garrison currency on the datatext tooltip'] = "Garnisonsressourcen am Infotext Tooltip anzeigen/ausblenden"
-L['Show/Hide oil on the datatext tooltip'] = "Öl am Infotext Tooltip anzeigen/ausbenden"
 L['Styles the chat datetexts and buttons only if both chat backdrops are set to "Hide Both".'] = "Passt die Chatinfotexte und Tasten an, wenn der Chathintergrund auf 'Verstecke Beide' gesetzt ist."
+L['Left Chat Panel'] = true
+L['Right Chat Panel'] = true
+L['Middle Panel'] = true
 
 -- install
 L["BenikUI didn't find any supported addons for profile creation"] = "BenikUI konnte keine unterstütze Profile für Addons finden"
@@ -110,10 +122,9 @@ L['UnitFrames'] = "Einheitenfenster"
 L['Unitframes Set'] = "Einheitenfenster setzen"
 L['Welcome to BenikUI version %s, for ElvUI %s.'] = "Willkommen zu BenikUI Version %s, für ElvUI %s."
 L['Welcome'] = "Willkommen"
-L['You are now finished with the installation process. If you are in need of technical support please visit us at http://www.tukui.org.'] = "Du hast den Installationsprozess jetzt abgeschlossen. Wenn du technische Unterstützung brauchst besuch uns bitte http://www.tukui.org."
+L['You are now finished with the installation process. If you are in need of technical support please visit us at https://www.tukui.org.'] = "Du hast den Installationsprozess jetzt abgeschlossen. Wenn du technische Unterstützung brauchst besuch uns bitte https://www.tukui.org."
 
 -- actionbar options
-L['Applies transparency in all actionbar backdrops and actionbar buttons.'] = "Aktiviert die Transparenz auf alle Aktionsleisten Hintergründe und Tasten."
 L['Bar 1'] = "Leiste 1"
 L['Bar 2'] = "Leiste 2"
 L['Choose Actionbar to show to'] = "Wähle Aktionsleiste zum Anzeigen"
@@ -121,7 +132,6 @@ L['Request Stop button'] = "Haltewunschtaste"
 L['Show in:'] = "Zeige in:"
 L['Show small buttons over Actionbar 1 or 2 decoration, to show/hide Actionbars 3 or 5.'] = "Zeigt kleine Tasten über Aktionsleiste 1 oder 2, um Aktionsleiste 3 oder 5 anzuzeigen/auszublenden."
 L['Switch Buttons (requires BenikUI Style)'] = "Tasten wechseln (benötigt BenikUI Stil)"
-L['Transparent Backdrops'] = "Transparente Hintergründe"
 
 -- Request stop button
 L['LeftClick to Request Stop'] = "Links-Klick um am nächsten Flugpunkt zu landen"
@@ -133,14 +143,21 @@ L["Random Stats"] = "Zufällige Werte"
 L["remaining till level"] = "verbleibend bis zum Level"
 
 -- Dashboards
+L['Amount'] = true
 L['Bar Color'] = "Leistenfarbe"
-L['Change the System Dashboard width.'] = "Ändert die Dashboard Breite"
+L["Change the Professions Dashboard width."] = "Ändert die Beruf-Dashboard Breite."
+L['Change the System Dashboard width.'] = "Ändert die System-Dashboard Breite."
+L["Change the Tokens Dashboard width."] = "Ändert die Token-Dashboard Breite."
 L['Choose font for all dashboards.'] = "Wähle Schriftart für alle Dashboards."
 L['Click :'] = "Klick :"
 L['Dashboards'] = true --No need to translate
+L["Enable the Professions Dashboard."] = "Aktiviert das Berufe Dashboard."
 L['Enable the System Dashboard.'] = "Aktiviert das System Dashboard."
 L['Enable the Tokens Dashboard.'] = "Aktivert das Abzeichen Dashboard."
-L['Enable/Disable '] = "Aktivieren/Deaktivieren"
+L['Enable/Disable'] = "Aktivieren/Deaktivieren"
+L['Faction Colors'] = true
+L['Fast Volume +/-'] = true
+L["Filter Capped"] = "Filtere am Cap"
 L['Latency (MS)'] = "Latenz (MS)"
 L['MouseWheel :'] = "Mausrad :"
 L['RightClick :'] = "Rechtsklick :"
@@ -148,6 +165,7 @@ L['Select Professions'] = "Berufe auswählen"
 L['Select System Board'] = "Wähle System Board"
 L['Select Tokens'] = "Abzeichen auswählen"
 L['Set the font size.'] = "Schriftgröße auswählen."
+L['Shift+MouseWheel :'] = true
 L['Shift+RightClick to remove'] = "Shift+Rechts click um zu entfernen"
 L['Show the token, even if the amount is 0'] = "Abzeichen anzeigen, auch wenn die Anzahl 0 ist"
 L['Show Weekly max'] = "Zeige wöchentliches maximum"
@@ -155,20 +173,19 @@ L['Show Weekly max tokens instead of total max'] = "Zeige wöchentliches max. Ab
 L['Show zero amount tokens'] = "Zeige Abzeichen mit der Anzahl 0"
 L['Show/Hide System Dashboard when in combat'] = "Dashboard im Kampf anzeigen/ausblenden"
 L['Show/Hide Tokens Dashboard when in combat'] = "Abzeichen Dashboard im Kampf anzeigen/ausblenden"
+L['Show/Hide Professions Dashboard when in combat'] = true
+L['Show/Hide Reputations Dashboard when in combat'] = true
 L['Show/Hide Tooltips'] = "Tooltip anzeigen/ausblenden"
 L['System'] = true --No need to translate
+L['Text Alignment'] = true
 L['Tip: Grayed tokens are not yet discovered'] = "Tip: Ausgegraute Abzeichen sind bis jetzt noch nicht entdeckt"
 L['Tip: Click to free memory'] = "Tip: Klicken um den Speicher zu bereinigen"
 L['Use DataTexts font'] = "Benutze Infotext Schriftart"
+L['Use Faction Colors on Bars'] = true
+L['Use Faction Colors on Text'] = true
 
 -- Databars Options
-L['AutoTrack'] = "Automatische Verfolgung"
-L['Change the tracked Faction automatically when reputation changes'] = "Ändert automatisch die Rufverfolgung wenn sich der Ruf verändert"
 L['Notifiers'] = "Benachrichtigungen"
-L['Show BenikUI decorative bars on the default ElvUI XP bar'] = "Zeige BenikUI dekorative Leisten auf der standard ElvUI Erfahrungsleiste"
-L['Show BenikUI decorative bars on the default ElvUI Azerite bar'] = true
-L['Show BenikUI decorative bars on the default ElvUI Reputation bar'] = "Zeige BenikUI dekorative Leisten auf der standard ElvUI Rufleiste"
-L['Show BenikUI decorative bars on the default ElvUI Honor bar'] = "Zeige BenikUI dekorative Leisten auf der standard ElvUI Ehrenleiste"
 L['Button Backdrop'] = "Tasten Hintergrund"
 L['Without Backdrop'] = "Ohne Hintergrund"
 
@@ -176,15 +193,12 @@ L['Without Backdrop'] = "Ohne Hintergrund"
 L['AddOnSkins'] = true --No need to translate
 L['AddOns Decor'] = "AddOns Dekor"
 L['Choose which addon you wish to be decorated to fit with BenikUI style'] = "Wähle aus, welches Addon du stylen möchtest so dass es am besten zu BenikUI passt"
-L['Decursive'] = true --No need to translate
 L['ElvUI AddOns'] = true --No need to translate
 L['decor.'] = "dekor."
 L['This will create and apply profile for '] = "Dieses wird ein Profil erstellen und anwenden für "
 L['Profiles'] = "Profile"
-L[': Profile for this character already exists. Aborting.'] = ": ein Profil für den Charakter existiert bereits. Abgebrochen."
 
 -- UnitFrame Options
-L['Adjust castbar text Y Offset'] = "Passe Zauberleisten Text Y-Versatz an"
 L['Apply shadow under the portrait'] = "Aktiviere den Schatten unter dem Portrait"
 L['Apply transparency on the portrait backdrop.'] = "Wende Transparenz auf den Portrait Hintergrund an."
 L['BenikUI Style on Portrait'] = "BenikUI Stil auf dem Portrait"
@@ -202,11 +216,11 @@ L['Makes the portrait backdrop transparent'] = "Dadurch wird der Portrait Hinter
 L['Player Size'] = "Spieler Größe"
 L['Power statusbar texture.'] = "Kraft Statusleiste Textur."
 L['Replaces the default role icons with SVUI ones.'] = "Ersetzt die Standard Rollen Symbole mit denen von SVUI."
-L['Shadow'] = "Schatten"
 L['Style Height'] = "Stil Höhe"
 L['SVUI Icons'] = "SVUI Symbole"
 L['This will ignore ElvUI Health Transparency setting on all Group Frames.'] = "Dieses ignoriert die ElvUI Gesundheit Transparenz Einstellung auf allen Gruppenfenstern."
 L['Vertical power statusbar'] = "Vertikale Kraft Statusleiste"
+
 -- Castbar
 L['Force show any text placed on the InfoPanel, while casting.'] = "Zwinge die Anzeige des Textes auf dem InfoPanel, während des zauberns."
 L['Show Castbar text'] = "Zeige Zauberleisten Text"
@@ -258,7 +272,6 @@ L["Fri"] = "Fr"
 L["Sat"] = "Sa"
 
 -- Addon friendly names (no need to translate)
-L['AdiBags'] = true
 L['Altoholic'] = true
 L['AtlasLoot'] = true
 L['Clique'] = true
@@ -275,3 +288,4 @@ L['BigWigs'] = true
 L['Zygor Guides'] = true
 L['Immersion'] = true
 L['Project Azilroka'] = true
+L['Kaliels Tracker'] = true

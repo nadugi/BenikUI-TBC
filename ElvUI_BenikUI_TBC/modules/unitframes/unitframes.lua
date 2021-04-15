@@ -1,9 +1,6 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
-local mod = BUI:NewModule('Units', 'AceHook-3.0', 'AceEvent-3.0', 'AceTimer-3.0');
-local UF = E:GetModule('UnitFrames');
-local LSM = E.LSM
-
-local find = string.find
+local mod = BUI:GetModule('Units')
+local UF = E:GetModule('UnitFrames')
 
 function mod:UnitDefaults()
 	if E.db.benikui.unitframes.player.portraitWidth == nil then
@@ -37,9 +34,9 @@ end
 function mod:Configure_ReadyCheckIcon(frame)
 	local tex = frame.ReadyCheckIndicator
 
-	tex.readyTexture = [[Interface\AddOns\ElvUI_BenikUI_Classic\media\textures\ready]]
-	tex.notReadyTexture = [[Interface\AddOns\ElvUI_BenikUI_Classic\media\textures\notready]]
-	tex.waitingTexture = [[Interface\AddOns\ElvUI_BenikUI_Classic\media\textures\waiting]]
+	tex.readyTexture = [[Interface\AddOns\ElvUI_BenikUI\media\textures\ready]]
+	tex.notReadyTexture = [[Interface\AddOns\ElvUI_BenikUI\media\textures\notready]]
+	tex.waitingTexture = [[Interface\AddOns\ElvUI_BenikUI\media\textures\waiting]]
 end
 
 -- Unit Shadows
@@ -156,7 +153,7 @@ function mod:TankTargetShadows()
 	end
 end
 
-function mod:PostUpdateAura(unit, button)
+function mod:PostUpdateAura(_, button)
 	if not button.shadow then
 		button:CreateSoftShadow()
 	end
@@ -187,17 +184,17 @@ function mod:PostUpdateAura(unit, button)
 	end
 end
 
-function mod:ADDON_LOADED(event, addon)
-	if addon ~= "ElvUI_Config" then return end
-	mod:UnregisterEvent(event)
-	mod:ChangeDefaultOptions()
+function mod:ChangeDefaultOptions()
+	E.Options.args.unitframe.args.individualUnits.args.player.args.power.args.height.max = 300
+	E.Options.args.unitframe.args.individualUnits.args.player.args.power.args.detachedWidth.min = ((E.db.unitframe.thinBorders or E.PixelMode) and 3 or 7)
+	E.Options.args.unitframe.args.individualUnits.args.target.args.power.args.height.max = 300
+	E.Options.args.unitframe.args.individualUnits.args.target.args.power.args.detachedWidth.min = ((E.db.unitframe.thinBorders or E.PixelMode) and 3 or 7)
 end
 
-function mod:ChangeDefaultOptions()
-	E.Options.args.unitframe.args.player.args.power.args.height.max = 300
-	E.Options.args.unitframe.args.player.args.power.args.detachedWidth.min = ((E.db.unitframe.thinBorders or E.PixelMode) and 3 or 7)
-	E.Options.args.unitframe.args.target.args.power.args.height.max = 300
-	E.Options.args.unitframe.args.target.args.power.args.detachedWidth.min = ((E.db.unitframe.thinBorders or E.PixelMode) and 3 or 7)
+function mod:ADDON_LOADED(event, addon)
+	if addon ~= "ElvUI_OptionsUI" then return end
+	mod:UnregisterEvent(event)
+	mod:ChangeDefaultOptions()
 end
 
 function mod:Initialize()
@@ -205,6 +202,7 @@ function mod:Initialize()
 	self:UnitDefaults()
 	self:InitPlayer()
 	self:InitTarget()
+	self:InitFocus()
 	self:InitPet()
 	self:InitTargetTarget()
 
@@ -216,11 +214,15 @@ function mod:Initialize()
 	self:ChangeHealthBarTexture()
 	self:InfoPanelColor()
 
+	self:Configure_RoleIcons()
+
 	if BUI.ShadowMode then
 		self:UnitShadows()
 		self:PartyShadows()
 		self:RaidShadows()
 		self:Raid40Shadows()
+		self:BossShadows()
+		self:ArenaShadows()
 		self:TankShadows()
 		self:TankTargetShadows()
 	end

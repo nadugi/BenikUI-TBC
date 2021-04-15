@@ -31,13 +31,13 @@ end
 local abtn = {}
 function mod:CreateButtons()
 	for i = 1, 2 do
-		abtn[i] = CreateFrame('Button', nil, E.UIParent)
+		abtn[i] = CreateFrame('Button', nil, E.UIParent, 'BackdropTemplate')
 		abtn[i]:Size(12, 5)
 		abtn[i]:SetTemplate('Default', true)
 		abtn[i]:SetAlpha(0)
 		abtn[i].tex = abtn[i]:CreateTexture(nil, 'OVERLAY')
 		abtn[i].tex:SetInside()
-		abtn[i].tex:SetTexture(E['media'].BuiFlat)
+		abtn[i].tex:SetTexture(E.Media.Textures.White8x8)
 		abtn[i].tex:SetVertexColor(unpack(E['media'].rgbvaluecolor))
 
 		abtn[i].anim = CreateAnimationGroup(abtn[i])
