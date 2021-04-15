@@ -23,12 +23,6 @@ local function StyleTooltip()
 	end
 end
 
-local function StyleCagedBattlePetTooltip(tooltipFrame)
-	if not tooltipFrame.style then
-		tooltipFrame:BuiStyle("Outside")
-	end
-end
-
 local tooltips = {
 	_G.EmbeddedItemTooltip,
 	_G.FriendsTooltip,
@@ -168,7 +162,6 @@ function mod:Initialize()
 	mod:SecureHookScript(GameTooltip, 'OnTooltipCleared', 'GameTooltip_OnTooltipCleared')
 	mod:SecureHookScript(GameTooltip, 'OnUpdate', 'RecolorTooltipStyle')
 	hooksecurefunc(TT, "GameTooltip_SetDefaultAnchor", mod.SetupStyleAndShadow)
-	hooksecurefunc("BattlePetTooltipTemplate_SetBattlePet", StyleCagedBattlePetTooltip)
 	hooksecurefunc(S, "Ace3_StyleTooltip", mod.StyleAceTooltip)
 end
 
