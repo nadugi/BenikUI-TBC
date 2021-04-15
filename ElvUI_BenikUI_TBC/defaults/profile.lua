@@ -18,9 +18,7 @@ P['unitframe']['units']['raid40']['classHover'] = false
 
 -- Databars text yOffset
 P['databars']['experience']['textYoffset'] = 0
-P['databars']['azerite']['textYoffset'] = 0
 P['databars']['reputation']['textYoffset'] = 0
-P['databars']['honor']['textYoffset'] = 0
 
 -- Add Minimap styling toggle default
 P['general']['minimap']['benikuiStyle'] = true
@@ -269,26 +267,6 @@ P['benikuiDatabars'] = {
 		['notifiers'] = {
 			['enable'] = true,
 			['position'] = 'LEFT',
-		},
-	},
-
-	['azerite'] = {
-		['enable'] = true,
-		['buiStyle'] = true,
-		['buttonStyle'] = "TRANSPARENT",
-		['notifiers'] = {
-			['enable'] = true,
-			['position'] = 'LEFT',
-		},
-	},
-
-	['honor'] = {
-		['enable'] = true,
-		['buiStyle'] = true,
-		['buttonStyle'] = "TRANSPARENT",
-		['notifiers'] = {
-			['enable'] = true,
-			['position'] = 'RIGHT',
 		},
 	},
 

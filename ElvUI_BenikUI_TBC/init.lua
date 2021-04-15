@@ -16,7 +16,7 @@ BUI.Config = {}
 BUI.Title = format('|cffffa500%s|r|cffffffff%s|r ', 'Benik', 'UI')
 BUI["RegisteredModules"] = {}
 BUI.Eversion = tonumber(E.version)
-BUI.Erelease = tonumber(GetAddOnMetadata("ElvUI_BenikUI", "X-ElvuiVersion"))
+BUI.Erelease = tonumber(GetAddOnMetadata("ElvUI_BenikUI_TBC", "X-ElvuiVersion"))
 
 BUI.Actionbars = BUI:NewModule('Actionbars', 'AceEvent-3.0')
 BUI.Bags = BUI:NewModule('Bags', 'AceHook-3.0')
@@ -65,16 +65,16 @@ function BUI:AddOptions()
 end
 
 function BUI:Init()
-	if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+	--[[if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
 		E:Delay(2, function() E:StaticPopup_Show("BENIKUI_CLASSIC") end)
 		return	
-	end
+	end]]
 
-	--ElvUI's version check
+	--[[ElvUI's version check
 	if BUI.Eversion < 1 or (BUI.Eversion < BUI.Erelease) then
 		E:Delay(2, function() E:StaticPopup_Show("BENIKUI_VERSION_MISMATCH") end)
 		return
-	end
+	end]]
 	self.initialized = true
 	self:Initialize()
 	self:InitializeModules()
