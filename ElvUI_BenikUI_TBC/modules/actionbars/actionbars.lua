@@ -180,7 +180,7 @@ local function VehicleExit()
 		return
 	end
 	local f = _G.MainMenuBarVehicleLeaveButton
-	local arrow = "Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\arrow"
+	local arrow = "Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\arrow"
 	f:SetNormalTexture(arrow)
 	f:SetPushedTexture(arrow)
 	f:SetHighlightTexture(arrow)

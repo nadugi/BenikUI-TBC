@@ -97,7 +97,7 @@ local function TaxiButton_OnLeave(self)
 	self.textHolder.Text:SetTextColor(1, 1, 1, .7)
 end
 
-local fly_icon = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\arrow.tga'
+local fly_icon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\arrow.tga'
 
 -- TaxiButton
 function mod:TaxiButton()

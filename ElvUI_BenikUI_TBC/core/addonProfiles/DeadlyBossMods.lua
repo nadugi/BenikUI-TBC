@@ -12,7 +12,7 @@ function BUI:LoadDBMProfile()
 		if E.private.benikui.expressway == true then
 			font = "Interface\\AddOns\\ElvUI\\media\\fonts\\Expressway.ttf"
 		else
-			font = "Interface\\AddOns\\ElvUI_BenikUI\\media\\fonts\\PROTOTYPE.TTF"
+			font = "Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\fonts\\PROTOTYPE.TTF"
 		end
 
 		DBM_AllSavedOptions[profileName]["SpecialWarningFontShadow"] = true

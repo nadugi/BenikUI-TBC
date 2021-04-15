@@ -9,8 +9,8 @@ function BU:Configure_RoleIcons()
 
 	-- Replace Role Icons
 	UF.RoleIconTextures = {
-		TANK = [[Interface\AddOns\ElvUI_BenikUI\media\textures\roleIcons\tank.tga]],
-		HEALER = [[Interface\AddOns\ElvUI_BenikUI\media\textures\roleIcons\healer.tga]],
-		DAMAGER = [[Interface\AddOns\ElvUI_BenikUI\media\textures\roleIcons\dps.tga]]
+		TANK = [[Interface\AddOns\ElvUI_BenikUI_TBC\media\textures\roleIcons\tank.tga]],
+		HEALER = [[Interface\AddOns\ElvUI_BenikUI_TBC\media\textures\roleIcons\healer.tga]],
+		DAMAGER = [[Interface\AddOns\ElvUI_BenikUI_TBC\media\textures\roleIcons\dps.tga]]
 	}
 end

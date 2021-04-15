@@ -549,7 +549,7 @@ function mod:Initialize()
 
 	self.FlightMode.top.menuButton.img = self.FlightMode.top.menuButton:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.top.menuButton.img:Point("CENTER")
-	self.FlightMode.top.menuButton.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\menu.tga')
+	self.FlightMode.top.menuButton.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\menu.tga')
 	self.FlightMode.top.menuButton.img:SetVertexColor(1, 1, 1, .7)
 
 	self.FlightMode.top.menuButton:SetScript('OnEnter', function()
@@ -583,7 +583,7 @@ function mod:Initialize()
 
 	self.FlightMode.top.closeButton.img = self.FlightMode.top.closeButton:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.top.closeButton.img:Point("CENTER")
-	self.FlightMode.top.closeButton.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\close.tga')
+	self.FlightMode.top.closeButton.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\close.tga')
 	self.FlightMode.top.closeButton.img:SetVertexColor(1, 1, 1, .7)
 
 	self.FlightMode.top.closeButton:SetScript('OnEnter', function()
@@ -665,7 +665,7 @@ function mod:Initialize()
 	self.FlightMode.bottom.logo = self.FlightMode:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.bottom.logo:Size(420, 105)
 	self.FlightMode.bottom.logo:Point("BOTTOM", self.FlightMode.bottom, "CENTER", 0, -20)
-	self.FlightMode.bottom.logo:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\logo_benikui.tga')
+	self.FlightMode.bottom.logo:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\logo_benikui.tga')
 	self.FlightMode.bottom.logo:Hide()
 
 	-- WoW logo
@@ -717,7 +717,7 @@ function mod:Initialize()
 
 	self.FlightMode.bottom.requestStop.img = self.FlightMode.bottom.requestStop:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.bottom.requestStop.img:Point("CENTER")
-	self.FlightMode.bottom.requestStop.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\arrow.tga')
+	self.FlightMode.bottom.requestStop.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\arrow.tga')
 	self.FlightMode.bottom.requestStop.img:SetVertexColor(1, 1, 1, .7)
 
 	self.FlightMode.bottom.requestStop:SetScript('OnEnter', function()
@@ -763,7 +763,7 @@ function mod:Initialize()
 
 	self.FlightMode.bottom.info.img = self.FlightMode.bottom.info:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.bottom.info.img:Point("CENTER")
-	self.FlightMode.bottom.info.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\info.tga')
+	self.FlightMode.bottom.info.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\info.tga')
 	self.FlightMode.bottom.info.img:SetVertexColor(1, 1, 1, .7)
 
 	self.FlightMode.bottom.info:SetScript('OnEnter', function()
@@ -801,7 +801,7 @@ function mod:Initialize()
 
 	self.FlightMode.bottom.map.img = self.FlightMode.bottom.map:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.bottom.map.img:Point("CENTER")
-	self.FlightMode.bottom.map.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\map.tga')
+	self.FlightMode.bottom.map.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\map.tga')
 	self.FlightMode.bottom.map.img:SetVertexColor(1, 1, 1, .7)
 
 	self.FlightMode.bottom.map:SetScript('OnEnter', function()
@@ -835,7 +835,7 @@ function mod:Initialize()
 
 	self.FlightMode.bottom.bags.img = self.FlightMode.bottom.bags:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.bottom.bags.img:Point("CENTER")
-	self.FlightMode.bottom.bags.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\bags.tga')
+	self.FlightMode.bottom.bags.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\bags.tga')
 	self.FlightMode.bottom.bags.img:SetVertexColor(1, 1, 1, .7)
 
 	self.FlightMode.bottom.bags:SetScript('OnEnter', function()

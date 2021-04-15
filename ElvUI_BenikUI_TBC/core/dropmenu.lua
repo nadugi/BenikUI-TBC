@@ -89,7 +89,7 @@ local function sortFunction(a, b)
 	return a.text < b.text
 end
 
-table.sort(BUI.MenuList, sortFunction)
+--table.sort(BUI.MenuList, sortFunction)
 
 local function OnClick(btn)
 	local parent = btn:GetParent()

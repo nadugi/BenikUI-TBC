@@ -9,15 +9,11 @@ local GetScreenHeight, GetScreenWidth = GetScreenHeight, GetScreenWidth
 local C_DateAndTime_GetCurrentCalendarTime = C_DateAndTime.GetCurrentCalendarTime
 local GetAchievementInfo = GetAchievementInfo
 local GetStatistic = GetStatistic
-local IsXPUserDisabled = IsXPUserDisabled
 local IsPlayerAtEffectiveMaxLevel = IsPlayerAtEffectiveMaxLevel
 local UnitXP, UnitXPMax = UnitXP, UnitXPMax
 local UnitLevel = UnitLevel
 local InCombatLockdown = InCombatLockdown
-local GetSpecialization = GetSpecialization
 local GetActiveSpecGroup = GetActiveSpecGroup
-local GetSpecializationInfo = GetSpecializationInfo
-local GetAverageItemLevel = GetAverageItemLevel
 local GetClampedCurrentExpansionLevel = GetClampedCurrentExpansionLevel
 local GetExpansionDisplayInfo = GetExpansionDisplayInfo
 
@@ -153,35 +149,6 @@ local function createStats()
 	return format("%s: |cfff0ff00%s|r", name, result)
 end
 
-local active
-local function getSpec()
-	local specIndex = GetSpecialization();
-	if not specIndex then return end
-
-	active = GetActiveSpecGroup()
-
-	local talent = ''
-	local i = GetSpecialization(false, false, active)
-	if i then
-		i = select(2, GetSpecializationInfo(i))
-		if(i) then
-			talent = format('%s', i)
-		end
-	end
-
-	return format('%s', talent)
-end
-
-local function getItemLevel()
-	local level = UnitLevel("player");
-	local _, equipped = GetAverageItemLevel()
-	local ilvl = ''
-	if (level >= MIN_PLAYER_LEVEL_FOR_ITEM_LEVEL_DISPLAY) then
-		ilvl = format('%s: %d', ITEM_UPGRADE_STAT_AVERAGE_ITEM_LEVEL, equipped)
-	end
-	return ilvl
-end
-
 function AFK:UpdateStatMessage()
 	E:UIFrameFadeIn(self.AFKMode.statMsg.info, 1, 1, 0)
 	local createdStat = createStats()
@@ -222,7 +189,7 @@ hooksecurefunc(AFK, "UpdateTimer", UpdateTimer)
 
 -- XP string
 local function GetXPinfo()
-	if IsPlayerAtEffectiveMaxLevel() or IsXPUserDisabled() then return end
+	if IsPlayerAtEffectiveMaxLevel() then return end
 
 	local cur, max = UnitXP('player'), UnitXPMax('player')
 	if max <= 0 then max = 1 end
@@ -240,8 +207,6 @@ function AFK:SetAFK(status)
 		local level = UnitLevel('player')
 		local race = UnitRace('player')
 		local localizedClass = UnitClass('player')
-		local spec = getSpec()
-		local ilvl = getItemLevel()
 		local adventuresEmblemFormat = "Adventures-EndCombat-%s"
 		local displayline = ""
 
@@ -261,7 +226,7 @@ function AFK:SetAFK(status)
 			self.AFKMode.xp.text:SetText("")
 		end
 		
-		displayline = (format("%s - %s\n%s %s %s %s %s\n%s", E.myname, E.myrealm, LEVEL, level, race, spec, localizedClass, ilvl))
+		displayline = (format("%s - %s\n%s %s %s %s", E.myname, E.myrealm, LEVEL, level, race, localizedClass))
 
 		self.AFKMode.bottom.name:SetText(displayline)
 		self.isAFK = true
@@ -302,12 +267,10 @@ local function Initialize()
 	local race = UnitRace('player')
 	local localizedClass = UnitClass('player')
 	local className = E.myclass
-	local spec = getSpec()
-	local ilvl = getItemLevel()
 
 	-- Shadow overlay
 	AFK.AFKMode.screenShadow = AFK.AFKMode:CreateTexture()
-	AFK.AFKMode.screenShadow:SetTexture([[Interface\Addons\ElvUI_BenikUI\media\textures\screenShadow]])
+	AFK.AFKMode.screenShadow:SetTexture([[Interface\Addons\ElvUI_BenikUI_TBC\media\textures\screenShadow]])
 	AFK.AFKMode.screenShadow:SetAllPoints(AFK.AFKMode)
 
 	-- Create Top frame
@@ -394,12 +357,12 @@ local function Initialize()
 	AFK.AFKMode.bottom.faction:SetParent(AFK.AFKMode.bottom.factionb)
 	AFK.AFKMode.bottom.faction:SetInside()
 	-- Apply class texture rather than the faction
-	AFK.AFKMode.bottom.faction:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\classIcons\\CLASS-'..className)
+	AFK.AFKMode.bottom.faction:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\classIcons\\CLASS-'..className)
 
 	-- Add more info in the name and position it to the center
 	AFK.AFKMode.bottom.name:ClearAllPoints()
 	AFK.AFKMode.bottom.name:Point("TOP", AFK.AFKMode.bottom.factionb, "BOTTOM", 0, 5)
-	AFK.AFKMode.bottom.name:SetFormattedText("%s - %s\n%s %s %s %s %s%s", E.myname, E.myrealm, LEVEL, level, race, spec, localizedClass, ilvl)
+	AFK.AFKMode.bottom.name:SetFormattedText("%s - %s\n%s %s %s %s", E.myname, E.myrealm, LEVEL, level, race, localizedClass)
 	AFK.AFKMode.bottom.name:SetJustifyH("CENTER")
 	AFK.AFKMode.bottom.name:FontTemplate(nil, 18)
 

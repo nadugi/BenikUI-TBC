@@ -91,10 +91,10 @@ local statusColors = {
 	'|cff5eed2c', -- light green
 }
 
-local SOUND_MUTE_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI\\media\\textures\\sound-mute.blp:14:14|t')
-local SOUND_LOW_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI\\media\\textures\\sound-low.blp:14:14|t')
-local SOUND_MEDIUM_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI\\media\\textures\\sound-medium.blp:14:14|t')
-local SOUND_MAX_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI\\media\\textures\\sound-max.blp:14:14|t')
+local SOUND_MUTE_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\sound-mute.blp:14:14|t')
+local SOUND_LOW_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\sound-low.blp:14:14|t')
+local SOUND_MEDIUM_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\sound-medium.blp:14:14|t')
+local SOUND_MAX_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\sound-max.blp:14:14|t')
 
 function mod:CreateVolume()
 	local boardName = _G['BUI_Volume']

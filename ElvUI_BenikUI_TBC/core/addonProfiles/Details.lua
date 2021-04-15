@@ -459,7 +459,7 @@ function BUI:LoadDetailsProfile()
 						["textL_custom_text"] = "{data1}. {data3}{data2}",
 						["font_size"] = 10,
 						["texture_custom_file"] = "Interface\\",
-						["texture_file"] = "Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\BuiOnePixel.tga",
+						["texture_file"] = "Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\BuiOnePixel.tga",
 						["height"] = 14,
 						["icon_file"] = "Interface\\AddOns\\Details\\images\\classes_small_alpha",
 						["icon_grayscale"] = false,
