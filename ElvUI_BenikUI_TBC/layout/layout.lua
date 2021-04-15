@@ -533,7 +533,6 @@ function mod:Initialize()
 	hooksecurefunc(E, 'UpdateMedia', updateButtons)
 
 	mod:RegisterEvent('PLAYER_ENTERING_WORLD')
-	mod:RegisterEvent('ACTIVE_TALENT_GROUP_CHANGED', 'regEvents')
 end
 
 BUI:RegisterModule(mod:GetName())
