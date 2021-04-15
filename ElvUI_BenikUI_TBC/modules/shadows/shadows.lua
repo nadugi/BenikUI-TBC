@@ -53,12 +53,6 @@ local function CalendarEventButtonShadows()
 	end
 end
 
-local function miscShadows()
-	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.character ~= true or BUI.ShadowMode ~= true then return end
-
-	_G.EquipmentFlyoutFrameButtons:CreateSoftShadow()
-end
-
 -- ElvUI tabs
 function mod:TabShadows(tab)
 	if not BUI.ShadowMode then return end
@@ -125,7 +119,6 @@ function mod:Initialize()
 	raidUtilityShadows()
 	mirrorTimersShadows()
 
-	miscShadows()
 	MicroBarShadows()
 	mod:RegisterEvent('START_TIMER')
 
