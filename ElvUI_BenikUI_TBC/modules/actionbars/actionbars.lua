@@ -198,8 +198,7 @@ function mod:Initialize()
 	C_TimerAfter(2, mod.ToggleStyle)
 	C_TimerAfter(2, mod.TotemShadows)
 	VehicleExit()
-	self:LoadRequestButton()
-	self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", "StyleColor");
+
 	hooksecurefunc(BUI, "SetupColorThemes", mod.StyleColor)
 
 	if not BUI.ShadowMode then return end
