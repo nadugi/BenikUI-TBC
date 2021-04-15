@@ -134,10 +134,10 @@ local function LoadSkin()
 			local listFrame = _G['DropDownList'..level];
 			local listFrameName = listFrame:GetName();
 			local Backdrop = _G[listFrameName..'Backdrop']
-			Backdrop.backdrop:BuiStyle("Outside")
+			Backdrop:BuiStyle("Outside")
 
 			local menuBackdrop = _G[listFrameName..'MenuBackdrop']
-			menuBackdrop.backdrop:BuiStyle("Outside")
+			menuBackdrop:BuiStyle("Outside")
 		end)
 
 		for i = 1, MAX_STATIC_POPUPS do
@@ -198,7 +198,7 @@ function mod:styleWorldMap()
 	end
 
 	local mapFrame = _G.WorldMapFrame
-	if not mapFrame.backdrop.style then
-		mapFrame.backdrop:BuiStyle("Outside")
+	if not mapFrame.style then
+		mapFrame:BuiStyle("Outside")
 	end
 end
