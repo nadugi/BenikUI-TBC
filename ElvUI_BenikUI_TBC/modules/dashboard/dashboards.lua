@@ -191,7 +191,7 @@ end
 
 function mod:Initialize()
 	mod:LoadSystem()
-	mod:LoadProfessions()
+	--mod:LoadProfessions()
 	--mod:LoadTokens()
 	mod:LoadReputations()
 end
