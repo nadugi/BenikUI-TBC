@@ -6,6 +6,7 @@
 ## RequiredDeps: ElvUI
 ## DefaultState: Enabled
 ## OptionalDeps: SharedMedia, AddOnSkins, ProjectAzilroka
+## X-ElvuiVersion: 0.17
 
 locales\load_locales.xml
 media\load_media.xml
