@@ -5,6 +5,7 @@ local join = string.join
 
 local GetContainerNumFreeSlots = GetContainerNumFreeSlots
 local GetContainerNumSlots = GetContainerNumSlots
+local ToggleAllBags = ToggleAllBags
 local NUM_BAG_SLOTS = NUM_BAG_SLOTS
 
 local statusColors = {
@@ -24,9 +25,9 @@ local function OnEvent(self)
 
 	local percentage = ((total - free) * 100) / total
 
-	if percentage >= 90 then
+	if percentage >= 80 then
 		textColor = 3
-	elseif percentage >= 60 and percentage < 90 then
+	elseif percentage >= 60 and percentage < 80 then
 		textColor = 2
 	else
 		textColor = 1
@@ -39,7 +40,7 @@ local function OnEvent(self)
 end
 
 local function OnClick()
-	_G.ToggleAllBags()
+	ToggleAllBags()
 end
 
 function mod:CreateBags()
