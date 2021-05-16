@@ -324,26 +324,12 @@ local function updateOptions()
 					guiInline = true,
 					disabled = function() return not E.db.benikui.panels[panelname].enable end,
 					args = {
-						petHide = {
-							order = 1,
-							name = L["Hide in Pet Battle"],
-							type = 'toggle',
-							get = function() return E.db.benikui.panels[panelname].petHide end,
-							set = function(info, value) E.db.benikui.panels[panelname].petHide = value; mod:RegisterHide() end,
-						},
 						combatHide = {
 							order = 2,
 							name = L["Hide In Combat"],
 							type = 'toggle',
 							get = function() return E.db.benikui.panels[panelname].combatHide end,
 							set = function(info, value) E.db.benikui.panels[panelname].combatHide = value; end,
-						},
-						vehicleHide = {
-							order = 3,
-							name = L["Hide In Vehicle"],
-							type = 'toggle',
-							get = function() return E.db.benikui.panels[panelname].vehicleHide end,
-							set = function(info, value) E.db.benikui.panels[panelname].vehicleHide = value; end,
 						},
 						visibility = {
 							type = 'input',

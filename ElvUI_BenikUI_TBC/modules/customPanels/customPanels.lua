@@ -10,7 +10,6 @@ local CreateFrame = CreateFrame
 local InCombatLockdown = InCombatLockdown
 local RegisterStateDriver = RegisterStateDriver
 local ReloadUI = ReloadUI
-local UnitInVehicle = UnitInVehicle
 local UnregisterStateDriver = UnregisterStateDriver
 
 local classColor = E:ClassColor(E.myclass, true)
@@ -304,30 +303,13 @@ function mod:OnEvent(event, unit)
 	if unit and unit ~= "player" then return end
 
 	local inCombat = (event == "PLAYER_REGEN_DISABLED" and true) or (event == "PLAYER_REGEN_ENABLED" and false) or InCombatLockdown()
-	local inVehicle = (event == "UNIT_ENTERING_VEHICLE" and true) or (event == "UNIT_EXITING_VEHICLE" and false) or UnitInVehicle("player")
 	for name in pairs(E.db.benikui.panels) do
 		if name then
 			local db = E.db.benikui.panels[name]
-			if (db.enable ~= true) or (inCombat and db.combatHide) or (inVehicle and db.vehicleHide) then
+			if (db.enable ~= true) or (inCombat and db.combatHide) then
 				_G[name]:Hide()
 			else
 				_G[name]:Show()
-			end
-			if event == "PET_BATTLE_CLOSE" then
-				_G[name]:SetFrameStrata(db.strata or 'LOW')
-			end
-		end
-	end
-end
-
-function mod:RegisterHide()
-	for name in pairs(E.db.benikui.panels) do
-		if name then
-			local db = E.db.benikui.panels[name]
-			if db.petHide then
-				E.FrameLocks[name] = { parent = E.UIParent }
-			else
-				E.FrameLocks[name] = nil
 			end
 		end
 	end
@@ -338,7 +320,6 @@ function mod:UpdatePanels()
 	mod:CreatePanel()
 	mod:SetupPanels()
 	mod:Resize()
-	mod:RegisterHide()
 	mod:UpdatePanelTitle()
 end
 
@@ -346,9 +327,6 @@ function mod:Initialize()
 	mod:UpdatePanels()
 	mod:RegisterEvent("PLAYER_REGEN_DISABLED", "OnEvent")
 	mod:RegisterEvent("PLAYER_REGEN_ENABLED", "OnEvent")
-	mod:RegisterEvent("UNIT_ENTERING_VEHICLE", "OnEvent")
-	mod:RegisterEvent("UNIT_EXITING_VEHICLE", "OnEvent")
-	mod:RegisterEvent("PET_BATTLE_CLOSE", "OnEvent")
 end
 
 BUI:RegisterModule(mod:GetName())
