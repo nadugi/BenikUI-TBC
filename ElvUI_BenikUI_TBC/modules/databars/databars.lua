@@ -10,7 +10,7 @@ function mod:CreateNotifier(bar)
 	bar.f:Size(2, 10)
 	bar.f.txt = bar.f:CreateFontString(nil, 'OVERLAY')
 	bar.f.arrow = bar.f:CreateTexture(nil, 'OVERLAY')
-	bar.f.arrow:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\arrowOutlined.tga')
+	bar.f.arrow:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\arrowOutlined.tga')
 	bar.f.arrow:SetVertexColor(1, 1, 1)
 	bar.f.arrow:Size(13, 13)
 end
@@ -124,8 +124,6 @@ end
 function mod:Initialize()
 	self:LoadXP()
 	self:LoadRep()
-	self:LoadAzerite()
-	self:LoadHonor()
 	self:LoadThreat()
 end
 

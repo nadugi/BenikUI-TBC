@@ -6,9 +6,7 @@
 ## RequiredDeps: ElvUI
 ## DefaultState: Enabled
 ## OptionalDeps: SharedMedia, AddOnSkins, ProjectAzilroka
-## X-Tukui-ProjectID: 11
-## X-Tukui-ProjectFolders: ElvUI_BenikUI
-## X-ElvuiVersion: 0.12
+## X-ElvuiVersion: 0.17
 
 locales\load_locales.xml
 media\load_media.xml

@@ -47,7 +47,7 @@ local function CreateStyleShadow(f)
 	styleShadow:Point('TOPLEFT', f, 'TOPLEFT', -2, 2)
 	styleShadow:Point('BOTTOMRIGHT', f, 'BOTTOMRIGHT', 2, 0)
 
-	styleShadow:SetBackdrop({edgeFile = [[Interface\AddOns\ElvUI_BenikUI\media\textures\GlowTexCut.tga]], edgeSize = E:Scale(3)})
+	styleShadow:SetBackdrop({edgeFile = [[Interface\AddOns\ElvUI_BenikUI_TBC\media\textures\GlowTexCut.tga]], edgeSize = E:Scale(3)})
 	styleShadow:SetBackdropColor(backdropr, backdropg, backdropb, 0)
 	styleShadow:SetBackdropBorderColor(borderr, borderg, borderb, db.shadowAlpha or 0.6)
 	f.styleShadow = styleShadow

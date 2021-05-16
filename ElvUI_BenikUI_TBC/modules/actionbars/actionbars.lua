@@ -140,47 +140,12 @@ function mod:TotemShadows()
 	end
 end
 
-function mod:ApplyFlyoutShadows(btn)
-	if not btn.shadow then
-		btn:CreateSoftShadow()
-	end
-end
-
-function mod:FlyoutShadows()
-	local btn, i = _G['SpellFlyoutButton1'], 1
-	while btn do
-		mod:ApplyFlyoutShadows(btn)
-
-		i = i + 1
-		btn = _G['SpellFlyoutButton'..i]
-	end
-end
-
-function mod:ExtraAB() -- shadows
-	if not E.private.actionbar.enable then return end
-	hooksecurefunc(_G.ZoneAbilityFrame, "UpdateDisplayedZoneAbilities", function(button)
-		for spellButton in button.SpellButtonContainer:EnumerateActive() do
-			if spellButton and not spellButton.hasShadow then
-				spellButton.backdrop:CreateSoftShadow()
-				spellButton.hasShadow = true
-			end
-		end
-	end)
-
-	for i = 1, _G.ExtraActionBarFrame:GetNumChildren() do
-		local button = _G["ExtraActionButton"..i]
-		if button then
-			button:CreateSoftShadow()
-		end
-	end
-end
-
 local function VehicleExit()
 	if E.private.actionbar.enable ~= true then
 		return
 	end
 	local f = _G.MainMenuBarVehicleLeaveButton
-	local arrow = "Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\arrow"
+	local arrow = "Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\arrow"
 	f:SetNormalTexture(arrow)
 	f:SetPushedTexture(arrow)
 	f:SetHighlightTexture(arrow)
@@ -198,13 +163,8 @@ function mod:Initialize()
 	C_TimerAfter(2, mod.ToggleStyle)
 	C_TimerAfter(2, mod.TotemShadows)
 	VehicleExit()
-	self:LoadRequestButton()
-	self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", "StyleColor");
-	hooksecurefunc(BUI, "SetupColorThemes", mod.StyleColor)
 
-	if not BUI.ShadowMode then return end
-	hooksecurefunc(_G.SpellFlyout, 'Show', mod.FlyoutShadows)
-	mod:ExtraAB()
+	hooksecurefunc(BUI, "SetupColorThemes", mod.StyleColor)
 end
 
 BUI:RegisterModule(mod:GetName())

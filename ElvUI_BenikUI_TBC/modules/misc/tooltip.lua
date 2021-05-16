@@ -23,12 +23,6 @@ local function StyleTooltip()
 	end
 end
 
-local function StyleCagedBattlePetTooltip(tooltipFrame)
-	if not tooltipFrame.style then
-		tooltipFrame:BuiStyle("Outside")
-	end
-end
-
 local tooltips = {
 	_G.EmbeddedItemTooltip,
 	_G.FriendsTooltip,
@@ -86,10 +80,6 @@ local function StyleBlizzardTooltips()
 				tooltipOverlay(tooltip)
 			end
 		end
-
-		_G.QuestMapFrame.QuestsFrame.StoryTooltip:BuiStyle("Outside")
-		_G.QuestScrollFrame.StoryTooltip:BuiStyle("Outside")
-		_G.QuestScrollFrame.CampaignTooltip:BuiStyle("Outside")
 
 		local shoppingTooltips = {_G.WorldMapCompareTooltip1, _G.WorldMapCompareTooltip2}
 		for _, tooltip in pairs(shoppingTooltips) do
@@ -155,12 +145,6 @@ function mod:SetupStyleAndShadow(tt)
 	end
 end
 
-function mod:StyleAceTooltip(tt)
-	if not tt.style then
-		tt:BuiStyle('Outside')
-	end
-end
-
 function mod:Initialize()
 	if E.db.benikui.general.benikuiStyle ~= true or E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.tooltip ~= true then return end
 
@@ -172,8 +156,6 @@ function mod:Initialize()
 	mod:SecureHookScript(GameTooltip, 'OnTooltipCleared', 'GameTooltip_OnTooltipCleared')
 	mod:SecureHookScript(GameTooltip, 'OnUpdate', 'RecolorTooltipStyle')
 	hooksecurefunc(TT, "GameTooltip_SetDefaultAnchor", mod.SetupStyleAndShadow)
-	hooksecurefunc("BattlePetTooltipTemplate_SetBattlePet", StyleCagedBattlePetTooltip)
-	hooksecurefunc(S, "Ace3_StyleTooltip", mod.StyleAceTooltip)
 end
 
 BUI:RegisterModule(mod:GetName())

@@ -32,24 +32,12 @@ local function SetupLayout(layout)
 	E.db["chat"]["timeStampFormat"] = "%H:%M "
 	E.db["chat"]["panelWidth"] = 412
 	E.db["databars"]["statusbar"] = "BuiFlat"
-	E.db["databars"]["azerite"]["enable"] = true
-	E.db["databars"]["azerite"]["height"] = 150
-	E.db["databars"]["azerite"]["orientation"] = 'VERTICAL'
-	E.db["databars"]["azerite"]["textFormat"] = 'NONE'
-	E.db["databars"]["azerite"]["fontSize"] = 9
-	E.db["databars"]["azerite"]["width"] = 8
 	E.db["databars"]["experience"]["font"] = "Expressway"
 	E.db["databars"]["experience"]["textYoffset"] = 10
 	E.db["databars"]["experience"]["textFormat"] = "CURPERC"
 	E.db["databars"]["experience"]["height"] = 5
 	E.db["databars"]["experience"]["orientation"] = "HORIZONTAL"
 	E.db["databars"]["experience"]["fontSize"] = 10
-	E.db["databars"]["honor"]["enable"] = true
-	E.db["databars"]["honor"]["height"] = 152
-	E.db["databars"]["honor"]["textFormat"] = 'NONE'
-	E.db["databars"]["honor"]["fontSize"] = 9
-	E.db["databars"]["honor"]["width"] = 8
-	E.db["databars"]["honor"]["orientation"] = 'VERTICAL'
 	E.db["databars"]["reputation"]["enable"] = true
 	E.db["databars"]["reputation"]["height"] = 150
 	E.db["databars"]["reputation"]["orientation"] = 'VERTICAL'
@@ -78,30 +66,14 @@ local function SetupLayout(layout)
 	E.db["general"]["valuecolor"]["b"] = 0
 	E.db["general"]["valuecolor"]["g"] = 0.5
 	E.db["general"]["valuecolor"]["r"] = 1
-	E.db["general"]["altPowerBar"]['enable'] = true
-	E.db["general"]["altPowerBar"]['width'] = 250
-	E.db["general"]["altPowerBar"]['height'] = 20
-	E.db["general"]["altPowerBar"]['fontOutline'] = 'OUTLINE'
-	E.db["general"]["altPowerBar"]['statusBar'] = "BuiFlat"
-	E.db["general"]["altPowerBar"]['textFormat'] = 'NAMECURMAX'
-	E.db["general"]["altPowerBar"]['statusBarColorGradient'] = false
-	E.db["general"]["altPowerBar"]['statusBarColor'] = { r = 0.2, g = 0.4, b = 0.8 }
-	E.db["general"]["itemLevel"]["displayCharacterInfo"] = false
-	E.db["general"]["itemLevel"]["displayInspectInfo"] = true
-	E.db["general"]["itemLevel"]["itemLevelFontSize"] = 12
-	E.db["general"]["itemLevel"]["itemLevelFontOutline"] = 'OUTLINE'
 
 	E.db["hideTutorial"] = true
 	E.private["skins"]["blizzard"]["alertframes"] = true
 	E.private["skins"]["blizzard"]["questChoice"] = true
 	E.private["skins"]["parchmentRemoverEnable"] = true
 
-	E.db["benikuiDatabars"]["azerite"]["buttonStyle"] = "DEFAULT"
-	E.db["benikuiDatabars"]["azerite"]["notifiers"]["position"] = "RIGHT"
 	E.db["benikuiDatabars"]["reputation"]["buttonStyle"] = "DEFAULT"
 	E.db["benikuiDatabars"]["reputation"]["notifiers"]["position"] = "LEFT"
-	E.db["benikuiDatabars"]["honor"]["buttonStyle"] = "TRANSPARENT"
-	E.db["benikuiDatabars"]["honor"]["notifiers"]["position"] = "LEFT"
 	E.db["benikuiDatabars"]["experience"]["buiStyle"] = false
 	E.db["benikui"]["general"]["auras"] = false
 	E.db["benikui"]["datatexts"]["chat"]["enable"] = true
@@ -117,13 +89,10 @@ local function SetupLayout(layout)
 	-- common movers
 	if E.db["movers"] == nil then E.db["movers"] = {} end
 	E.db["movers"]["AlertFrameMover"] = "TOP,ElvUIParent,TOP,0,-140"
-	E.db["movers"]["AzeriteBarMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,415,22"
 	E.db["movers"]["BelowMinimapContainerMover"] = "TOP,ElvUIParent,TOP,0,-192"
 	E.db["movers"]["BNETMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-156,-200"
 	E.db["movers"]["BuiDashboardMover"] = "TOPLEFT,ElvUIParent,TOPLEFT,4,-8"
-	E.db["movers"]["DigSiteProgressBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,315"
 	E.db["movers"]["GMMover"] = "TOPLEFT,ElvUIParent,TOPLEFT,158,-38"
-	E.db["movers"]["HonorBarMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-158,-6"
 	E.db["movers"]["LeftChatMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,2,22"
 	E.db["movers"]["LocationMover"] = "TOP,ElvUIParent,TOP,0,-7"
 	E.db["movers"]["MicrobarMover"] = "TOPLEFT,ElvUIParent,TOPLEFT,158,-5"
@@ -142,9 +111,6 @@ local function SetupLayout(layout)
 	if layout == 'classic' then
 		E.db["general"]["font"] = "Bui Prototype"
 		E.db["general"]["fontSize"] = 10
-		E.db["general"]["altPowerBar"]["font"] = "Bui Prototype"
-		E.db["general"]["altPowerBar"]["fontSize"] = 10
-		E.db["general"]["itemLevel"]["itemLevelFont"] = "Bui Prototype"
 
 		E.db["chat"]["tabFont"] = "Bui Visitor1"
 		E.db["chat"]["tabFontSize"] = 10
@@ -192,9 +158,6 @@ local function SetupLayout(layout)
 	elseif layout == "v3" then
 		E.db["general"]["font"] = "Expressway"
 		E.db["general"]["fontSize"] = 11
-		E.db["general"]["altPowerBar"]["font"] = "Expressway"
-		E.db["general"]["altPowerBar"]["fontSize"] = 11
-		E.db["general"]["itemLevel"]["itemLevelFont"] = "Expressway"
 
 		E.db["datatexts"]["font"] = "Expressway"
 		E.db["datatexts"]["fontSize"] = 11
@@ -398,13 +361,9 @@ local function SetupActionbars(layout)
 		E.db["movers"]["PetAB"] = "BOTTOM,ElvUIParent,BOTTOM,0,147"
 		E.db["movers"]["ShiftAB"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,832,52"
 		E.db["movers"]["DTPanelBuiMiddleDTPanelMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,2"
-		E.db["movers"]["ArenaHeaderMover"] = "BOTTOMRIGHT,ElvUIParent,BOTTOMRIGHT,-56,346"
-		E.db["movers"]["BossButton"] = "BOTTOM,ElvUIParent,BOTTOM,0,283"
-		E.db["movers"]["BossHeaderMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-56,-397"
 		E.db["movers"]["BuffsMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-181,-3"
 		E.db["movers"]["DebuffsMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-181,-128"
 		E.db["movers"]["ExperienceBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,20"
-		E.db["movers"]["TalkingHeadFrameMover"] = "TOP,ElvUIParent,TOP,0,-128"
 
 	elseif layout == 'v2' then
 		E.db["actionbar"]["font"] = "Bui Visitor1"
@@ -460,9 +419,6 @@ local function SetupActionbars(layout)
 		E.db["databars"]["experience"]["width"] = 416
 
 		-- movers
-		E.db["movers"]["ArenaHeaderMover"] = "BOTTOMRIGHT,ElvUIParent,BOTTOMRIGHT,-56,346"
-		E.db["movers"]["BossButton"] = "BOTTOM,ElvUIParent,BOTTOM,0,255"
-		E.db["movers"]["BossHeaderMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-56,-397"
 		E.db["movers"]["BuffsMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-181,-3"
 		E.db["movers"]["DTPanelBuiMiddleDTPanelMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,2"
 		E.db["movers"]["DebuffsMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-181,-128"
@@ -473,7 +429,6 @@ local function SetupActionbars(layout)
 		E.db["movers"]["PetAB"] = "BOTTOMRIGHT,ElvUIParent,BOTTOMRIGHT,-150,177"
 		E.db["movers"]["ShiftAB"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,832,128"
 		E.db["movers"]["ExperienceBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,100"
-		E.db["movers"]["TalkingHeadFrameMover"] = "TOP,ElvUIParent,TOP,0,-128"
 
 	elseif layout == 'v3' then
 		E.db["actionbar"]["bar1"]["backdropSpacing"] = 6
@@ -519,12 +474,8 @@ local function SetupActionbars(layout)
 		E.global["datatexts"]["customPanels"]["BuiMiddleDTPanel"]["width"] = 416
 		E.db["databars"]["experience"]["width"] = 416
 		-- movers
-		E.db["movers"]["ArenaHeaderMover"] = "BOTTOMRIGHT,ElvUIParent,BOTTOMRIGHT,-56,346"
-		E.db["movers"]["BossButton"] = "BOTTOM,ElvUIParent,BOTTOM,0,362"
-		E.db["movers"]["BossHeaderMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-56,-397"
 		E.db["movers"]["BuffsMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-181,-3"
 		E.db["movers"]["DebuffsMover"] = "TOPRIGHT,ElvUIParent,TOPRIGHT,-181,-128"
-		E.db["movers"]["DigSiteProgressBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,315"
 		E.db["movers"]["ElvAB_1"] = "BOTTOM,ElvUIParent,BOTTOM,0,310"
 		E.db["movers"]["ElvAB_2"] = "BOTTOM,ElvUIParent,BOTTOM,0,268"
 		E.db["movers"]["ElvAB_3"] = "BOTTOM,ElvUIParent,BOTTOM,0,22"
@@ -534,7 +485,6 @@ local function SetupActionbars(layout)
 		E.db["movers"]["ShiftAB"] = "BOTTOM,ElvUIParent,BOTTOM,0,141"
 		E.db["movers"]["DTPanelBuiMiddleDTPanelMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,2"
 		E.db["movers"]["ExperienceBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,68"
-		E.db["movers"]["TalkingHeadFrameMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,116"
 	end
 
 	if E.private.actionbar.enable ~= true then
@@ -824,15 +774,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["party"]["power"]["position"] = "BOTTOMRIGHT"
 		E.db["unitframe"]["units"]["party"]["power"]["xOffset"] = 0
 		E.db["unitframe"]["units"]["party"]["power"]["yOffset"] = 2
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["damager"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["healer"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["tank"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["attachTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["size"] = 12
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["position"] = "RIGHT"
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["anchorPoint"] = "RIGHT"
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["width"] = 70
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["height"] = 16
@@ -861,15 +802,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid"]["colorOverride"] = "FORCE_ON"
 		E.db["unitframe"]["units"]["raid"]["portrait"]["enable"] = true
 		E.db["unitframe"]["units"]["raid"]["portrait"]["overlay"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["damager"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["healer"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["tank"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["attachTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["size"] = 12
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["position"] = "RIGHT"
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["enable"] = true
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["font"] = "Bui Visitor1"
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["size"] = 20
@@ -898,14 +830,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid40"]["health"]["xOffset"] = 0
 		E.db["unitframe"]["units"]["raid40"]["health"]["yOffset"] = 1
 		E.db["unitframe"]["units"]["raid40"]["power"]["enable"] = false
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["size"] = 10
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["position"] = "RIGHT"
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["damager"] = false
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["healer"] = true
 		E.db["unitframe"]["units"]["raid40"]["colorOverride"] = "FORCE_ON"
 		E.db["unitframe"]["units"]["raid40"]["infoPanel"]["enable"] = false
 		E.db["unitframe"]["units"]["raid40"]["infoPanel"]["transparent"] = true
@@ -918,31 +842,7 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid40"]["rdebuffs"]["fontOutline"] = "OUTLINE"
 		E.db["unitframe"]["units"]["raid40"]["growthDirection"] = 'RIGHT_UP'
 
-		-- Boss
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["sizeOverride"] = 24
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["yOffset"] = 12
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["xOffset"] = -1
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconAttached"] = false
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconXOffset"] = 2
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconPosition"] = "RIGHT"
-		E.db["unitframe"]["units"]["boss"]["width"] = 210
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["height"] = 14
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["enable"] = true
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["transparent"] = true
-		E.db["unitframe"]["units"]["boss"]["name"]["attachTextTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["boss"]["name"]["yOffset"] = 1
-		E.db["unitframe"]["units"]["boss"]["name"]["xOffset"] = 4
-		E.db["unitframe"]["units"]["boss"]["name"]["position"] = "LEFT"
-		E.db["unitframe"]["units"]["boss"]["height"] = 50
-		E.db["unitframe"]["units"]["boss"]["buffs"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["boss"]["buffs"]["anchorPoint"] = "CENTER"
-		E.db["unitframe"]["units"]["boss"]["buffs"]["xOffset"] = 16
-		E.db["unitframe"]["units"]["boss"]["buffs"]["attachTo"] = "HEALTH"
-		E.db["unitframe"]["units"]["boss"]["power"]["height"] = 5
-
 		-- Movers
-		E.db["movers"]["AltPowerBarMover"] = "TOP,ElvUIParent,TOP,0,-66"
-		E.db["movers"]["BossButton"] = "BOTTOM,ElvUIParent,BOTTOM,0,271"
 		E.db["movers"]["ClassBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,349"
 		E.db["movers"]["ElvUF_AssistMover"] = "TOPLEFT,ElvUIParent,TOPLEFT,4,-392"
 		E.db["movers"]["ElvUF_BodyGuardMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,4,444"
@@ -963,7 +863,6 @@ local function SetupUnitframes(layout)
 		E.db["movers"]["TargetPowerBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,231,215"
 		E.db["movers"]["TotemBarMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,425,42"
 		E.db["movers"]["ElvUF_FocusCastbarMover"] = "BOTTOM,ElvUIParent,BOTTOM,317,137"
-		E.db["movers"]["ZoneAbility"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,577,273"
 
 	elseif layout == 'v2' then
 		E.db["nameplates"]["units"]["FRIENDLY_PLAYER"]["debuffs"]["countFont"] = "Bui Tukui"
@@ -1280,15 +1179,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["party"]["power"]["position"] = "LEFT"
 		E.db["unitframe"]["units"]["party"]["power"]["yOffset"] = -2
 		E.db["unitframe"]["units"]["party"]["power"]["xOffset"] = 2
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["attachTextTo"] = "Health"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["position"] = "TOPRIGHT"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["size"] = 12
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["damager"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["healer"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["tank"] = true
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["yOffset"] = 15
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["xOffset"] = -2
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["anchorPoint"] = "RIGHT"
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["height"] = 16
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["width"] = 70
@@ -1319,15 +1209,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid"]["colorOverride"] = "FORCE_ON"
 		E.db["unitframe"]["units"]["raid"]["portrait"]["enable"] = true
 		E.db["unitframe"]["units"]["raid"]["portrait"]["overlay"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["damager"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["healer"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["tank"] = true
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["attachTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["size"] = 12
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["position"] = "RIGHT"
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["enable"] = true
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["font"] = "Bui Visitor1"
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["size"] = 20
@@ -1358,14 +1239,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid40"]["health"]["xOffset"] = 0
 		E.db["unitframe"]["units"]["raid40"]["health"]["yOffset"] = 1
 		E.db["unitframe"]["units"]["raid40"]["power"]["enable"] = false
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["size"] = 10
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["position"] = "RIGHT"
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["damager"] = true
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["healer"] = true
 		E.db["unitframe"]["units"]["raid40"]["colorOverride"] = "FORCE_ON"
 		E.db["unitframe"]["units"]["raid40"]["infoPanel"]["enable"] = false
 		E.db["unitframe"]["units"]["raid40"]["infoPanel"]["transparent"] = true
@@ -1381,31 +1254,7 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid40"]["infoPanel"]["transparent"] = true
 		E.db["unitframe"]["units"]["raid40"]["growthDirection"] = 'RIGHT_UP'
 
-		-- Boss
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["sizeOverride"] = 24
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["yOffset"] = 12
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["xOffset"] = -1
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconAttached"] = false
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconXOffset"] = 2
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconPosition"] = "RIGHT"
-		E.db["unitframe"]["units"]["boss"]["width"] = 210
-		E.db["unitframe"]["units"]["boss"]["height"] = 58
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["height"] = 18
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["enable"] = true
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["transparent"] = true
-		E.db["unitframe"]["units"]["boss"]["name"]["attachTextTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["boss"]["name"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["boss"]["name"]["xOffset"] = 2
-		E.db["unitframe"]["units"]["boss"]["name"]["position"] = "LEFT"
-		E.db["unitframe"]["units"]["boss"]["buffs"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["boss"]["buffs"]["anchorPoint"] = "CENTER"
-		E.db["unitframe"]["units"]["boss"]["buffs"]["xOffset"] = 16
-		E.db["unitframe"]["units"]["boss"]["buffs"]["attachTo"] = "HEALTH"
-		E.db["unitframe"]["units"]["boss"]["power"]["height"] = 5
-
 		-- Movers
-		E.db["movers"]["AltPowerBarMover"] = "TOP,ElvUIParent,TOP,0,-66"
-		E.db["movers"]["BossButton"] = "BOTTOM,ElvUIParent,BOTTOM,0,237"
 		E.db["movers"]["ClassBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,300"
 		E.db["movers"]["ElvUF_AssistMover"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,4,722"
 		E.db["movers"]["ElvUF_BodyGuardMover"] = "TOPLEFT,ElvUIParent,TOPLEFT,4,-526"
@@ -1428,7 +1277,6 @@ local function SetupUnitframes(layout)
 		E.db["movers"]["TargetPortraitMover"] = "BOTTOM,ElvUIParent,BOTTOM,365,163"
 		E.db["movers"]["TargetPowerBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,189,209"
 		E.db["movers"]["TotemBarMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,425,42"
-		E.db["movers"]["ZoneAbility"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,538,233"
 	elseif layout == 'v3' then
 		E.db["nameplates"]["units"]["FRIENDLY_PLAYER"]["debuffs"]["countFont"] = "Expressway"
 		E.db["nameplates"]["units"]["FRIENDLY_PLAYER"]["debuffs"]["font"] = "Expressway"
@@ -1685,28 +1533,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["targettarget"]["portrait"]["enable"] = false
 		E.db["unitframe"]["units"]["targettarget"]["width"] = 130
 
-		-- boss
-		E.db["unitframe"]["units"]["boss"]["buffs"]["anchorPoint"] = "CENTER"
-		E.db["unitframe"]["units"]["boss"]["buffs"]["attachTo"] = "HEALTH"
-		E.db["unitframe"]["units"]["boss"]["buffs"]["xOffset"] = 16
-		E.db["unitframe"]["units"]["boss"]["buffs"]["yOffset"] = 0
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconAttached"] = false
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconPosition"] = "RIGHT"
-		E.db["unitframe"]["units"]["boss"]["castbar"]["iconXOffset"] = 2
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["sizeOverride"] = 24
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["xOffset"] = -1
-		E.db["unitframe"]["units"]["boss"]["debuffs"]["yOffset"] = 12
-		E.db["unitframe"]["units"]["boss"]["height"] = 50
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["enable"] = true
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["height"] = 14
-		E.db["unitframe"]["units"]["boss"]["infoPanel"]["transparent"] = true
-		E.db["unitframe"]["units"]["boss"]["name"]["attachTextTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["boss"]["name"]["position"] = "LEFT"
-		E.db["unitframe"]["units"]["boss"]["name"]["xOffset"] = 4
-		E.db["unitframe"]["units"]["boss"]["name"]["yOffset"] = 1
-		E.db["unitframe"]["units"]["boss"]["portrait"]["enable"] = false
-		E.db["unitframe"]["units"]["boss"]["width"] = 210
-
 		-- party
 		if not E.db.unitframe.units.party.customTexts then E.db.unitframe.units.party.customTexts = {} end
 
@@ -1758,12 +1584,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["party"]["power"]["xOffset"] = 0
 		E.db["unitframe"]["units"]["party"]["power"]["yOffset"] = 2
 		E.db["unitframe"]["units"]["party"]["rdebuffs"]["font"] = "Expressway"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["attachTextTo"] = "Health"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["attachTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["position"] = "RIGHT"
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["size"] = 12
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["party"]["roleIcon"]["yOffset"] = 0
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["anchorPoint"] = "RIGHT"
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["height"] = 16
 		E.db["unitframe"]["units"]["party"]["targetsGroup"]["width"] = 70
@@ -1795,11 +1615,6 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["fontOutline"] = "OUTLINE"
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["size"] = 20
 		E.db["unitframe"]["units"]["raid"]["rdebuffs"]["yOffset"] = 12
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["attachTo"] = "InfoPanel"
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["position"] = "RIGHT"
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["size"] = 12
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["raid"]["roleIcon"]["yOffset"] = 0
 		E.db["unitframe"]["units"]["raid"]["verticalSpacing"] = 5
 		E.db["unitframe"]["units"]["raid"]["width"] = 78
 		E.db["unitframe"]["units"]["raid"]["growthDirection"] = 'UP_RIGHT'
@@ -1817,18 +1632,11 @@ local function SetupUnitframes(layout)
 		E.db["unitframe"]["units"]["raid40"]["rdebuffs"]["fontOutline"] = "OUTLINE"
 		E.db["unitframe"]["units"]["raid40"]["rdebuffs"]["size"] = 20
 		E.db["unitframe"]["units"]["raid40"]["rdebuffs"]["yOffset"] = 4
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["damager"] = false
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["enable"] = true
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["position"] = "RIGHT"
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["size"] = 10
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["xOffset"] = -2
-		E.db["unitframe"]["units"]["raid40"]["roleIcon"]["yOffset"] = 0
 		E.db["unitframe"]["units"]["raid40"]["verticalSpacing"] = 5
 		E.db["unitframe"]["units"]["raid40"]["growthDirection"] = 'RIGHT_UP'
 
 		-- movers
 		E.db["movers"]["ElvUF_AssistMover"] = "TOPLEFT,ElvUIParent,TOPLEFT,4,-392"
-		E.db["movers"]["BossButton"] = "BOTTOM,ElvUIParent,BOTTOM,0,391"
 		E.db["movers"]["ElvUF_BodyGuardMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,4,444"
 		E.db["movers"]["ElvUF_FocusCastbarMover"] = "BOTTOMRIGHT,ElvUIParent,BOTTOMRIGHT,-518,223"
 		E.db["movers"]["ElvUF_FocusMover"] = "BOTTOMRIGHT,ElvUIParent,BOTTOMRIGHT,-518,236"
@@ -1845,10 +1653,8 @@ local function SetupUnitframes(layout)
 		E.db["movers"]["ElvUF_TargetMover"] = "BOTTOM,ElvUIParent,BOTTOM,314,268"
 		E.db["movers"]["ElvUF_TargetTargetMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,206"
 		E.db["movers"]["ClassBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,360"
-		E.db["movers"]["AltPowerBarMover"] = "TOP,ElvUIParent,TOP,0,-66"
 		E.db["movers"]["PlayerPowerBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,350"
 		E.db["movers"]["TargetPowerBarMover"] = "BOTTOM,ElvUIParent,BOTTOM,231,215"
-		E.db["movers"]["ZoneAbility"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,552,368"
 	end
 
 	if E.db.benikui.unitframes.player.detachPortrait == true then
@@ -2017,7 +1823,7 @@ end
 BUI.installTable = {
 	["Name"] = "|cff00c0faBenikUI|r",
 	["Title"] = L["|cff00c0faBenikUI|r Installation"],
-	["tutorialImage"] = [[Interface\AddOns\ElvUI_BenikUI\media\textures\logo_benikui.tga]],
+	["tutorialImage"] = [[Interface\AddOns\ElvUI_BenikUI_TBC\media\textures\logo_benikui.tga]],
 	["Pages"] = {
 		[1] = function()
 			PluginInstallFrame:BuiStyle('Outside')

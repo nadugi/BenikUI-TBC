@@ -13,7 +13,7 @@ local GetAddOnInfo = GetAddOnInfo
 local IsAddOnLoaded = IsAddOnLoaded
 local UpdateAddOnMemoryUsage = UpdateAddOnMemoryUsage
 local GetAddOnMemoryUsage = GetAddOnMemoryUsage
-local InCombatLockdown = InCombatLockdown
+local InCombatLockdown, IsInInstance = InCombatLockdown, IsInInstance
 local GameTooltip = _G["GameTooltip"]
 
 local kiloByteString = '|cfff6a01a %d|r'..' kb'
@@ -76,8 +76,6 @@ end
 
 function mod:CreateFps()
 	local boardName = _G['BUI_FPS']
-	local db = E.db.dashboards.system
-	local holder = _G.BUI_SystemDashboard
 
 	boardName:SetScript('OnMouseDown', function (self)
 		if(not InCombatLockdown()) then
@@ -109,16 +107,10 @@ function mod:CreateFps()
 			GameTooltip:AddLine(L['Tip: Click to free memory'], 0.7, 0.7, 1)
 
 			GameTooltip:Show()
-			if db.mouseover then
-				E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
-			end
 		end
 	end)
 
 	boardName:SetScript('OnLeave', function(self)
-		if db.mouseover then
-			E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
-		end
 		GameTooltip:Hide()
 	end)
 

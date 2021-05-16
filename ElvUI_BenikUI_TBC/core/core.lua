@@ -20,7 +20,7 @@ BUI["styles"] = {}
 BUI["softGlow"] = {}
 BUI["shadows"] = {}
 BUI.TexCoords = {.08, 0.92, -.04, 0.92}
-BUI.Version = GetAddOnMetadata('ElvUI_BenikUI', 'Version')
+BUI.Version = GetAddOnMetadata('ElvUI_BenikUI_TBC', 'Version')
 BUI.ShadowMode = false;
 BUI.AddonProfileKey = '';
 BINDING_HEADER_BENIKUI = BUI.Title
@@ -72,7 +72,7 @@ function BUI:LuaError(msg)
 	if switch == 'on' or switch == '1' then
 		for i=1, GetNumAddOns() do
 			local name = GetAddOnInfo(i)
-			if (name ~= 'ElvUI' and name ~= 'ElvUI_OptionsUI' and name ~= 'ElvUI_BenikUI') and E:IsAddOnEnabled(name) then
+			if (name ~= 'ElvUI' and name ~= 'ElvUI_OptionsUI' and name ~= 'ElvUI_BenikUI_TBC') and E:IsAddOnEnabled(name) then
 				DisableAddOn(name, E.myname)
 				ElvDB.BuiErrorDisabledAddOns[name] = i
 			end
@@ -224,7 +224,7 @@ function BUI:Initialize()
 	end
 
 	if E.db.benikui.general.loginMessage then
-		print(format('%s%s%s %s', BUI.Title, BUI:cOption('v'..BUI.Version, "orange"), L['is loaded. For any issues or suggestions, please visit'], PrintURL('http://git.tukui.org/Benik/ElvUI_BenikUI/issues')))
+		print(format('%s%s%s %s', BUI.Title, BUI:cOption('v'..BUI.Version, "orange"), L['is loaded. For any issues or suggestions, please visit'], PrintURL('http://git.tukui.org/Benik/ElvUI_BenikUI_TBC/issues')))
 	end
 
 	if E.db.benikui.general.benikuiStyle and E.db.benikui.general.shadows then

@@ -201,32 +201,6 @@ function mod:CastBarHooks()
 			hooksecurefunc(castbar, "PostCastInterruptible", mod.PostCastInterruptible)
 		end
 	end
-
-	for i = 1, 5 do
-		local castbar = _G["ElvUF_Arena"..i].Castbar
-		if castbar then
-			if BUI.ShadowMode then
-				castbar.backdrop:CreateSoftShadow()
-				castbar.backdrop.shadow:SetFrameLevel(castbar.backdrop:GetFrameLevel())
-				castbar.ButtonIcon.bg:CreateSoftShadow()
-			end
-			hooksecurefunc(castbar, "PostCastStart", mod.PostCast)
-			hooksecurefunc(castbar, "PostCastInterruptible", mod.PostCastInterruptible)
-		end
-	end
-
-	for i = 1, MAX_BOSS_FRAMES do
-		local castbar = _G["ElvUF_Boss"..i].Castbar
-		if castbar then
-			if BUI.ShadowMode then
-				castbar.backdrop:CreateSoftShadow()
-				castbar.backdrop.shadow:SetFrameLevel(castbar.backdrop:GetFrameLevel())
-				castbar.ButtonIcon.bg:CreateSoftShadow()
-			end
-			hooksecurefunc(castbar, "PostCastStart", mod.PostCast)
-			hooksecurefunc(castbar, "PostCastInterruptible", mod.PostCastInterruptible)
-		end
-	end
 end
 
 function mod:Initialize()

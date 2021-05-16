@@ -3,7 +3,7 @@ local mod = BUI:GetModule('Skins')
 local S = E:GetModule('Skins')
 
 local classColor = E:ClassColor(E.myclass, true)
-local CloseButton = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\Close.tga'
+local CloseButton = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\Close.tga'
 
 function mod:HandleCloseButton(f)
 	if f.Texture then

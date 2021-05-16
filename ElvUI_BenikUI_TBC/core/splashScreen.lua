@@ -52,7 +52,7 @@ local function CreateSplashScreen()
 
 	f.logo = f:CreateTexture(nil, 'OVERLAY')
 	f.logo:Size(384, 96)
-	f.logo:SetTexture('Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\logo_benikui.tga')
+	f.logo:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\logo_benikui.tga')
 	f.logo:Point('CENTER', f, 'CENTER')
 
 	f.version = f:CreateFontString(nil, 'OVERLAY')

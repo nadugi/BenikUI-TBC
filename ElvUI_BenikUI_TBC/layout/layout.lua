@@ -28,10 +28,10 @@ local PANEL_HEIGHT = 19;
 local SPACING = (E.PixelMode and 1 or 3)
 local BUTTON_NUM = 4
 
-local menuIcon = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\flightMode\\menu.tga'
-local lfgIcon = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\buttons\\eye.tga'
-local optionsIcon = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\buttons\\options.tga'
-local addonsIcon = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\buttons\\plugin.tga'
+local menuIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\menu.tga'
+local lfgIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\buttons\\eye.tga'
+local optionsIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\buttons\\options.tga'
+local addonsIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\buttons\\plugin.tga'
 
 local Bui_dchat = CreateFrame('Frame', 'BuiDummyChat', E.UIParent, 'BackdropTemplate')
 local Bui_deb = CreateFrame('Frame', 'BuiDummyEditBoxHolder', E.UIParent, 'BackdropTemplate')
@@ -533,7 +533,6 @@ function mod:Initialize()
 	hooksecurefunc(E, 'UpdateMedia', updateButtons)
 
 	mod:RegisterEvent('PLAYER_ENTERING_WORLD')
-	mod:RegisterEvent('ACTIVE_TALENT_GROUP_CHANGED', 'regEvents')
 end
 
 BUI:RegisterModule(mod:GetName())
