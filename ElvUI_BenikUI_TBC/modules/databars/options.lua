@@ -4,7 +4,7 @@ local mod = BUI:GetModule('Databars');
 
 local tinsert, ipairs = table.insert, ipairs
 
-local REPUTATION, DEFAULT, HONOR = REPUTATION, DEFAULT, HONOR
+local REPUTATION, DEFAULT = REPUTATION, DEFAULT
 
 local backdropValues = {
 	TRANSPARENT = L['Transparent'],
@@ -22,9 +22,7 @@ local positionValues = {
 local databarsTbl = {
 	-- bar, option, name
 	{'ElvUI_ExperienceBar', 'experience', L['XP Bar']},
-	{'ElvUI_AzeriteBar', 'azerite', L['Azerite Bar']},
 	{'ElvUI_ReputationBar', 'reputation', REPUTATION},
-	{'ElvUI_HonorBar', 'honor', HONOR},
 	{'ElvUI_ThreatBar', 'threat', L["Threat"]}
 }
 
@@ -133,23 +131,6 @@ local function injectElvUIDatabarOptions()
 		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "experience") end,
 	}
 
-	-- azerite
-	E.Options.args.databars.args.azerite.args.fontGroup.args.textYoffset = {
-		order = 100,
-		type = "range",
-		min = -30, max = 30, step = 1,
-		name = BUI:cOption(L['Text yOffset'], "blue"),
-		get = function(info) return E.db.databars.azerite[ info[#info] ] end,
-		set = function(info, value) E.db.databars.azerite[ info[#info] ] = value; mod:AzeriteTextOffset() end,
-	}
-
-	E.Options.args.databars.args.azerite.args.gotobenikui = {
-		order = -1,
-		type = "execute",
-		name = BUI.Title..L["Azerite Bar"],
-		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "azerite") end,
-	}
-
 	-- reputation
 	E.Options.args.databars.args.reputation.args.fontGroup.args.textYoffset = {
 		order = 100,
@@ -165,23 +146,6 @@ local function injectElvUIDatabarOptions()
 		type = "execute",
 		name = BUI.Title..REPUTATION,
 		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "reputation") end,
-	}
-
-	-- honor
-	E.Options.args.databars.args.honor.args.fontGroup.args.textYoffset = {
-		order = 100,
-		type = "range",
-		min = -30, max = 30, step = 1,
-		name = BUI:cOption(L['Text yOffset'], "blue"),
-		get = function(info) return E.db.databars.honor[ info[#info] ] end,
-		set = function(info, value) E.db.databars.honor[ info[#info] ] = value; mod:HonorTextOffset() end,
-	}
-
-	E.Options.args.databars.args.honor.args.gotobenikui = {
-		order = -1,
-		type = "execute",
-		name = BUI.Title..HONOR,
-		func = function() LibStub("AceConfigDialog-3.0-ElvUI"):SelectGroup("ElvUI", "benikui", "benikuiDatabars", "honor") end,
 	}
 
 	-- threat
