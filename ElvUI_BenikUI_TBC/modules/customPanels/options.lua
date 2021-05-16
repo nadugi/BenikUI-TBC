@@ -28,7 +28,6 @@ local colorValues = {
 	[2] = CUSTOM,
 	[3] = L['Value Color'],
 	[4] = DEFAULT,
-	[5] = L['Covenant Color']
 }
 
 local function updateOptions()
@@ -325,7 +324,7 @@ local function updateOptions()
 					disabled = function() return not E.db.benikui.panels[panelname].enable end,
 					args = {
 						combatHide = {
-							order = 2,
+							order = 1,
 							name = L["Hide In Combat"],
 							type = 'toggle',
 							get = function() return E.db.benikui.panels[panelname].combatHide end,
@@ -333,7 +332,7 @@ local function updateOptions()
 						},
 						visibility = {
 							type = 'input',
-							order = 4,
+							order = 2,
 							name = L["Visibility State"],
 							desc = L["This works like a macro, you can run different situations to get the panel to show/hide differently.\n Example: '[combat] show;hide'"],
 							width = 'full',
@@ -412,7 +411,7 @@ end
 local function panelsTable()
 	E.Options.args.benikui.args.panels = {
 		type = "group",
-		name = BUI:cOption(L["Custom Panels"], "orange"),
+		name = L["Custom Panels"],
 		order = 70,
 		childGroups = "select",
 		args = {

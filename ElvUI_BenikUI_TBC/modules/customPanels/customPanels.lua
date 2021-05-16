@@ -10,6 +10,7 @@ local CreateFrame = CreateFrame
 local InCombatLockdown = InCombatLockdown
 local RegisterStateDriver = RegisterStateDriver
 local ReloadUI = ReloadUI
+local UnitInVehicle = UnitInVehicle
 local UnregisterStateDriver = UnregisterStateDriver
 
 local classColor = E:ClassColor(E.myclass, true)
@@ -26,8 +27,6 @@ local PanelDefault = {
 	['clickThrough'] = false,
 	['strata'] = "LOW",
 	['combatHide'] = true,
-	['petHide'] = true,
-	['vehicleHide'] = true,
 	['tooltip'] = true,
 	['visibility'] = "",
 	['styleColor'] = 1,
@@ -49,34 +48,6 @@ local PanelDefault = {
 		['fontColor'] = {r = .9, g = .9, b = .9},
 	}
 }
-
-local function InsertNewDefaults()
-	for name in pairs(E.db.benikui.panels) do
-		if name then
-			if E.db.benikui.panels[name].styleColor == nil then E.db.benikui.panels[name].styleColor = 1 end
-			if E.db.benikui.panels[name].customStyleColor == nil then E.db.benikui.panels[name].customStyleColor = {r = .9, g = .7, b = 0} end
-
-			if E.db.benikui.panels[name].title == nil then
-				E.db.benikui.panels[name].title = {	
-					['enable'] = true,
-					['text'] = 'Title',
-					['height'] = 26,
-					['position'] = 'TOP',
-					['textPosition'] = 'CENTER',
-					['textXoffset'] = 0,
-					['textYoffset'] = 0,
-					['panelTexture'] = "BuiMelli",
-					['panelColor'] = {r = .9, g = .7, b = 0, a = .7},
-					['useDTfont'] = true,
-					['font'] = E.db.datatexts.font,
-					['fontsize'] = E.db.datatexts.fontSize,
-					['fontflags'] = E.db.datatexts.fontOutline,
-					['fontColor'] = {r = .9, g = .9, b = .9},
-				}
-			end
-		end
-	end
-end
 
 local function OnEnter(self)
 	if E.db.benikui.panels[self.Name].tooltip then
@@ -109,12 +80,12 @@ function mod:CreatePanel()
 
 	for name in pairs(E.db.benikui.panels) do
 		if name and not _G[name] then
-			local panel = CreateFrame("Frame", name, E.UIParent, 'BackdropTemplate')
+			local panel = CreateFrame("Frame", name, E.UIParent)
 			panel:Width(name.width or 200)
 			panel:Height(name.height or 200)
 			panel:SetTemplate('Transparent')
 			panel:Point('CENTER', E.UIParent, 'CENTER', -600, 0)
-			panel:BuiStyle('Outside', nil, true, true)
+			panel:Style('Outside', false, true, true)
 			if BUI.ShadowMode then panel:CreateSoftShadow() end
 			panel:SetScript("OnEnter", OnEnter)
 			panel:SetScript("OnLeave", OnLeave)
@@ -125,7 +96,7 @@ function mod:CreatePanel()
 			panel.moverName = moverName
 			panel.Name = name
 			
-			local title = CreateFrame("Frame", nil, panel, 'BackdropTemplate')
+			local title = CreateFrame("Frame", nil, panel)
 			title:SetTemplate('Transparent', false, true)
 			title:Point('TOPLEFT', panel, 'TOPLEFT', 0, (E.PixelMode and 0 or 2))
 			title:Point('BOTTOMRIGHT', panel, 'TOPRIGHT', 0, (E.PixelMode and -15 or -14))
@@ -141,7 +112,7 @@ function mod:CreatePanel()
 			local tex = title:CreateTexture(nil, "BACKGROUND")
 			tex:SetBlendMode("ADD")
 			tex:SetAllPoints()
-			tex:SetTexture(E.Media.Textures.White8x8)
+			tex:SetTexture(E.media.BuiFlat)
 			panel.tex = tex
 		end
 	end
@@ -256,8 +227,6 @@ function mod:SetupPanels()
 					r, g, b = BUI:unpackColor(db.customStyleColor)
 				elseif db.styleColor == 3 then
 					r, g, b = BUI:unpackColor(E.db.general.valuecolor)
-				elseif db.styleColor == 5 then
-					r, g, b = BUI:getCovenantColor()
 				else
 					r, g, b = BUI:unpackColor(E.db.general.backdropcolor)
 				end
@@ -303,6 +272,7 @@ function mod:OnEvent(event, unit)
 	if unit and unit ~= "player" then return end
 
 	local inCombat = (event == "PLAYER_REGEN_DISABLED" and true) or (event == "PLAYER_REGEN_ENABLED" and false) or InCombatLockdown()
+
 	for name in pairs(E.db.benikui.panels) do
 		if name then
 			local db = E.db.benikui.panels[name]
@@ -316,7 +286,6 @@ function mod:OnEvent(event, unit)
 end
 
 function mod:UpdatePanels()
-	InsertNewDefaults()
 	mod:CreatePanel()
 	mod:SetupPanels()
 	mod:Resize()

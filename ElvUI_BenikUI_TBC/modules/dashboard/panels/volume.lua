@@ -23,46 +23,53 @@ local function GetVolumePercent(cat)
 end
 
 local function RoundVolume(cat)
-	local digit
-	if IsShiftKeyDown() then
-		digit = 1
-	else
-		digit = 2
-	end
-
-	local volume = tonumber(GetCVar(cat))
-	volume = E:Round(volume, digit)
+	local volume = tonumber(GetCVar(cat));
+	volume = E:Round(volume, 1)
 	return volume;
 end
 
-local function Sound_MasterVolumeUp()
-	local digit1, digit2
-	if IsShiftKeyDown() then
-		digit1 = 0.9
-		digit2 = 0.1
+local function iconBG_OnEnter(self)
+	GameTooltip:SetOwner(self, 'ANCHOR_RIGHT', 5, -20)
+	GameTooltip:ClearAllPoints()
+
+	GameTooltip:ClearLines()
+	local master = GetVolumePercent('Sound_MasterVolume');
+	local effects = GetVolumePercent('Sound_SFXVolume');
+	local music = GetVolumePercent('Sound_MusicVolume');
+	local ambience = GetVolumePercent('Sound_AmbienceVolume');
+
+	if (GetCVar('Sound_EnableAllSound') == '0') then
+		GameTooltip:AddDoubleLine(MASTER_VOLUME, MUTED, 1, 1, 1, selectioncolor)
 	else
-		digit1 = 0.99
-		digit2 = 0.01
+		GameTooltip:AddDoubleLine(MASTER_VOLUME, master..'%', 1, 1, 1, selectioncolor)
 	end
+	GameTooltip:AddDoubleLine(ENABLE_SOUNDFX, effects..'%', 1, 1, 1, selectioncolor)
+	GameTooltip:AddDoubleLine(MUSIC_VOLUME, music..'%', 1, 1, 1, selectioncolor)
+	GameTooltip:AddDoubleLine(VOICE_AMBIENCE, ambience..'%', 1, 1, 1, selectioncolor)
+	GameTooltip:AddLine(' ')
+	GameTooltip:AddDoubleLine(L['Click :'], BINDING_NAME_TOGGLESOUND, 0.7, 0.7, 1, 0.7, 0.7, 1)
+	GameTooltip:AddDoubleLine(L['RightClick :'], BINDING_NAME_TOGGLEMUSIC, 0.7, 0.7, 1, 0.7, 0.7, 1)
+	GameTooltip:AddDoubleLine(L['MouseWheel :'], VOLUME..' +/-', 0.7, 0.7, 1, 0.7, 0.7, 1)
+	GameTooltip:Show()
+end
+
+local function iconBG_OnLeave(self)
+	GameTooltip:Hide()
+end
+
+local function Sound_MasterVolumeUp()
 	local volume = RoundVolume('Sound_MasterVolume')
 
-	if (volume and volume <= digit1) then
-		SetCVar('Sound_MasterVolume', volume + digit2);
+	if (volume and volume <= 0.9) then
+		SetCVar('Sound_MasterVolume', volume + 0.1);
 	end
 end
 
 local function Sound_MasterVolumeDown()
-	local digit
-	if IsShiftKeyDown() then
-		digit = 0.1
-	else
-		digit = 0.01
-	end
-
 	local volume = RoundVolume('Sound_MasterVolume')
 
-	if (volume and volume >= digit) then
-		SetCVar('Sound_MasterVolume', volume - digit);
+	if (volume and volume >= 0.1) then
+		SetCVar('Sound_MasterVolume', volume - 0.1);
 	end
 end
 
@@ -98,11 +105,9 @@ local SOUND_MAX_ICON = ('|TInterface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures
 
 function mod:CreateVolume()
 	local boardName = _G['BUI_Volume']
-	local db = E.db.dashboards.system
-	local holder = _G.BUI_SystemDashboard
 
 	local iconBG = CreateFrame('Frame', nil, boardName)
-	iconBG:Size(16, 16)
+	iconBG:Size(16,16)
 	iconBG:Point('BOTTOMRIGHT', boardName, 'BOTTOMRIGHT', 0, (E.PixelMode and 4 or 6))
 	iconBG:SetFrameStrata('LOW')
 	iconBG.text = iconBG:CreateFontString(nil, 'OVERLAY')
@@ -114,44 +119,8 @@ function mod:CreateVolume()
 	iconBG.text:SetShadowOffset(1.25, -1.25)
 	iconBG:EnableMouse(true)
 	iconBG:EnableMouseWheel(true)
-
-	iconBG:SetScript('OnEnter', function(self)
-		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT', 5, -20)
-		GameTooltip:ClearAllPoints()
-
-		GameTooltip:ClearLines()
-		local master = GetVolumePercent('Sound_MasterVolume');
-		local effects = GetVolumePercent('Sound_SFXVolume');
-		local music = GetVolumePercent('Sound_MusicVolume');
-		local ambience = GetVolumePercent('Sound_AmbienceVolume');
-
-		if (GetCVar('Sound_EnableAllSound') == '0') then
-			GameTooltip:AddDoubleLine(MASTER_VOLUME, MUTED, 1, 1, 1, selectioncolor)
-		else
-			GameTooltip:AddDoubleLine(MASTER_VOLUME, master..'%', 1, 1, 1, selectioncolor)
-		end
-		GameTooltip:AddDoubleLine(ENABLE_SOUNDFX, effects..'%', 1, 1, 1, selectioncolor)
-		GameTooltip:AddDoubleLine(MUSIC_VOLUME, music..'%', 1, 1, 1, selectioncolor)
-		GameTooltip:AddDoubleLine(VOICE_AMBIENCE, ambience..'%', 1, 1, 1, selectioncolor)
-		GameTooltip:AddLine(' ')
-		GameTooltip:AddDoubleLine(L['Click :'], BINDING_NAME_TOGGLESOUND, 0.7, 0.7, 1, 0.7, 0.7, 1)
-		GameTooltip:AddDoubleLine(L['RightClick :'], BINDING_NAME_TOGGLEMUSIC, 0.7, 0.7, 1, 0.7, 0.7, 1)
-		GameTooltip:AddDoubleLine(L['MouseWheel :'], VOLUME..' +/-', 0.7, 0.7, 1, 0.7, 0.7, 1)
-		GameTooltip:AddDoubleLine(L['Shift+MouseWheel :'], L['Fast Volume +/-'], 0.7, 0.7, 1, 0.7, 0.7, 1)
-		GameTooltip:Show()
-
-		if db.mouseover then
-			E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
-		end
-	end)
-
-	iconBG:SetScript('OnLeave', function(self)
-		if db.mouseover then
-			E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
-		end
-		GameTooltip:Hide()
-	end)
-
+	iconBG:SetScript('OnEnter', iconBG_OnEnter)
+	iconBG:SetScript('OnLeave', iconBG_OnLeave)
 	iconBG:SetScript('OnMouseWheel', iconBG_OnMouseWheel)
 	iconBG:SetScript('OnMouseUp', iconBG_OnClick)
 
@@ -167,6 +136,7 @@ function mod:CreateVolume()
 
 		if (GetCVar('Sound_EnableSFX') == '0') then
 			color = 1
+			iconBG:SetAlpha(1)
 			icon = SOUND_MUTE_ICON
 		else
 			if(volumeValue * 100 / max >= 75) then
@@ -184,16 +154,10 @@ function mod:CreateVolume()
 			end
 		end
 
-		if holder:GetAlpha() == 0 then
-			iconBG.text:SetText('')
-		else
-			iconBG.text:SetText(icon)
-		end
-
+		iconBG.text:SetText(icon)
 		local displayFormat = join('', VOLUME..':', statusColors[color], ' %d%%|r')
 		boardName.Text:SetFormattedText(displayFormat, volumeValue)
 	end)
-
 	boardName.Status:RegisterEvent('VARIABLES_LOADED')
 	boardName.Status:RegisterEvent('CVAR_UPDATE')
 end

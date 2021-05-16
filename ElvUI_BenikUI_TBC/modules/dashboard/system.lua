@@ -3,10 +3,11 @@ local mod = BUI:GetModule('Dashboards');
 local DT = E:GetModule('DataTexts');
 
 local tinsert, twipe, getn, pairs, ipairs = table.insert, table.wipe, getn, pairs, ipairs
-local _G = _G
+
 -- GLOBALS: hooksecurefunc
 
 local CreateFrame = CreateFrame
+local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 
 local DASH_HEIGHT = 20
 local DASH_SPACING = 3
@@ -16,7 +17,8 @@ local boards = {"FPS", "MS", "Durability", "Bags", "Volume"}
 
 function mod:UpdateSystem()
 	local db = E.db.dashboards.system
-	local holder = _G.BUI_SystemDashboard
+	local holder = BUI_SystemDashboard
+	local DASH_WIDTH = E.db.dashboards.system.width or 150
 
 	if(BUI.SystemDB[1]) then
 		for i = 1, getn(BUI.SystemDB) do
@@ -26,20 +28,6 @@ function mod:UpdateSystem()
 		holder:Hide()
 	end
 
-	if db.mouseover then holder:SetAlpha(0) else holder:SetAlpha(1) end
-
-	holder:SetScript('OnEnter', function(self)
-		if db.mouseover then
-			E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
-		end
-	end)
-
-	holder:SetScript('OnLeave', function(self)
-		if db.mouseover then
-			E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
-		end
-	end)
-
 	for _, name in pairs(boards) do
 		if db.chooseSystem[name] == true then
 			holder:Show()
@@ -47,17 +35,19 @@ function mod:UpdateSystem()
 
 			local sysFrame = CreateFrame('Frame', 'BUI_'..name, holder)
 			sysFrame:Height(DASH_HEIGHT)
-			sysFrame:Width(E.db.dashboards.system.width or 150)
+			sysFrame:Width(DASH_WIDTH)
 			sysFrame:Point('TOPLEFT', holder, 'TOPLEFT', SPACING, -SPACING)
 			sysFrame:EnableMouse(true)
 
-			sysFrame.dummy = CreateFrame('Frame', nil, sysFrame, 'BackdropTemplate')
-			sysFrame.dummy:SetTemplate('Transparent', nil, true, true)
-			sysFrame.dummy:SetBackdropBorderColor(0, 0, 0, 0)
-			sysFrame.dummy:SetBackdropColor(1, 1, 1, .2)
-			sysFrame.dummy:Point('BOTTOMLEFT', sysFrame, 'BOTTOMLEFT', 2, 0)
+			sysFrame.dummy = CreateFrame('Frame', nil, sysFrame)
+			sysFrame.dummy:Point('BOTTOMLEFT', sysFrame, 'BOTTOMLEFT', 2, 2)
 			sysFrame.dummy:Point('BOTTOMRIGHT', sysFrame, 'BOTTOMRIGHT', (E.PixelMode and -4 or -8), 0)
-			sysFrame.dummy:Height(E.PixelMode and 1 or 3)
+			sysFrame.dummy:Height(E.PixelMode and 3 or 5)
+
+			sysFrame.dummy.dummyStatus = sysFrame.dummy:CreateTexture(nil, 'OVERLAY')
+			sysFrame.dummy.dummyStatus:SetInside()
+			sysFrame.dummy.dummyStatus:SetTexture(E['media'].BuiFlat)
+			sysFrame.dummy.dummyStatus:SetVertexColor(1, 1, 1, .2)
 
 			sysFrame.Status = CreateFrame('StatusBar', nil, sysFrame.dummy)
 			sysFrame.Status:SetStatusBarTexture(E.Media.Textures.White8x8)
@@ -66,25 +56,13 @@ function mod:UpdateSystem()
 
 			sysFrame.spark = sysFrame.Status:CreateTexture(nil, 'OVERLAY', nil);
 			sysFrame.spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]]);
-			sysFrame.spark:Size(12, 6);
+			sysFrame.spark:SetSize(12, 6);
 			sysFrame.spark:SetBlendMode('ADD');
-			sysFrame.spark:Point('CENTER', sysFrame.Status:GetStatusBarTexture(), 'RIGHT')
+			sysFrame.spark:SetPoint('CENTER', sysFrame.Status:GetStatusBarTexture(), 'RIGHT')
 
 			sysFrame.Text = sysFrame.Status:CreateFontString(nil, 'OVERLAY')
 			sysFrame.Text:Point('LEFT', sysFrame, 'LEFT', 6, (E.PixelMode and 2 or 3))
 			sysFrame.Text:SetJustifyH('LEFT')
-
-			sysFrame:SetScript('OnEnter', function(self)
-				if db.mouseover then
-					E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
-				end
-			end)
-
-			sysFrame:SetScript('OnLeave', function(self)
-				if db.mouseover then
-					E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
-				end
-			end)
 
 			tinsert(BUI.SystemDB, sysFrame)
 		end
@@ -107,16 +85,18 @@ function mod:UpdateSystemSettings()
 end
 
 function mod:CreateSystemDashboard()
-	local holder = self:CreateDashboardHolder('BUI_SystemDashboard', 'system')
-	holder:Point('TOPLEFT', E.UIParent, 'TOPLEFT', 4, -8)
-	holder:Width(E.db.dashboards.system.width or 150)
+	local DASH_WIDTH = E.db.dashboards.system.width or 150
+
+	self.sysHolder = self:CreateDashboardHolder('BUI_SystemDashboard', 'system')
+	self.sysHolder:Point('TOPLEFT', E.UIParent, 'TOPLEFT', 2, -30)
+	self.sysHolder:Width(DASH_WIDTH)
 
 	mod:UpdateSystem()
-	mod:UpdateHolderDimensions(holder, 'system', BUI.SystemDB)
-	mod:ToggleStyle(holder, 'system')
-	mod:ToggleTransparency(holder, 'system')
+	mod:UpdateHolderDimensions(self.sysHolder, 'system', BUI.SystemDB)
+	mod:ToggleStyle(self.sysHolder, 'system')
+	mod:ToggleTransparency(self.sysHolder, 'system')
 
-	E:CreateMover(_G.BUI_SystemDashboard, 'BuiDashboardMover', L['System'], nil, nil, nil, 'ALL,BENIKUI', nil, 'benikui,dashboards,system')
+	E:CreateMover(self.sysHolder, 'BuiDashboardMover', L['System'], nil, nil, nil, 'ALL,BenikUI', nil, 'benikui,dashboards,system')
 end
 
 function mod:LoadSystem()
