@@ -94,7 +94,7 @@ local function dashboardsTable()
 			name = {
 				order = 1,
 				type = 'header',
-				name = BUI:cOption(L['Dashboards']),
+				name = BUI:cOption(L['Dashboards'], "orange"),
 			},
 			panels = {
 				order = 2,
