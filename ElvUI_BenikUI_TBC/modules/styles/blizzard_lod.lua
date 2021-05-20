@@ -838,7 +838,6 @@ local function style_TradeSkillUI()
 
 	local frame = _G.TradeSkillFrame
 	frame:BuiStyle("Outside")
-	frame.DetailsFrame.GuildFrame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_TradeSkillUI", "BenikUI_TradeSkillUI", style_TradeSkillUI)
 
