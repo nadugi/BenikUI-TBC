@@ -93,7 +93,7 @@ local function LoadSkin()
 	end
 
 	if db.mail then
-		_G.MailFrame:BuiStyle("Outside")
+		_G.MailFrame.backdrop:BuiStyle("Outside")
 		_G.OpenMailFrame:BuiStyle("Outside")
 	end
 
@@ -175,7 +175,7 @@ local function LoadSkin()
 	end
 
 	if db.taxi then
-		_G.TaxiFrame:BuiStyle("Outside")
+		_G.TaxiFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.trade then
