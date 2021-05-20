@@ -29,7 +29,7 @@ local SPACING = (E.PixelMode and 1 or 3)
 local BUTTON_NUM = 4
 
 local menuIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\menu.tga'
-local lfgIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\buttons\\eye.tga'
+local statusIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\info.tga'
 local optionsIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\buttons\\options.tga'
 local addonsIcon = 'Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\buttons\\plugin.tga'
 
@@ -43,6 +43,22 @@ function BuiGameMenu_OnMouseUp(self)
 	if InCombatLockdown() then return end
 	GameTooltip:Hide()
 	BUI:Dropmenu(BUI.MenuList, menuFrame, self:GetName(), 'tLeft', -SPACING, SPACING, 4)
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
+end
+
+-- StatusMenu
+local StatusList = {
+	{text = L["AFK"], func = function() SendChatMessage("" ,"AFK" ) end},
+	{text = L["DND"], func = function() SendChatMessage("" ,"DND" ) end},
+	{text = L["Reload (ShiftClick)"], func = function() if IsShiftKeyDown() then ReloadUI() end end},
+}
+
+local StatusMenuFrame = CreateFrame('Frame', 'BuiStatusMenu', E.UIParent)
+StatusMenuFrame:SetTemplate('Transparent', true)
+
+function BuiStatusMenu_OnMouseUp(self)
+	GameTooltip:Hide()
+	BUI:Dropmenu(StatusList, StatusMenuFrame, self:GetName(), 'tRight', SPACING, SPACING, 4)
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
 end
 
@@ -368,31 +384,21 @@ function mod:CreateLayout()
 				GameTooltip:Hide()
 			end)
 
-		-- LFG Button
+		-- Status Button
 		elseif i == 4 then
 			bbuttons[i]:Point('TOPLEFT', Bui_ldtp, 'TOPRIGHT', SPACING, 0)
 			bbuttons[i]:Point('BOTTOMRIGHT', Bui_ldtp, 'BOTTOMRIGHT', PANEL_HEIGHT + SPACING, 0)
 			bbuttons[i]:SetParent(Bui_ldtp)
-			bbuttons[i].btn:SetTexture(lfgIcon)
+			bbuttons[i].btn:SetTexture(statusIcon)
+			bbuttons[i].btn:Size(16, 16)
 
-			bbuttons[i]:SetScript('OnClick', function(self, btn)
-				if btn == "LeftButton" then
-					PVEFrame_ToggleFrame()
-				elseif btn == "RightButton" then
-					if not IsAddOnLoaded('Blizzard_EncounterJournal') then
-						EncounterJournal_LoadUI();
-					end
-					ToggleFrame(EncounterJournal)
-				end
-				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
-			end)
+			bbuttons[i]:SetScript('OnClick', BuiStatusMenu_OnMouseUp)
 
 			bbuttons[i]:SetScript('OnEnter', function(self)
 				self.btn:SetVertexColor(1, 1, 1, .7)
-				GameTooltip:SetOwner(self, 'ANCHOR_TOP', 0, 2 )
+				GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT', 0, 2)
 				GameTooltip:ClearLines()
-				GameTooltip:AddDoubleLine(L['Click :'], LFG_TITLE, 0.7, 0.7, 1)
-				GameTooltip:AddDoubleLine(L['RightClick :'], ADVENTURE_JOURNAL, 0.7, 0.7, 1)
+				GameTooltip:AddLine(L['Set Player Status or Reload'])
 				GameTooltip:Show()
 				if InCombatLockdown() then GameTooltip:Hide() end
 			end)
