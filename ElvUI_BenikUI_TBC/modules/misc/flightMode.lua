@@ -360,8 +360,6 @@ function mod:SetFlightMode(status)
 		self:CancelAllTimers()
 
 		self.FlightMode.bottom.timeFlying.txt:SetText("00:00")
-		self.FlightMode.bottom.requestStop:EnableMouse(true)
-		self.FlightMode.bottom.requestStop.img:SetVertexColor(1, 1, 1, .7)
 		self.FlightMode.message:Hide()
 		self.FlightMode.message:SetAlpha(1)
 		self.FlightMode.message:Width(10)
@@ -703,57 +701,10 @@ function mod:Initialize()
 	self.FlightMode.message.text:SetTextColor(1, 1, 0, .7)
 	self.FlightMode.message.text:SetAlpha(0)
 
-	-- Request Stop button
-	self.FlightMode.bottom.requestStop = CreateFrame('Button', nil, self.FlightMode.bottom)
-	self.FlightMode.bottom.requestStop:Size(32, 32)
-	self.FlightMode.bottom.requestStop:Point("LEFT", self.FlightMode.bottom, "LEFT", 10, 0)
-	self.FlightMode.bottom.requestStop:EnableMouse(true)
-
-	self.FlightMode.bottom.requestStop.img = self.FlightMode.bottom.requestStop:CreateTexture(nil, 'OVERLAY')
-	self.FlightMode.bottom.requestStop.img:Point("CENTER")
-	self.FlightMode.bottom.requestStop.img:SetTexture('Interface\\AddOns\\ElvUI_BenikUI_TBC\\media\\textures\\flightMode\\arrow.tga')
-	self.FlightMode.bottom.requestStop.img:SetVertexColor(1, 1, 1, .7)
-
-	self.FlightMode.bottom.requestStop:SetScript('OnEnter', function()
-		GameTooltip:SetOwner(self.FlightMode.bottom.requestStop, 'ANCHOR_RIGHT', 1, 0)
-		GameTooltip:ClearLines()
-		GameTooltip:AddLine(TAXI_CANCEL_DESCRIPTION, selectioncolor)
-		GameTooltip:AddLine(L['LeftClick to Request Stop'], 0.7, 0.7, 1)
-		GameTooltip:Show()
-		if db.gameMenuColor == 1 then
-			self.FlightMode.bottom.requestStop.img:SetVertexColor(classColor.r, classColor.g, classColor.b)
-		elseif db.gameMenuColor == 2 then
-			self.FlightMode.bottom.requestStop.img:SetVertexColor(BUI:unpackColor(E.db.benikui.colors.customGameMenuColor))
-		else
-			self.FlightMode.bottom.requestStop.img:SetVertexColor(BUI:unpackColor(E.db.general.valuecolor))
-		end
-	end)
-
-	self.FlightMode.bottom.requestStop:SetScript('OnLeave', function()
-		self.FlightMode.bottom.requestStop.img:SetVertexColor(1, 1, 1, .7)
-		GameTooltip:Hide()
-	end)
-
-	self.FlightMode.bottom.requestStop:SetScript('OnClick', function()
-		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
-		TaxiRequestEarlyLanding();
-		self.FlightMode.bottom.requestStop:EnableMouse(false)
-		self.FlightMode.bottom.requestStop.img:SetVertexColor(1, 0, 0, .7)
-		self.FlightMode.message:Show()
-		self.FlightMode.message.anim.sizing:SetChange(self.FlightMode.message.text:GetStringWidth() + 24)
-		self.FlightMode.message.anim:Play()
-		C_TimerAfter(.5, function()
-			UIFrameFadeIn(self.FlightMode.message.text, 1, 0, 1)
-		end)
-		C_TimerAfter(8, function()
-			UIFrameFadeOut(self.FlightMode.message, 1, 1, 0)
-		end)
-	end)
-
 	-- Toggle Location button
 	self.FlightMode.bottom.info = CreateFrame('Button', nil, self.FlightMode.bottom)
 	self.FlightMode.bottom.info:Size(32, 32)
-	self.FlightMode.bottom.info:Point("LEFT", self.FlightMode.bottom.requestStop, "RIGHT", 10, 0)
+	self.FlightMode.bottom.info:Point("LEFT", self.FlightMode.bottom, "LEFT", 10, 0)
 
 	self.FlightMode.bottom.info.img = self.FlightMode.bottom.info:CreateTexture(nil, 'OVERLAY')
 	self.FlightMode.bottom.info.img:Point("CENTER")
