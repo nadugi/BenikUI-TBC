@@ -159,6 +159,7 @@ local function LoadSkin()
 
 	if db.quest then
 		_G.QuestFrame:BuiStyle("Outside")
+		_G.QuestLogFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.stable then
