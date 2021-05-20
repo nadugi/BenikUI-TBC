@@ -849,7 +849,7 @@ local function style_TrainerUI()
 		return
 	end
 
-	_G.ClassTrainerFrame:BuiStyle("Outside")
+	_G.ClassTrainerFrame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_TrainerUI", "BenikUI_TrainerUI", style_TrainerUI)
 
