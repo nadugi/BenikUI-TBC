@@ -46,7 +46,7 @@ local function LoadSkin()
 
 	if db.friends then
 		_G.AddFriendFrame:BuiStyle("Outside")
-		_G.FriendsFrame:BuiStyle("Outside")
+		_G.FriendsFrame.backdrop:BuiStyle("Outside")
 		_G.FriendsFriendsFrame.backdrop:BuiStyle("Outside")
 	end
 
