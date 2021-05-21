@@ -189,9 +189,9 @@ end
 
 local AddonsToHide = {
 	-- addon, frame
-	{'ZygorGuidesViewer', 'ZygorGuidesViewerFrame'},
-	{'ZygorGuidesViewer', 'Zygor_Notification_Center'},
-	{'ZygorGuidesViewer', 'ZygorGuidesViewer_ActionBar'},
+	{'ZygorGuidesViewerClassicTBC', 'ZygorGuidesViewerFrame'},
+	{'ZygorGuidesViewerClassicTBC', 'Zygor_Notification_Center'},
+	{'ZygorGuidesViewerClassicTBC', 'ZygorGuidesViewer_ActionBar'},
 	{'WorldQuestTracker', 'WorldQuestTrackerScreenPanel'},
 	{'WorldQuestTracker', 'WorldQuestTrackerFinderFrame'},
 	{'XIV_Databar', 'XIV_Databar'},
