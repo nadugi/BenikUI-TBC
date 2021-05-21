@@ -149,9 +149,6 @@ local function SetupLayout(layout)
 		E.db["nameplates"]["fontOutline"] = 'MONOCHROMEOUTLINE'
 		E.db["nameplates"]["statusbar"] = "BuiFlat"
 
-		E.db["benikui"]["misc"]["ilevel"]["font"] = "Bui Prototype"
-		E.db["benikui"]["misc"]["ilevel"]["fontsize"] = 9
-
 		E.db["benikui"]["general"]["shadows"] = false
 
 		E.private.benikui.expressway = false
@@ -192,10 +189,7 @@ local function SetupLayout(layout)
 		E.db["tooltip"]["smallTextFontSize"] = 11
 		E.db["tooltip"]["textFontSize"] = 11
 
-		E.db["benikui"]["misc"]["ilevel"]["font"] = "Expressway"
-		E.db["benikui"]["misc"]["ilevel"]["fontsize"] = 10
 		E.global["datatexts"]["customPanels"]["BuiMiddleDTPanel"]["width"] = 416
-
 
 		E.db["benikui"]["general"]["shadows"] = true
 

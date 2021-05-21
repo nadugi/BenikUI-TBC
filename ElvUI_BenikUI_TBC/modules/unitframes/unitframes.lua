@@ -107,18 +107,6 @@ function mod:Raid40Shadows()
 	end
 end
 
--- Boss shadows
-function mod:BossShadows()
-	for i = 1, 5 do
-		local unitbutton = _G["ElvUF_Boss"..i]
-		if unitbutton then
-			unitbutton:CreateSoftShadow()
-			unitbutton.Buffs.PostUpdateIcon = mod.PostUpdateAura
-			unitbutton.Debuffs.PostUpdateIcon = mod.PostUpdateAura
-		end
-	end
-end
-
 -- Arena shadows
 function mod:ArenaShadows()
 	for i = 1, 5 do
@@ -221,7 +209,6 @@ function mod:Initialize()
 		self:PartyShadows()
 		self:RaidShadows()
 		self:Raid40Shadows()
-		self:BossShadows()
 		self:ArenaShadows()
 		self:TankShadows()
 		self:TankTargetShadows()

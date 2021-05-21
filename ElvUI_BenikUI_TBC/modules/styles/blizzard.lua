@@ -46,7 +46,7 @@ local function LoadSkin()
 
 	if db.friends then
 		_G.AddFriendFrame:BuiStyle("Outside")
-		_G.FriendsFrame:BuiStyle("Outside")
+		_G.FriendsFrame.backdrop:BuiStyle("Outside")
 		_G.FriendsFriendsFrame.backdrop:BuiStyle("Outside")
 	end
 
@@ -63,37 +63,13 @@ local function LoadSkin()
 		_G.HelpFrame.backdrop:BuiStyle("Outside")
 	end
 
-	if db.lfg then
-		_G.LFGInvitePopup.backdrop:BuiStyle("Outside")
-		_G.LFGDungeonReadyDialog.backdrop:BuiStyle("Outside")
-		_G.LFGDungeonReadyStatus.backdrop:BuiStyle("Outside")
-		_G.LFGListApplicationDialog.backdrop:BuiStyle("Outside")
-		_G.LFGListInviteDialog.backdrop:BuiStyle("Outside")
-		_G.PVEFrame:BuiStyle("Outside")
-		_G.RaidBrowserFrame.backdrop:BuiStyle("Outside")
-
-		local function forceTabFont(button)
-			if button.isSkinned then
-				return
-			end
-			local text = button:GetFontString()
-			if text then
-				text:FontTemplate(nil, 11)
-			end
-			button.isSkinned = true
-		end
-		forceTabFont(_G.LFGListFrame.ApplicationViewer.NameColumnHeader)
-		forceTabFont(_G.LFGListFrame.ApplicationViewer.RoleColumnHeader)
-		forceTabFont(_G.LFGListFrame.ApplicationViewer.ItemLevelColumnHeader)
-	end
-
 	if db.loot then
 		_G.LootFrame:BuiStyle("Outside")
 		_G.MasterLooterFrame:BuiStyle("Outside")
 	end
 
 	if db.mail then
-		_G.MailFrame:BuiStyle("Outside")
+		_G.MailFrame.backdrop:BuiStyle("Outside")
 		_G.OpenMailFrame:BuiStyle("Outside")
 	end
 
@@ -158,7 +134,8 @@ local function LoadSkin()
 	end
 
 	if db.quest then
-		_G.QuestFrame:BuiStyle("Outside")
+		_G.QuestFrame.backdrop:BuiStyle("Outside")
+		_G.QuestLogFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.stable then
@@ -174,7 +151,7 @@ local function LoadSkin()
 	end
 
 	if db.taxi then
-		_G.TaxiFrame:BuiStyle("Outside")
+		_G.TaxiFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.trade then

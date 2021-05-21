@@ -72,21 +72,11 @@ P['benikui'] = {
 	},
 
 	['misc'] = {
-		['ilevel'] = {
-			['enable'] = true,
-			['font'] = 'Bui Prototype',
-			['fontsize'] = 9,
-			['fontflags'] = 'OUTLINE',
-			['colorStyle'] = 'RARITY',
-			['color'] = {r = 1, g = 1, b = 0},
-			['position'] = 'INSIDE',
-		},
 		['flightMode'] = {
 			['enable'] = true,
 			['logo'] = 'WOW',
 		},
 		['afkMode'] = true,
-		['alternativePower'] = true,
 	},
 
 	['datatexts'] = {
@@ -108,7 +98,6 @@ P['benikui'] = {
 			['enable'] = true,
 			['chooseAb'] = 'BAR2',
 		},
-		['requestStop'] = true,
 		['style'] = {
 			['bar1'] = true,
 			['bar2'] = true,
@@ -281,28 +270,6 @@ P['benikuiDatabars'] = {
 	},
 }
 
--- Widgetbars
-P['benikuiWidgetbars'] = {
-	['mawBar'] = {
-		['enable'] = true,
-		['width'] = 222,
-		['height'] = 5,
-		['textYoffset'] = 13,
-		['barColor'] = {r = 0.192, g = 0.858, b = 0.858, a = 100},
-		['barAutoColor'] = true,
-		['textColor'] = {r = 1, g = 1, b = 1},
-		['useDTfont'] = true,
-		['font'] = E.db.datatexts.font,
-		['fontsize'] = E.db.datatexts.fontSize,
-		['fontflags'] = E.db.datatexts.fontOutline,
-		['textFormat'] = 'PERCENT',
-	},
-	['halfBar'] = {
-		['altbar'] = true,
-		['mirrorbar'] = true,
-	},
-}
-
 -- Dashboards
 P['dashboards'] = {
 	['system'] = {
@@ -323,20 +290,6 @@ P['dashboards'] = {
 		['latency'] = 2,
 	},
 
-	['tokens'] = {
-		['enableTokens'] = true,
-		['combat'] = true,
-		['mouseover'] = false,
-		['tooltip'] = true,
-		['width'] = 150,
-		['style'] = true,
-		['transparency'] = true,
-		['backdrop'] = true,
-		['zeroamount'] = false,
-		['weekly'] = true,
-		['iconPosition'] = 'LEFT'
-	},
-
 	['professions'] = {
 		['enableProfessions'] = true,
 		['combat'] = true,
@@ -347,20 +300,6 @@ P['dashboards'] = {
 		['backdrop'] = true,
 		['capped'] = false,
 		['iconPosition'] = 'RIGHT'
-	},
-
-	['reputations'] = {
-		['enableReputations'] = true,
-		['combat'] = true,
-		['mouseover'] = false,
-		['width'] = 200,
-		['style'] = true,
-		['transparency'] = true,
-		['backdrop'] = true,
-		['barFactionColors'] = true,
-		['textFactionColors'] = true,
-		['tooltip'] = false,
-		['textAlign'] = 'LEFT',
 	},
 
 	['dashfont'] = {

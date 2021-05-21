@@ -85,7 +85,7 @@ function mod:CreatePanel()
 			panel:Height(name.height or 200)
 			panel:SetTemplate('Transparent')
 			panel:Point('CENTER', E.UIParent, 'CENTER', -600, 0)
-			panel:Style('Outside', false, true, true)
+			panel:BuiStyle('Outside', false, true, true)
 			if BUI.ShadowMode then panel:CreateSoftShadow() end
 			panel:SetScript("OnEnter", OnEnter)
 			panel:SetScript("OnLeave", OnLeave)

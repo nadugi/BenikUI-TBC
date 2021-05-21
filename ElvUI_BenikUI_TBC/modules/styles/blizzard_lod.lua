@@ -226,14 +226,11 @@ local function style_Communities()
 	local frame = _G.CommunitiesFrame
 	if frame then
 		frame.backdrop:BuiStyle("Outside")
-		frame.GuildMemberDetailFrame.backdrop:BuiStyle("Outside")
 		frame.NotificationSettingsDialog.backdrop:BuiStyle("Outside")
 	end
-	_G.CommunitiesGuildLogFrame.backdrop:BuiStyle("Outside")
+
 	_G.CommunitiesSettingsDialog.backdrop:BuiStyle("Outside")
 	_G.CommunitiesAvatarPickerDialog.backdrop:BuiStyle("Outside")
-	_G.ClubFinderCommunityAndGuildFinderFrame.RequestToJoinFrame.backdrop:BuiStyle("Outside")
-	_G.ClubFinderGuildFinderFrame.RequestToJoinFrame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_Communities", "BenikUI_Communities", style_Communities)
 
@@ -837,8 +834,7 @@ local function style_TradeSkillUI()
 	end
 
 	local frame = _G.TradeSkillFrame
-	frame:BuiStyle("Outside")
-	frame.DetailsFrame.GuildFrame.backdrop:BuiStyle("Outside")
+	frame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_TradeSkillUI", "BenikUI_TradeSkillUI", style_TradeSkillUI)
 
@@ -850,7 +846,7 @@ local function style_TrainerUI()
 		return
 	end
 
-	_G.ClassTrainerFrame:BuiStyle("Outside")
+	_G.ClassTrainerFrame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_TrainerUI", "BenikUI_TrainerUI", style_TrainerUI)
 
