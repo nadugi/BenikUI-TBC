@@ -107,11 +107,6 @@ local function ConfigureCastbar(unit, unitframe)
 			local unitframe = _G["ElvUF_Arena"..i]
 			ConfigureCastbarShadow(unit, unitframe)
 		end
-	elseif unit == "boss" then
-		for i = 1, 5 do
-			local unitframe = _G["ElvUF_Boss"..i]
-			ConfigureCastbarShadow(unit, unitframe)
-		end
 	end
 end
 
@@ -131,7 +126,6 @@ function mod:UpdateAllCastbars()
 	mod:UpdateSettings("focus")
 	mod:UpdateSettings("pet")
 	mod:UpdateSettings("arena")
-	mod:UpdateSettings("boss")
 end
 
 --Castbar texture
