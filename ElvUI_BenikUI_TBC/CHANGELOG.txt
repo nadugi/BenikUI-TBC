@@ -1,3 +1,12 @@
+v1.02 - May 23, 2021
+Fixed Professions Dashboard font update
+Removed the unused rep file
+Removed Covenant Colors
+Fixed Location Plus tbc reference
+Removed Timer shadows. This will fix the shadow error on bgs
+Fixed dressing room frame style
+Fixed afkMode Time variations
+
 v1.01 - May 22, 2021
 Updated Patrons/Donators list
 remove boss frames - thurin
