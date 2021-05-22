@@ -82,8 +82,6 @@ function mod:StyleColor()
 				r, g, b = BUI:unpackColor(db.customAbStyleColor)
 			elseif db.abStyleColor == 3 then
 				r, g, b = BUI:unpackColor(E.db.general.valuecolor)
-			elseif db.abStyleColor == 5 then
-				r, g, b = BUI:getCovenantColor()
 			else
 				r, g, b = BUI:unpackColor(E.db.general.backdropcolor)
 			end
@@ -100,8 +98,6 @@ function mod:StyleColor()
 			r, g, b = BUI:unpackColor(db.customAbStyleColor)
 		elseif db.abStyleColor == 3 then
 			r, g, b = BUI:unpackColor(E.db.general.valuecolor)
-		elseif db.abStyleColor == 5 then
-			r, g, b = BUI:getCovenantColor()
 		else
 			r, g, b = BUI:unpackColor(E.db.general.backdropcolor)
 		end
