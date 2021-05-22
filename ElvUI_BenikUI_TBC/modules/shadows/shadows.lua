@@ -90,19 +90,6 @@ local function MicroBarShadows()
 	end
 end
 
-local function TimerShadow(bar)
-	bar.backdrop:CreateSoftShadow()
-end
-
-function mod:START_TIMER()
-	for _, b in pairs(TimerTracker.timerList) do
-		if b["bar"] and not b["bar"].hasShadow then
-			TimerShadow(b["bar"])
-			b["bar"].hasShadow = true
-		end
-	end
-end
-
 function mod:ChatBubbles(frame, holder)
 	if E.private.general.chatBubbles == 'backdrop' then
 		if holder.backdrop then
@@ -120,7 +107,6 @@ function mod:Initialize()
 	mirrorTimersShadows()
 
 	MicroBarShadows()
-	mod:RegisterEvent('START_TIMER')
 
 	-- AddonSkins
 	mod:AddonSkins()
