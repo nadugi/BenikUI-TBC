@@ -60,8 +60,6 @@ local function UpdateProfessionOptions()
 			hasSecondary = false
 		end
 
-		
-
 		if (skillName and isAbandonable) or hasSecondary then
 			E.Options.args.benikui.args.dashboards.args.professions.args.chooseProfessions.args[skillName] = {
 				order = optionOrder + 1,
