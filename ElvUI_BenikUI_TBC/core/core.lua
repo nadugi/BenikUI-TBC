@@ -33,7 +33,7 @@ end
 BUI.SLE = BUI:IsAddOnEnabled('ElvUI_SLE')
 BUI.MER = BUI:IsAddOnEnabled('ElvUI_MerathilisUI')
 BUI.PA = BUI:IsAddOnEnabled('ProjectAzilroka')
-BUI.LP = BUI:IsAddOnEnabled('ElvUI_LocPlus')
+BUI.LP = BUI:IsAddOnEnabled('ElvUI_LocPlus-TBC')
 BUI.NB = BUI:IsAddOnEnabled('ElvUI_NutsAndBolts-TBC')
 BUI.AS = BUI:IsAddOnEnabled('AddOnSkins')
 BUI.IF = BUI:IsAddOnEnabled('InFlight_Load')
