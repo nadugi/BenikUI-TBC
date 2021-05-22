@@ -10,13 +10,6 @@ V['benikui'] = {
 
 -- Dashboards
 V['dashboards'] = {
-	['tokens'] = {
-		['chooseTokens'] = {
-			[1560] = true, -- War Resources
-			[1580] = true, -- Seal of Wartorn Fate
-		},
-	},
-	
 	['professions'] = {
 		['chooseProfessions'] = {
 			[5] = true,
@@ -25,12 +18,6 @@ V['dashboards'] = {
 			[8] = true,
 			[9] = true,
 			[10] = true,
-		},
-	},
-
-	['reputations'] = {
-		['chooseReputations'] = {
-
 		},
 	},
 }
