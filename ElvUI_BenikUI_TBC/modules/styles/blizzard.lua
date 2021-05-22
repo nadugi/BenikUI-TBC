@@ -41,7 +41,7 @@ local function LoadSkin()
 	end
 
 	if db.dressingroom then
-		_G.DressUpFrame:BuiStyle("Outside")
+		_G.DressUpFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.friends then
