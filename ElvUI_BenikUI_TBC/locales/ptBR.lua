@@ -61,10 +61,6 @@ L['|cffffff00%s|r profile for this character already exists. Aborting.'] = 'Perf
 
 -- Misc
 L['Shown Logo'] = "Mostrar Logo"
-L['iLevel'] = "iLevel"
-L['Show item level per slot, on the character info frame'] = "Mostrar nivel dos items por slot, na folha de informação do personagem"
-L['Inside the item slot'] = "Dentro do slot do item"
-L['Outside the item slot'] = "Fora do slot do item"
 
 -- Flight mode
 L['Exit FlightMode'] = "Sair do Modo de Voo"
@@ -147,15 +143,12 @@ L['Amount'] = "Quantidade"
 L['Bar Color'] = "Cor da Barra"
 L["Change the Professions Dashboard width."] = "Altera a largura do Painel de Profissões."
 L['Change the System Dashboard width.'] = "Altera a largura do Painel de Sistema."
-L["Change the Tokens Dashboard width."] = "Altera a largura do Painel de Tokens."
 L['Choose font for all dashboards.'] = "Escolha a fonte para todos os painéis."
 L['Click :'] = "Clique :"
 L['Dashboards'] = "Painéis"
 L["Enable the Professions Dashboard."] = "Habilita o Painel de Profissões."
 L['Enable the System Dashboard.'] = "Habilita o Painel de Sistema."
-L['Enable the Tokens Dashboard.'] = "Habilita o Painel de Tokens."
 L['Enable/Disable'] = "Habilita/Desabilita"
-L['Faction Colors'] = true
 L['Fast Volume +/-'] = true
 L["Filter Capped"] = "Filtrar terminadas."
 L['Latency (MS)'] = "Latência (MS)"
@@ -163,26 +156,16 @@ L['MouseWheel :'] = "MouseWheel :"
 L['RightClick :'] = "RightClick :"
 L['Select Professions'] = "Escolha Profissões"
 L['Select System Board'] = "Escolha Painel de Sistema"
-L['Select Tokens'] = "Escolha Tokens"
 L['Set the font size.'] = "Defina o tamanho da fonte."
 L['Shift+MouseWheel :'] = true
 L['Shift+RightClick to remove'] = "Shift+RightClick para remover"
-L['Show the token, even if the amount is 0'] = "Mostrar o token mesmo que a quantidade seja 0"
-L['Show Weekly max'] = "Mostrar Máx Semanal"
-L['Show Weekly max tokens instead of total max'] = "Mostrar Máx Semanal de tokens em vez do Máx Total"
-L['Show zero amount tokens'] = "Mostrar tokens com quantidade zero"
 L['Show/Hide System Dashboard when in combat'] = "Mostra/Esconde o Painel de Sistem em combate"
-L['Show/Hide Tokens Dashboard when in combat'] = "Mostra/Esconde o Painel de Tokens em combate"
 L['Show/Hide Professions Dashboard when in combat'] = true
-L['Show/Hide Reputations Dashboard when in combat'] = true
 L['Text Alignment'] = true
 L['Show/Hide Tooltips'] = "Mostra/Esconde Dica de contexto"
 L['System'] = "Sistema"
-L['Tip: Grayed tokens are not yet discovered'] = "Dica: Tokens a cinzento ainda não foram descobertos"
 L['Tip: Click to free memory'] = "Dica: Clique para libera memória"
 L['Use DataTexts font'] = "Usar fonte dos Textos Informativos"
-L['Use Faction Colors on Bars'] = "Usar cor da Fação nas Barras"
-L['Use Faction Colors on Text'] = "Usar cor da Fação no Texto"
 
 -- Databars Options
 L['Notifiers'] = "Notificadores"

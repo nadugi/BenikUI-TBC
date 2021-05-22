@@ -61,10 +61,6 @@ L['|cffffff00%s|r profile for this character already exists. Aborting.'] = true 
 
 -- Misc
 L['Shown Logo'] = true
-L['iLevel'] = true
-L['Show item level per slot, on the character info frame'] = true
-L['Inside the item slot'] = true
-L['Outside the item slot'] = true
 
 -- Flight mode
 L['Exit FlightMode'] = true
@@ -145,41 +141,31 @@ L["remaining till level"] = true
 -- Dashboards
 L['Amount'] = true
 L['Bar Color'] = true
-L["Change the Professions Dashboard width."] = true
+L['Change the Professions Dashboard width.'] = true
 L['Change the System Dashboard width.'] = true
-L["Change the Tokens Dashboard width."] = true
 L['Choose font for all dashboards.'] = true
 L['Click :'] = true
 L['Dashboards'] = true
 L["Enable the Professions Dashboard."] = true
 L['Enable the System Dashboard.'] = true
-L['Enable the Tokens Dashboard.'] = true
 L['Enable/Disable'] = true
-L['Faction Colors'] = true
 L['Fast Volume +/-'] = true
-L["Filter Capped"] = true
+L['Filter Capped'] = true
 L['Latency (MS)'] = true
 L['MouseWheel :'] = true
 L['RightClick :'] = true
 L['Select Professions'] = true
 L['Select System Board'] = true
-L['Select Tokens'] = true
 L['Set the font size.'] = true
 L['Shift+MouseWheel :'] = true
 L['Shift+RightClick to remove'] = true
-L['Show the token, even if the amount is 0'] = true
-L['Show Weekly max'] = true
-L['Show Weekly max tokens instead of total max'] = true
+L['Show/Hide System Dashboard when in combat'] = true
 L['Show/Hide Professions Dashboard when in combat'] = true
-L['Show/Hide Reputations Dashboard when in combat'] = true
 L['Show/Hide Tooltips'] = true
 L['System'] = true
 L['Text Alignment'] = true
-L['Tip: Grayed tokens are not yet discovered'] = true
 L['Tip: Click to free memory'] = true
 L['Use DataTexts font'] = true
-L['Use Faction Colors on Bars'] = true
-L['Use Faction Colors on Text'] = true
 
 -- Databars Options
 L['Notifiers'] = true
