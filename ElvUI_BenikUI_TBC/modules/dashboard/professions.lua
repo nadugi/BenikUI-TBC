@@ -1,6 +1,7 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local mod = BUI:GetModule('Dashboards');
 local DT = E:GetModule('DataTexts');
+local LSM = E.LSM
 
 local getn = getn
 local pairs, ipairs = pairs, ipairs
@@ -88,6 +89,8 @@ function mod:UpdateProfessions()
 						self.ProFrame.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
 					end
 
+					self.ProFrame.Text:FontTemplate(LSM:Fetch('font', E.db.dashboards.dashfont.dbfont), E.db.dashboards.dashfont.dbfontsize, E.db.dashboards.dashfont.dbfontflags)
+
 					if (skillModifier and skillModifier > 0) then
 						self.ProFrame.Text:SetFormattedText('%s: %s |cFF6b8df4+%s|r / %s', skillName, skillRank, skillModifier, skillMaxRank)
 					else
@@ -150,6 +153,7 @@ function mod:UpdateProfessions()
 			frame:Point('TOP', BUI.ProfessionsDB[key - 1], 'BOTTOM', 0, -SPACING -(E.PixelMode and 0 or 2))
 		end
 	end
+	mod:FontStyle(BUI.ProfessionsDB)
 end
 
 function mod:UpdateProfessionSettings()
