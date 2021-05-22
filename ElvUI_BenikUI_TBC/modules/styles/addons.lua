@@ -31,7 +31,6 @@ end
 local function LoadInFlight()
 	local f = CreateFrame("Frame")
 	f:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
-	f:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
 
 	f:SetScript("OnEvent", function(self, event)
 		if event then
