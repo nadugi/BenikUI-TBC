@@ -61,10 +61,6 @@ L['|cffffff00%s|r profile for this character already exists. Aborting.'] = "|cff
 
 -- Misc
 L['Shown Logo'] = "Zeige Logo"
-L['iLevel'] = true --No need to translate
-L['Show item level per slot, on the character info frame'] = "Zeigt das Itemlevel pro Slot, im Spielerfenster"
-L['Inside the item slot'] = "Innerhalb des Ausrüstungsplatz"
-L['Outside the item slot'] = "Ausserhalb des Ausrüstungsplatz"
 
 -- Flight mode
 L['Exit FlightMode'] = "Verlasse den Flugmodus"
@@ -147,15 +143,12 @@ L['Amount'] = true
 L['Bar Color'] = "Leistenfarbe"
 L["Change the Professions Dashboard width."] = "Ändert die Beruf-Dashboard Breite."
 L['Change the System Dashboard width.'] = "Ändert die System-Dashboard Breite."
-L["Change the Tokens Dashboard width."] = "Ändert die Token-Dashboard Breite."
 L['Choose font for all dashboards.'] = "Wähle Schriftart für alle Dashboards."
 L['Click :'] = "Klick :"
 L['Dashboards'] = true --No need to translate
 L["Enable the Professions Dashboard."] = "Aktiviert das Berufe Dashboard."
 L['Enable the System Dashboard.'] = "Aktiviert das System Dashboard."
-L['Enable the Tokens Dashboard.'] = "Aktivert das Abzeichen Dashboard."
 L['Enable/Disable'] = "Aktivieren/Deaktivieren"
-L['Faction Colors'] = true
 L['Fast Volume +/-'] = true
 L["Filter Capped"] = "Filtere am Cap"
 L['Latency (MS)'] = "Latenz (MS)"
@@ -163,26 +156,16 @@ L['MouseWheel :'] = "Mausrad :"
 L['RightClick :'] = "Rechtsklick :"
 L['Select Professions'] = "Berufe auswählen"
 L['Select System Board'] = "Wähle System Board"
-L['Select Tokens'] = "Abzeichen auswählen"
 L['Set the font size.'] = "Schriftgröße auswählen."
 L['Shift+MouseWheel :'] = true
 L['Shift+RightClick to remove'] = "Shift+Rechts click um zu entfernen"
-L['Show the token, even if the amount is 0'] = "Abzeichen anzeigen, auch wenn die Anzahl 0 ist"
-L['Show Weekly max'] = "Zeige wöchentliches maximum"
-L['Show Weekly max tokens instead of total max'] = "Zeige wöchentliches max. Abzeichen anstatt vom totalem max."
-L['Show zero amount tokens'] = "Zeige Abzeichen mit der Anzahl 0"
 L['Show/Hide System Dashboard when in combat'] = "Dashboard im Kampf anzeigen/ausblenden"
-L['Show/Hide Tokens Dashboard when in combat'] = "Abzeichen Dashboard im Kampf anzeigen/ausblenden"
 L['Show/Hide Professions Dashboard when in combat'] = true
-L['Show/Hide Reputations Dashboard when in combat'] = true
 L['Show/Hide Tooltips'] = "Tooltip anzeigen/ausblenden"
 L['System'] = true --No need to translate
 L['Text Alignment'] = true
-L['Tip: Grayed tokens are not yet discovered'] = "Tip: Ausgegraute Abzeichen sind bis jetzt noch nicht entdeckt"
 L['Tip: Click to free memory'] = "Tip: Klicken um den Speicher zu bereinigen"
 L['Use DataTexts font'] = "Benutze Infotext Schriftart"
-L['Use Faction Colors on Bars'] = true
-L['Use Faction Colors on Text'] = true
 
 -- Databars Options
 L['Notifiers'] = "Benachrichtigungen"

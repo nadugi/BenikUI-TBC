@@ -61,10 +61,6 @@ L['|cffffff00%s|r profile for this character already exists. Aborting.'] = "|cff
 
 -- Misc
 L['Shown Logo'] = "Logo affiché"
-L['iLevel'] = true
-L['Show item level per slot, on the character info frame'] = "Affiche le niveau d'objet par emplacement, dans le cadre d'informations de votre personnage"
-L['Inside the item slot'] = "Dans l'emplacement de l'objet"
-L['Outside the item slot'] = "En dehors de l'emplacement de l'objet"
 
 -- Flight mode
 L['Exit FlightMode'] = "Quitter le mode voyage"
@@ -147,15 +143,12 @@ L['Amount'] = "Montant"
 L['Bar Color'] = "Couleur de la barre"
 L["Change the Professions Dashboard width."] = "Modifiez la largeur du tableau de bord des professions."
 L['Change the System Dashboard width.'] = "Modifiez la largeur du tableau de bord système."
-L["Change the Tokens Dashboard width."] = "Modifiez la largeur du tableau de bord des jetons."
 L['Choose font for all dashboards.'] = "Choisissez la police pour tous les tableaux de bord."
 L['Click :'] = "Clic"
 L['Dashboards'] = "tableaux de bord"
 L["Enable the Professions Dashboard."] = "Active le tableau de bord des professions."
 L['Enable the System Dashboard.'] = "Active le tableau de bord système."
-L['Enable the Tokens Dashboard.'] = "Active le tableau de bord des jetons."
 L['Enable/Disable'] = "Active/Désactive"
-L['Faction Colors'] = true
 L['Fast Volume +/-'] = true
 L["Filter Capped"] = "Filtre plafonné"
 L['Latency (MS)'] = "Latence (MS)"
@@ -163,26 +156,16 @@ L['MouseWheel :'] = "Roulette de la souris :"
 L['RightClick :'] = "Clic-droit :"
 L['Select Professions'] = "Sélectionn d'une profession"
 L['Select System Board'] = "Sélection de la carte système"
-L['Select Tokens'] = "Sélection des jetons"
 L['Set the font size.'] = "Définissez la taille de la police."
 L['Shift+MouseWheel :'] = true
 L['Shift+RightClick to remove'] = "Maj + clic droit pour supprimer"
-L['Show the token, even if the amount is 0'] = "Affiche le jeton, même si le montant est de 0"
-L['Show Weekly max'] = "Afficher le max. hebdomadaire"
-L['Show Weekly max tokens instead of total max'] = "Afficher les jetons maximum hebdomadaire au lieu du maximum total"
-L['Show zero amount tokens'] = "Afficher les jetons de montant nul"
 L['Show/Hide System Dashboard when in combat'] = "Affiche/masque le tableau de bord du système en combat"
-L['Show/Hide Tokens Dashboard when in combat'] = "Affiche/masque le tableau de bord des jetons en combat"
 L['Show/Hide Professions Dashboard when in combat'] = true
-L['Show/Hide Reputations Dashboard when in combat'] = true
 L['Show/Hide Tooltips'] = "Affiche/masque les info-bulles"
 L['System'] = "Système"
 L['Text Alignment'] = true
-L['Tip: Grayed tokens are not yet discovered'] = "Astuce: les jetons grisés ne sont pas encore découverts"
 L['Tip: Click to free memory'] = "Astuce: cliquez pour libérer de la mémoire"
 L['Use DataTexts font'] = "Utiliser la police pour les textes de données"
-L['Use Faction Colors on Bars'] = true
-L['Use Faction Colors on Text'] = true
 
 -- Databars Options
 L['Notifiers'] = "Notificateurs"
