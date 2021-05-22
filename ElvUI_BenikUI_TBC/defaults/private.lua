@@ -18,7 +18,7 @@ V['dashboards'] = {
 	},
 	
 	['professions'] = {
-		['choosePofessions'] = {
+		['chooseProfessions'] = {
 			[5] = true,
 			[6] = true,
 			[7] = true,
