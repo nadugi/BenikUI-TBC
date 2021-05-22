@@ -230,8 +230,6 @@ P['benikuiSkins'] = {
 	},
 
 	['variousSkins'] = {
-		['talkingHead'] = true,
-		['objectiveTracker'] = true,
 		['inflight'] = true,
 		['kt'] = true,
 	},
