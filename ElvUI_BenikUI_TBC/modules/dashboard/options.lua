@@ -42,7 +42,7 @@ end
 
 local function UpdateProfessionOptions()
 	local optionOrder = 1
-	E.Options.args.benikui.args.dashboards.args.professions.args.choosePofessions = {
+	E.Options.args.benikui.args.dashboards.args.professions.args.chooseProfessions = {
 		order = 50,
 		type = 'group',
 		guiInline = true,
@@ -60,17 +60,19 @@ local function UpdateProfessionOptions()
 			hasSecondary = false
 		end
 
+		
+
 		if (skillName and isAbandonable) or hasSecondary then
-			E.Options.args.benikui.args.dashboards.args.professions.args.choosePofessions.args[skillName] = {
+			E.Options.args.benikui.args.dashboards.args.professions.args.chooseProfessions.args[skillName] = {
 				order = optionOrder + 1,
 				type = 'toggle',
 				name = skillName,
 				desc = L['Enable/Disable '] .. skillName,
 				get = function(info)
-					return E.private.dashboards.professions.choosePofessions[skillIndex]
+					return E.private.dashboards.professions.chooseProfessions[skillIndex]
 				end,
 				set = function(info, value)
-					E.private.dashboards.professions.choosePofessions[skillIndex] = value;
+					E.private.dashboards.professions.chooseProfessions[skillIndex] = value;
 					BUID:UpdateProfessions();
 					BUID:UpdateProfessionSettings();
 				end,
