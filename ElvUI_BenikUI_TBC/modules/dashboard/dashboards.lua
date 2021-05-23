@@ -125,6 +125,9 @@ function mod:CreateDashboard(name, barHolder, option, hasIcon)
 	bar:EnableMouse(true)
 
 	bar.dummy = CreateFrame('Frame', nil, bar)
+	bar.dummy:SetTemplate('Transparent', nil, true, true)
+	bar.dummy:SetBackdropBorderColor(0, 0, 0, 0)
+	bar.dummy:SetBackdropColor(1, 1, 1, .2)
 	bar.dummy:Point('BOTTOMLEFT', bar, 'BOTTOMLEFT', 2, (E.PixelMode and 2 or 0))
 
 	if hasIcon then
@@ -133,12 +136,7 @@ function mod:CreateDashboard(name, barHolder, option, hasIcon)
 		bar.dummy:Point('BOTTOMRIGHT', bar, 'BOTTOMRIGHT', (E.PixelMode and -2 or -4), 0)
 	end
 
-	bar.dummy:Height(E.PixelMode and 3 or 5)
-
-	bar.dummy.dummyStatus = bar.dummy:CreateTexture(nil, 'OVERLAY')
-	bar.dummy.dummyStatus:SetInside()
-	bar.dummy.dummyStatus:SetTexture(E['media'].BuiFlat)
-	bar.dummy.dummyStatus:SetVertexColor(1, 1, 1, .2)
+	bar.dummy:Height(E.PixelMode and 1 or 3)
 
 	bar.Status = CreateFrame('StatusBar', nil, bar.dummy)
 	bar.Status:SetStatusBarTexture(E.Media.Textures.White8x8)
