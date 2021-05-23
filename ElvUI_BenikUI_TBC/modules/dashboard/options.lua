@@ -11,7 +11,7 @@ local CALENDAR_TYPE_DUNGEON, CALENDAR_TYPE_RAID, PLAYER_V_PLAYER, SECONDARY_SKIL
 
 -- GLOBALS: AceGUIWidgetLSMlists, hooksecurefunc
 
-local boards = {"FPS", "MS", "Durability", "Bags", "Volume"}
+local boards = {L["FPS"], L["MS"], L["Durability"], L["Bags"], L["Volume"]}
 
 local function UpdateSystemOptions()
 	for _, boardname in pairs(boards) do
