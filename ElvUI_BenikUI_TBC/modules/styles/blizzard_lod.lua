@@ -838,6 +838,19 @@ local function style_TradeSkillUI()
 end
 S:AddCallbackForAddon("Blizzard_TradeSkillUI", "BenikUI_TradeSkillUI", style_TradeSkillUI)
 
+-- CraftFrame
+local function style_CraftUI()
+	if E.private.skins.blizzard.craft ~= true or E.private.skins.blizzard.enable ~= true or
+		E.db.benikui.general.benikuiStyle ~= true
+	then
+		return
+	end
+
+	local frame = _G.CraftFrame
+	frame.backdrop:BuiStyle("Outside")
+end
+S:AddCallbackForAddon("Blizzard_CraftUI", "BenikUI_CraftUI", style_CraftUI)
+
 -- TrainerUI
 local function style_TrainerUI()
 	if E.private.skins.blizzard.trainer ~= true or E.private.skins.blizzard.enable ~= true or
