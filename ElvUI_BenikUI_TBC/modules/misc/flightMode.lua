@@ -224,7 +224,6 @@ function mod:SetFlightMode(status)
 		if _G.ZoneAbilityFrame and _G.ZoneAbilityFrame:GetParent() then
 			_G.ZoneAbilityFrame:GetParent():Hide()
 		end
-		C_TimerAfter(0.05, function() _G.MainMenuBarVehicleLeaveButton:Hide() end)
 
 		self.FlightMode.bottom.map:EnableMouse(true)
 		self.FlightMode.top.menuButton:EnableMouse(true)
@@ -330,7 +329,6 @@ function mod:SetFlightMode(status)
 		self:SkinInFlight()
 	elseif(self.inFlightMode) then
 		self.inFlightMode = false
-		_G.MainMenuBarVehicleLeaveButton:SetParent(_G.UIParent)
 		mod:SetFrameParent()
 
 		E.UIParent:Show()
@@ -344,7 +342,6 @@ function mod:SetFlightMode(status)
 		if _G.ZoneAbilityFrame and _G.ZoneAbilityFrame:GetParent() then
 			_G.ZoneAbilityFrame:GetParent():Show()
 		end
-		_G.MainMenuBarVehicleLeaveButton:SetScript('OnShow', nil)
 		self.FlightMode:Hide()
 
 		-- Enable Blizz location messsages.
