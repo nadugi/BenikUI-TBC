@@ -18,9 +18,8 @@ local C_Map_GetBestMapForUnit = C_Map.GetBestMapForUnit
 local C_Map_GetPlayerMapPosition = C_Map.GetPlayerMapPosition
 local GetScreenWidth = GetScreenWidth
 local InCombatLockdown = InCombatLockdown
-local TaxiRequestEarlyLanding = TaxiRequestEarlyLanding
 local UIFrameFadeIn, UIFrameFadeOut, PlaySound = UIFrameFadeIn, UIFrameFadeOut, PlaySound
-local TAXI_CANCEL_DESCRIPTION, UNKNOWN = TAXI_CANCEL_DESCRIPTION, UNKNOWN
+local UNKNOWN = UNKNOWN
 
 -- GLOBALS: UIParent, FlightModeLocation, selectioncolor, LeftChatPanel, ElvUI_ContainerFrame
 -- GLOBALS: FlightModeMenuBtn, CreateAnimationGroup, LeftChatMover, BuiDummyChat, Minimap, AddOnSkins
@@ -357,10 +356,6 @@ function mod:SetFlightMode(status)
 		self:CancelAllTimers()
 
 		self.FlightMode.bottom.timeFlying.txt:SetText("00:00")
-		self.FlightMode.message:Hide()
-		self.FlightMode.message:SetAlpha(1)
-		self.FlightMode.message:Width(10)
-		self.FlightMode.message.text:SetAlpha(0)
 
 		-- Revert Bags
 		if ElvUI_ContainerFrame then
@@ -678,25 +673,6 @@ function mod:Initialize()
 	self.FlightMode.bottom.benikui:Point("TOP", self.FlightMode.bottom.logo, "BOTTOM", 0, 12)
 	self.FlightMode.bottom.benikui:SetTextColor(1, 1, 1)
 	self.FlightMode.bottom.benikui:Hide()
-
-	-- Message frame. Shows when request stop is pressed
-	self.FlightMode.message = CreateFrame("Frame", nil, self.FlightMode, 'BackdropTemplate')
-	self.FlightMode.message:SetFrameLevel(0)
-	self.FlightMode.message:SetTemplate("Transparent")
-	self.FlightMode.message:CreateWideShadow()
-	self.FlightMode.message:Point("BOTTOM", self.FlightMode.bottom.logo, "TOP", 0, (E.PixelMode and 8 or 10))
-	self.FlightMode.message:Size(10, 30)
-	self.FlightMode.message:Hide()
-	-- Create animation
-	self.FlightMode.message.anim = CreateAnimationGroup(self.FlightMode.message)
-	self.FlightMode.message.anim.sizing = self.FlightMode.message.anim:CreateAnimation("SetWidth")
-
-	self.FlightMode.message.text = self.FlightMode.message:CreateFontString(nil, 'OVERLAY')
-	self.FlightMode.message.text:FontTemplate(nil, 14)
-	self.FlightMode.message.text:SetFormattedText("%s", TAXI_CANCEL_DESCRIPTION)
-	self.FlightMode.message.text:Point("CENTER")
-	self.FlightMode.message.text:SetTextColor(1, 1, 0, .7)
-	self.FlightMode.message.text:SetAlpha(0)
 
 	-- Toggle Location button
 	self.FlightMode.bottom.info = CreateFrame('Button', nil, self.FlightMode.bottom)
