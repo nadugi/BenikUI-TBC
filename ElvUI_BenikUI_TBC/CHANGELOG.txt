@@ -1,3 +1,8 @@
+v1.04 - May 30, 2021
+Updated Patrons, Coders and Nitro boosters
+Removed all Request stop instances
+Updated koKR.lua Localization, adding sentences, commenting on missing sentences. Credit: nadugi
+
 v1.03 - May 26, 2021
 Set min ElvUI version to 2.07
 Removed some broken backdrops
