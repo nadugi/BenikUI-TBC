@@ -63,6 +63,10 @@ local function LoadSkin()
 		_G.HelpFrame.backdrop:BuiStyle("Outside")
 	end
 
+	if db.lfg then
+		_G.LFGParentFrame.backdrop:BuiStyle("Outside")
+	end
+
 	if db.loot then
 		_G.LootFrame:BuiStyle("Outside")
 		_G.MasterLooterFrame:BuiStyle("Outside")

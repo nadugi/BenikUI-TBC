@@ -6,8 +6,10 @@ if E.private.actionbar.enable ~= true then return; end
 
 local _G = _G
 local pairs = pairs
+local GetNumShapeshiftForms = GetNumShapeshiftForms
 local C_TimerAfter = C_Timer.After
 local MAX_TOTEMS = MAX_TOTEMS
+local MAX_STANCES = GetNumShapeshiftForms()
 
 -- GLOBALS: NUM_PET_ACTION_SLOTS
 -- GLOBALS: ElvUI_BarPet, ElvUI_StanceBar
@@ -123,6 +125,17 @@ function mod:PetShadows()
 	end
 end
 
+function mod:StancebarShadows()
+	for i = 1, MAX_STANCES do
+		local button = _G['ElvUI_StanceBarButton'..i]
+		if BUI.ShadowMode then
+			if button.backdrop and not button.backdrop.shadow then
+				button:CreateSoftShadow()
+			end
+		end
+	end
+end
+
 function mod:TotemShadows()
 	if not BUI.ShadowMode then return end
 
@@ -158,6 +171,7 @@ function mod:Initialize()
 	C_TimerAfter(2, mod.LoadToggleButtons)
 	C_TimerAfter(2, mod.ToggleStyle)
 	C_TimerAfter(2, mod.TotemShadows)
+	C_TimerAfter(2, mod.StancebarShadows)
 	VehicleExit()
 
 	hooksecurefunc(BUI, "SetupColorThemes", mod.StyleColor)

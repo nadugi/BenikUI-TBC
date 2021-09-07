@@ -1,3 +1,11 @@
+v1.05 - Sep 7, 2021
+Update donators list with David <3
+Attempt to prevent a strange Portrait error
+toc client update
+Styled the LFG frame
+Add shadow to StanceBar. Credit BearLag
+Forgot Esa. Soz <3
+
 v1.04 - May 30, 2021
 Updated Patrons, Coders and Nitro boosters
 Removed all Request stop instances
