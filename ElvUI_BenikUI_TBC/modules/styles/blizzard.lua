@@ -136,7 +136,7 @@ local function LoadSkin()
 	end
 
 	if db.pvp then
-		_G.PVPReadyDialog.backdrop:BuiStyle("Outside")
+		_G.PVPReadyDialog:BuiStyle("Outside")
 	end
 
 	if db.quest then
