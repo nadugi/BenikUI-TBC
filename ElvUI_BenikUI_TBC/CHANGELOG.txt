@@ -1,3 +1,8 @@
+v1.06 - Nov 2, 2021
+Fixed Unitframes errors
+Fixed a backdrop error
+Prevent Static popup error
+
 v1.05 - Sep 7, 2021
 Update donators list with David <3
 Attempt to prevent a strange Portrait error

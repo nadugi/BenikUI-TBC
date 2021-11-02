@@ -121,7 +121,9 @@ local function LoadSkin()
 
 		for i = 1, MAX_STATIC_POPUPS do
 			local frame = _G['ElvUI_StaticPopup'..i]
-			frame:BuiStyle("Outside")
+			if frame then
+				frame:BuiStyle("Outside")
+			end
 		end
 	end
 
@@ -134,7 +136,7 @@ local function LoadSkin()
 	end
 
 	if db.pvp then
-		_G.PVPReadyDialog.backdrop:BuiStyle("Outside")
+		_G.PVPReadyDialog:BuiStyle("Outside")
 	end
 
 	if db.quest then
