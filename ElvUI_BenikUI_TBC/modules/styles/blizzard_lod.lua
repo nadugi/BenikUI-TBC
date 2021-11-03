@@ -225,7 +225,7 @@ local function style_Communities()
 
 	local frame = _G.CommunitiesFrame
 	if frame then
-		frame.backdrop:BuiStyle("Outside")
+		frame:BuiStyle("Outside")
 		frame.NotificationSettingsDialog.backdrop:BuiStyle("Outside")
 	end
 
