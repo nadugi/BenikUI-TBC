@@ -73,49 +73,49 @@ function mod:UpdateProfessions()
 						holder:Point('TOPLEFT', ProfessionsMover, 'TOPLEFT')
 					end
 
-					self.ProFrame = self:CreateDashboard(nil, holder, 'professions', false)
+					local bar = self:CreateDashboard(holder, 'professions', false)
 
 					if (skillModifier and skillModifier > 0) then
-						self.ProFrame.Status:SetMinMaxValues(1, skillMaxRank + skillModifier)
-						self.ProFrame.Status:SetValue(skillRank + skillModifier)
+						bar.Status:SetMinMaxValues(1, skillMaxRank + skillModifier)
+						bar.Status:SetValue(skillRank + skillModifier)
 					else
-						self.ProFrame.Status:SetMinMaxValues(1, skillMaxRank)
-						self.ProFrame.Status:SetValue(skillRank)
+						bar.Status:SetMinMaxValues(1, skillMaxRank)
+						bar.Status:SetValue(skillRank)
 					end
 
 					if E.db.dashboards.barColor == 1 then
-						self.ProFrame.Status:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
+						bar.Status:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
 					else
-						self.ProFrame.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
+						bar.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
 					end
 
-					self.ProFrame.Text:FontTemplate(LSM:Fetch('font', E.db.dashboards.dashfont.dbfont), E.db.dashboards.dashfont.dbfontsize, E.db.dashboards.dashfont.dbfontflags)
+					bar.Text:FontTemplate(LSM:Fetch('font', E.db.dashboards.dashfont.dbfont), E.db.dashboards.dashfont.dbfontsize, E.db.dashboards.dashfont.dbfontflags)
 
 					if (skillModifier and skillModifier > 0) then
-						self.ProFrame.Text:SetFormattedText('%s: %s |cFF6b8df4+%s|r / %s', skillName, skillRank, skillModifier, skillMaxRank)
+						bar.Text:SetFormattedText('%s: %s |cFF6b8df4+%s|r / %s', skillName, skillRank, skillModifier, skillMaxRank)
 					else
-						self.ProFrame.Text:SetFormattedText('%s: %s / %s', skillName, skillRank, skillMaxRank)
+						bar.Text:SetFormattedText('%s: %s / %s', skillName, skillRank, skillMaxRank)
 					end
 
 					if E.db.dashboards.textColor == 1 then
-						self.ProFrame.Text:SetTextColor(classColor.r, classColor.g, classColor.b)
+						bar.Text:SetTextColor(classColor.r, classColor.g, classColor.b)
 					else
-						self.ProFrame.Text:SetTextColor(BUI:unpackColor(E.db.dashboards.customTextColor))
+						bar.Text:SetTextColor(BUI:unpackColor(E.db.dashboards.customTextColor))
 					end
 
-					self.ProFrame:SetScript('OnEnter', function(self)
+					bar:SetScript('OnEnter', function(self)
 						if db.mouseover then
 							E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
 						end
 					end)
 
-					self.ProFrame:SetScript('OnLeave', function(self)
+					bar:SetScript('OnLeave', function(self)
 						if db.mouseover then
 							E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
 						end
 					end)
 
-					self.ProFrame:SetScript('OnClick', function(self)
+					bar:SetScript('OnClick', function(self)
 						--[[if skillLine == 186 then
 							CastSpellByID(2656) -- mining skills
 						elseif skillLine == 182 then
@@ -129,9 +129,9 @@ function mod:UpdateProfessions()
 						end]]
 					end)
 
-					self.ProFrame.skillName = skillName
+					bar.skillName = skillName
 
-					tinsert(BUI.ProfessionsDB, self.ProFrame)
+					tinsert(BUI.ProfessionsDB, bar)
 				end
 			end
 		end

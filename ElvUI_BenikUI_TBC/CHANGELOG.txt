@@ -1,3 +1,9 @@
+v1.08 - Nov 7, 2021
+Ported Reputations Dashboard from retail
+Popup Style needs a delay. This should fix it
+Fix Ace3 Tooltip Style
+Fix broken options
+
 v1.07 - Nov 4, 2021
 Fixed Unitframe Buff icons
 Prevent a Guild error

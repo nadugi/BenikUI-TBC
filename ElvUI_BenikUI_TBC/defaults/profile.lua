@@ -300,6 +300,20 @@ P['dashboards'] = {
 		['iconPosition'] = 'RIGHT'
 	},
 
+	['reputations'] = {
+		['enableReputations'] = true,
+		['combat'] = true,
+		['mouseover'] = false,
+		['width'] = 200,
+		['style'] = true,
+		['transparency'] = true,
+		['backdrop'] = true,
+		['barFactionColors'] = true,
+		['textFactionColors'] = true,
+		['tooltip'] = false,
+		['textAlign'] = 'LEFT',
+	},
+
 	['dashfont'] = {
 		['useDTfont'] = true,
 		['dbfont'] = E.db.datatexts.font,
