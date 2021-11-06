@@ -4,6 +4,7 @@ local S = E:GetModule('Skins')
 
 local _G = _G
 local pairs = pairs
+local C_TimerAfter = C_Timer.After
 
 local MAX_STATIC_POPUPS = 4
 
@@ -119,12 +120,15 @@ local function LoadSkin()
 			menuBackdrop:BuiStyle("Outside")
 		end)
 
-		for i = 1, MAX_STATIC_POPUPS do
-			local frame = _G['ElvUI_StaticPopup'..i]
-			if frame then
-				frame:BuiStyle("Outside")
+		local function StylePopups()
+			for i = 1, MAX_STATIC_POPUPS do
+				local frame = _G['ElvUI_StaticPopup'..i]
+				if frame and not frame.style then
+					frame:BuiStyle("Outside")
+				end
 			end
 		end
+		C_TimerAfter(1, StylePopups)
 	end
 
 	if db.nonraid then
