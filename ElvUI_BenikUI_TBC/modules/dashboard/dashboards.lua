@@ -15,6 +15,7 @@ local classColor = E.myclass == 'PRIEST' and E.PriestColors or (CUSTOM_CLASS_COL
 -- Dashboards bar frame tables
 BUI.SystemDB = {}
 BUI.ProfessionsDB = {}
+BUI.FactionsDB = {}
 BUI.SecondarySkill = SECONDARY_SKILLS:gsub(":", '')
 
 function mod:EnableDisableCombat(holder, option)
@@ -42,10 +43,19 @@ function mod:ToggleTransparency(holder, option)
 	local db = E.db.dashboards[option]
 	if not db.backdrop then
 		holder.backdrop:SetTemplate("NoBackdrop")
+		if holder.backdrop.shadow then
+			holder.backdrop.shadow:Hide()
+		end
 	elseif db.transparency then
 		holder.backdrop:SetTemplate("Transparent")
+		if holder.backdrop.shadow then
+			holder.backdrop.shadow:Show()
+		end
 	else
 		holder.backdrop:SetTemplate("Default", true)
+		if holder.backdrop.shadow then
+			holder.backdrop.shadow:Show()
+		end
 	end
 end
 
@@ -117,7 +127,7 @@ function mod:CreateDashboardHolder(holderName, option)
 	return holder
 end
 
-function mod:CreateDashboard(name, barHolder, option, hasIcon)
+function mod:CreateDashboard(barHolder, option, hasIcon)
 	local bar = CreateFrame('Button', nil, barHolder)
 	bar:Height(DASH_HEIGHT)
 	bar:Width(E.db.dashboards[option].width or 150)
@@ -177,6 +187,7 @@ end
 function mod:Initialize()
 	mod:LoadSystem()
 	mod:LoadProfessions()
+	mod:LoadReputations()
 end
 
 BUI:RegisterModule(mod:GetName())
