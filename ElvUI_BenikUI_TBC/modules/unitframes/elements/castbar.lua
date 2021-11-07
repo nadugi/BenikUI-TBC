@@ -135,23 +135,6 @@ function mod:PostCast(unit, unitframe)
 	if not self.isTransparent then
 		self:SetStatusBarTexture(castTexture)
 	end
-
-	if not E.db.benikui.unitframes.castbarColor.enable then return; end
-	local color = E.db.benikui.unitframes.castbarColor.castbarBackdropColor
-	local r, g, b, a = color.r, color.g, color.b, color.a
-
-	if self.bg and self.bg:IsShown() then
-		self.bg:SetColorTexture(r, g, b)
-	else
-		if self.backdrop then
-			if self.backdrop.backdropTexture then
-				self.backdrop.backdropTexture:SetVertexColor(r, g, b)
-				self.backdrop.backdropTexture:SetAlpha(a)
-			end
-			r, g, b = self.backdrop:GetBackdropColor()
-			self.backdrop:SetBackdropColor(r, g, b, a)
-		end
-	end
 end
 
 function mod:PostCastInterruptible(unit, unitframe)
@@ -161,23 +144,6 @@ function mod:PostCastInterruptible(unit, unitframe)
 
 	if not self.isTransparent then
 		self:SetStatusBarTexture(castTexture)
-	end
-
-	if not E.db.benikui.unitframes.castbarColor.enable then return; end
-	local color = E.db.benikui.unitframes.castbarColor.castbarBackdropColor
-	local r, g, b, a = color.r, color.g, color.b, color.a
-
-	if self.bg and self.bg:IsShown() then
-		self.bg:SetColorTexture(r, g, b)
-	else
-		if self.backdrop then
-			if self.backdrop.backdropTexture then
-				self.backdrop.backdropTexture:SetVertexColor(r, g, b)
-				self.backdrop.backdropTexture:SetAlpha(a)
-			end
-			r, g, b = self.backdrop:GetBackdropColor()
-			self.backdrop:SetBackdropColor(r, g, b, a)
-		end
 	end
 end
 
