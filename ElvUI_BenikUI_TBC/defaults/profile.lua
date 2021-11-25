@@ -185,10 +185,6 @@ P['benikui'] = {
 			['power'] = E.db.unitframe.statusbar,
 			['castbar'] = 'BuiFlat',
 		},
-		['castbarColor'] = {
-			['enable'] = true,
-			['castbarBackdropColor'] = {r = 0.054, g = 0.054, b = 0.054, a = 0.75},
-		},
 		['misc'] = {
 			['svui'] = true,
 			['portraitTransparency'] = 0.70,
