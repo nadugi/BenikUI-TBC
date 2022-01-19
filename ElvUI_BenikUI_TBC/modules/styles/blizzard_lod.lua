@@ -496,12 +496,6 @@ local function style_GuildBankUI()
 	end
 
 	_G.GuildBankFrame:BuiStyle("Outside")
-	for i = 1, 8 do
-		local button = _G["GuildBankTab" .. i .. "Button"]
-		local texture = _G["GuildBankTab" .. i .. "ButtonIconTexture"]
-		button:BuiStyle("Inside")
-		texture:SetTexCoord(unpack(BUI.TexCoords))
-	end
 end
 S:AddCallbackForAddon("Blizzard_GuildBankUI", "BenikUI_GuildBankUI", style_GuildBankUI)
 
@@ -613,6 +607,18 @@ local function style_ItemUpgradeUI()
 	_G.ItemUpgradeFrame:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_ItemUpgradeUI", "BenikUI_ItemUpgradeUI", style_ItemUpgradeUI)
+
+-- LookingForGroupUI
+local function style_LookingForGroupUI()
+	if E.private.skins.blizzard.lfg ~= true or E.private.skins.blizzard.enable ~= true or
+		E.db.benikui.general.benikuiStyle ~= true
+	then
+		return
+	end
+
+	_G.LFGParentFrame.backdrop:BuiStyle("Outside")
+end
+S:AddCallbackForAddon("Blizzard_LookingForGroupUI", "BenikUI_LookingForGroupUI", style_LookingForGroupUI)
 
 -- LookingForGuildUI
 local function style_LookingForGuildUI()
