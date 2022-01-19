@@ -496,12 +496,6 @@ local function style_GuildBankUI()
 	end
 
 	_G.GuildBankFrame:BuiStyle("Outside")
-	for i = 1, 8 do
-		local button = _G["GuildBankTab" .. i .. "Button"]
-		local texture = _G["GuildBankTab" .. i .. "ButtonIconTexture"]
-		button:BuiStyle("Inside")
-		texture:SetTexCoord(unpack(BUI.TexCoords))
-	end
 end
 S:AddCallbackForAddon("Blizzard_GuildBankUI", "BenikUI_GuildBankUI", style_GuildBankUI)
 
