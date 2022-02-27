@@ -128,7 +128,7 @@ local function LoadSkin()
 	end
 
 	if db.nonraid then
-		_G.RaidInfoFrame.backdrop:BuiStyle("Outside")
+		_G.RaidInfoFrame:BuiStyle("Outside")
 	end
 
 	if db.petition then
