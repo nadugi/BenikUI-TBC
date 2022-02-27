@@ -495,7 +495,7 @@ local function style_GuildBankUI()
 		return
 	end
 
-	_G.GuildBankFrame:BuiStyle("Outside")
+	_G.GuildBankFrame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_GuildBankUI", "BenikUI_GuildBankUI", style_GuildBankUI)
 
