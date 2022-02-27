@@ -1,3 +1,7 @@
+v1.11 - Feb 27, 2022
+Fixed GuildBank style
+Fixed a style error with RaidInfoFrame
+
 v1.10 - Jan 19, 2022
 Fixed Guild Bank button error
 Fixed LFG Style
