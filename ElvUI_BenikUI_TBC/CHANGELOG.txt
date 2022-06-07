@@ -1,3 +1,6 @@
+v1.13 - Jun 7, 2022
+Undo "Fixed the Volume icon behavior, in the System Dashboard"
+
 v1.12 - Jun 6, 2022
 toc update
 Fixed the Volume icon behavior, in the System Dashboard
