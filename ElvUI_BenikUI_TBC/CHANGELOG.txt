@@ -1,3 +1,11 @@
+v1.13 - Jun 7, 2022
+Undo "Fixed the Volume icon behavior, in the System Dashboard"
+
+v1.12 - Jun 6, 2022
+toc update
+Fixed the Volume icon behavior, in the System Dashboard
+Fixed an Ace Popup style error
+
 v1.11 - Feb 27, 2022
 Fixed GuildBank style
 Fixed a style error with RaidInfoFrame
