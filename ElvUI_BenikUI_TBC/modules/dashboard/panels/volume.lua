@@ -134,7 +134,7 @@ function mod:CreateVolume()
 
 		self:SetValue(volumeValue)
 
-		if (GetCVar('Sound_EnableSFX') == '1') then
+		if (GetCVar('Sound_EnableSFX') == '0') then
 			color = 1
 			iconBG:SetAlpha(1)
 			icon = SOUND_MUTE_ICON
