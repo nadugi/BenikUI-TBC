@@ -658,11 +658,16 @@ function mod:Initialize()
 	self.FlightMode.bottom.wowlogo:SetFrameStrata("MEDIUM")
 	self.FlightMode.bottom.wowlogo:Size(300, 150)
 	self.FlightMode.bottom.wowlogo.tex = self.FlightMode.bottom.wowlogo:CreateTexture(nil, 'OVERLAY')
-	--local currentExpansionLevel = GetClampedCurrentExpansionLevel();
-	--local expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel);
-	--if expansionDisplayInfo then
-	--	self.FlightMode.bottom.wowlogo.tex:SetTexture(expansionDisplayInfo.logo)
-	--end
+	local currentExpansionLevel = GetClampedCurrentExpansionLevel()
+	local expansionDisplayInfo
+	if E.TBC then
+		expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel)
+	else
+		expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel, 2)
+	end
+	if expansionDisplayInfo then
+		self.FlightMode.bottom.wowlogo.tex:SetTexture(expansionDisplayInfo.logo)
+	end
 	self.FlightMode.bottom.wowlogo.tex:SetInside()
 	self.FlightMode.bottom.wowlogo:Hide()
 
