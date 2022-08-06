@@ -189,10 +189,15 @@ local function Initialize()
 	AFK.AFKMode.top.wowlogo:SetSize(300, 150)
 	AFK.AFKMode.top.wowlogo.tex = AFK.AFKMode.top.wowlogo:CreateTexture(nil, 'OVERLAY')
 	local currentExpansionLevel = GetClampedCurrentExpansionLevel();
-	--local expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel);
-	--if expansionDisplayInfo then
-	--	AFK.AFKMode.top.wowlogo.tex:SetTexture(expansionDisplayInfo.logo)
-	--end
+	local expansionDisplayInfo
+	if E.TBC then
+		expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel);
+	else
+		expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel, 2);
+	end
+	if expansionDisplayInfo then
+		AFK.AFKMode.top.wowlogo.tex:SetTexture(expansionDisplayInfo.logo)
+	end
 	AFK.AFKMode.top.wowlogo.tex:SetInside()
 
 	-- Server/Local Time text
