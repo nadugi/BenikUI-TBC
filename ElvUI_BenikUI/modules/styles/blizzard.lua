@@ -38,6 +38,9 @@ local function LoadSkin()
 
 	if db.character then
 		_G.CharacterFrame.backdrop:BuiStyle("Outside")
+		if E.Wrath then
+			_G.PVPFrame.backdrop:BuiStyle("Outside")
+		end
 		hooksecurefunc('ReputationFrame_Update', repUpdate)
 	end
 
