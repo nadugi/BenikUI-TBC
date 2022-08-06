@@ -179,11 +179,11 @@ local function style_Calendar()
 	end
 
 	_G.CalendarFrame.backdrop:BuiStyle("Outside")
-	_G.CalendarViewEventFrame.backdrop:BuiStyle("Outside")
-	_G.CalendarViewHolidayFrame.backdrop:BuiStyle("Outside")
-	_G.CalendarCreateEventFrame.backdrop:BuiStyle("Outside")
+	_G.CalendarViewEventFrame:BuiStyle("Outside")
+	_G.CalendarViewHolidayFrame:BuiStyle("Outside")
+	_G.CalendarCreateEventFrame:BuiStyle("Outside")
 	_G.CalendarContextMenu:BuiStyle("Outside")
-	_G.CalendarViewRaidFrame.backdrop:BuiStyle("Outside")
+	_G.CalendarViewRaidFrame:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_Calendar", "BenikUI_Calendar", style_Calendar)
 
