@@ -8,7 +8,7 @@ local IsAddOnLoaded = IsAddOnLoaded
 local ADDONS = ADDONS
 
 local DecorElvUIAddons = {
-	{'ElvUI_LocPlus-TBC', L['LocationPlus'], 'locplus'},
+	{'ElvUI_LocPlus', L['LocationPlus'], 'locplus'},
 	{'ElvUI_SLE', L['Shadow & Light'], 'sle'},
 	{'ElvUI_Enhanced', L['ElvUI_Enhanced'], 'enh'},
 	{'ElvUI_MerathilisUI', L['MerathilisUI'], 'mer'},
@@ -39,7 +39,7 @@ local SupportedProfiles = {
 	{'BigWigs', 'BigWigs'},
 	{'DBM-Core', 'Deadly Boss Mods'},
 	{'Details', 'Details'},
-	{'ElvUI_LocPlus-TBC', 'Location Plus'},
+	{'ElvUI_LocPlus', 'Location Plus'},
 	{'InFlight_Load', 'InFlight'},
 	{'MikScrollingBattleText', "Mik's Scrolling Battle Text"},
 	{'Pawn', 'Pawn'},
