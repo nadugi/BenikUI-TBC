@@ -3,6 +3,7 @@ local UF = E:GetModule('UnitFrames');
 local BU = BUI:GetModule('Units');
 
 function BU:Create_AuraBarsWithShadow(statusBar)
+	statusBar.auraInfo = {}
 	statusBar:CreateBackdrop(nil, nil, nil, UF.thinBorders, true)
 	statusBar:CreateSoftShadow()
 	statusBar:SetScript('OnMouseDown', OnClick)
