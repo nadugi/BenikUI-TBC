@@ -63,16 +63,11 @@ function BUI:AddOptions()
 end
 
 function BUI:Init()
-	--[[if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-		E:Delay(2, function() E:StaticPopup_Show("BENIKUI_CLASSIC") end)
-		return	
-	end]]
-
-	--[[ElvUI's version check
+	--ElvUI's version check
 	if BUI.Eversion < 1 or (BUI.Eversion < BUI.Erelease) then
 		E:Delay(2, function() E:StaticPopup_Show("BENIKUI_VERSION_MISMATCH") end)
 		return
-	end]]
+	end
 	self.initialized = true
 	self:Initialize()
 	self:InitializeModules()
@@ -80,16 +75,6 @@ function BUI:Init()
 end
 
 E.Libs.EP:HookInitialize(BUI, BUI.Init)
-
--- BenikUI retail on classic
-E.PopupDialogs["BENIKUI_CLASSIC"] = {
-	button1 = CLOSE,
-	OnAccept = E.noop,
-	text = (format(L["|cffff0000BenikUI Error|r\n\nIt seems like BenikUI Retail version is installed on WoW Classic. Please install BenikUI Classic version.\n|cff00c0faTip: Usually happens with Twitch Client|r"])),
-	timeout = 0,
-	whileDead = 1,
-	hideOnEscape = false,
-}
 
 --Version check
 E.PopupDialogs["BENIKUI_VERSION_MISMATCH"] = {
@@ -104,8 +89,8 @@ E.PopupDialogs["BENIKUI_VERSION_MISMATCH"] = {
 		self.editBox.width = self.editBox:GetWidth()
 		self.editBox:Width(280)
 		self.editBox:AddHistoryLine("text")
-		self.editBox.temptxt = "https://www.tukui.org/download.php?ui=elvui"
-		self.editBox:SetText("https://www.tukui.org/download.php?ui=elvui")
+		self.editBox.temptxt = "https://www.tukui.org/classic-wotlk-addons.php?id=2"
+		self.editBox:SetText("https://www.tukui.org/classic-wotlk-addons.php?id=2")
 		self.editBox:HighlightText()
 		self.editBox:SetJustifyH("CENTER")
 	end,
