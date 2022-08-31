@@ -88,10 +88,12 @@ end
 
 -- thanks to Repooc for guidance
 local function CharacterFrameShadows()
+	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.character ~= true then
+		return
+	end
 	local i = 1
 	local tab = _G['CharacterFrameTab'..i]
 	while tab do
-		if not BUI.ShadowMode then return end
 		if not tab then return end
 
 		if tab.backdrop then
@@ -105,6 +107,9 @@ local function CharacterFrameShadows()
 end
 
 local function SpellBookFrameShadows()
+	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.spellbook ~= true then
+		return
+	end
 	for j = 1, MAX_SKILLLINE_TABS do
 		local tab = _G['SpellBookSkillLineTab'..j]
 		tab:CreateSoftShadow()
@@ -120,10 +125,12 @@ local function SpellBookFrameShadows()
 end
 
 local function FriendsFrameShadows()
+	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.friends ~= true then
+		return
+	end
 	local i = 1
 	local tab = _G['FriendsFrameTab'..i]
 	while tab do
-		if not BUI.ShadowMode then return end
 		if not tab then return end
 
 		if tab.backdrop then
