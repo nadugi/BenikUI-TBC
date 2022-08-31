@@ -16,9 +16,6 @@ local function style_AchievementUI()
 	local frame = _G.AchievementFrame
 	if frame.backdrop then
 		frame.backdrop:BuiStyle("Outside")
-		if E.TBC then
-			frame.searchResults.backdrop:BuiStyle("Outside")
-		end
 	end
 end
 S:AddCallbackForAddon("Blizzard_AchievementUI", "BenikUI_AchievementUI", style_AchievementUI)
@@ -629,13 +626,9 @@ local function style_LookingForGroupUI()
 	then
 		return
 	end
-	if E.TBC then
-		_G.LFGParentFrame.backdrop:BuiStyle("Outside")
-	end
-	if E.Wrath then
-		_G.LFGListingFrame.backdrop:BuiStyle("Outside")
-		_G.LFGBrowseFrame.backdrop:BuiStyle("Outside")
-	end
+
+	_G.LFGListingFrame.backdrop:BuiStyle("Outside")
+	_G.LFGBrowseFrame.backdrop:BuiStyle("Outside")
 end
 S:AddCallbackForAddon("Blizzard_LookingForGroupUI", "BenikUI_LookingForGroupUI", style_LookingForGroupUI)
 

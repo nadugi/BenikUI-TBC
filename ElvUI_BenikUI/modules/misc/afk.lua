@@ -160,6 +160,8 @@ local function Initialize()
 	local race = UnitRace('player')
 	local localizedClass = UnitClass('player')
 	local className = E.myclass
+	local currentExpansionLevel = GetClampedCurrentExpansionLevel();
+	local expansionDisplayInfo
 
 	-- Create Top frame
 	AFK.AFKMode.top = CreateFrame('Frame', nil, AFK.AFKMode)
@@ -188,13 +190,9 @@ local function Initialize()
 	AFK.AFKMode.top.wowlogo:SetFrameStrata("MEDIUM")
 	AFK.AFKMode.top.wowlogo:SetSize(300, 150)
 	AFK.AFKMode.top.wowlogo.tex = AFK.AFKMode.top.wowlogo:CreateTexture(nil, 'OVERLAY')
-	local currentExpansionLevel = GetClampedCurrentExpansionLevel();
-	local expansionDisplayInfo
-	if E.TBC then
-		expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel);
-	else
-		expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel, 2);
-	end
+
+	expansionDisplayInfo = GetExpansionDisplayInfo(currentExpansionLevel, 2)
+
 	if expansionDisplayInfo then
 		AFK.AFKMode.top.wowlogo.tex:SetTexture(expansionDisplayInfo.logo)
 	end
