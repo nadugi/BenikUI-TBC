@@ -872,7 +872,9 @@ local function style_CraftUI()
 	end
 
 	local frame = _G.CraftFrame
-	frame.backdrop:BuiStyle("Outside")
+	if frame.backdrop then
+		frame.backdrop:BuiStyle("Outside")
+	end
 end
 S:AddCallbackForAddon("Blizzard_CraftUI", "BenikUI_CraftUI", style_CraftUI)
 
