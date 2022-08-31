@@ -1,3 +1,14 @@
+v1.14 - Aug 31, 2022
+Fixed Loot/Trade chat tab not moving to the left during install
+update Benik plugin names and fix report frame (thurin)
+fix calendar in wrath (thurin)
+style wrath PVP frame (thurin)
+wrath classic logo in afk (thurin)
+add benik style to barber shop (thurin)
+fix logo in flightmode (thurin)
+initial Wrath changes (thurin)
+Fixed Actionbar buttons shadows
+
 v1.13 - Jun 7, 2022
 Undo "Fixed the Volume icon behavior, in the System Dashboard"
 
