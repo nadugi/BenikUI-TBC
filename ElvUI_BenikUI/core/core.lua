@@ -214,4 +214,7 @@ function BUI:Initialize()
 
 	hooksecurefunc(E, "UpdateMedia", BUI.UpdateSoftGlowColor)
 	hooksecurefunc(BUI, "SetupColorThemes", BUI.UpdateStyleColors)
+	if E:IsAddOnEnabled("ElvUI_BenikUI_TBC") then
+		DisableAddOn("ElvUI_BenikUI_TBC")
+	end
 end
