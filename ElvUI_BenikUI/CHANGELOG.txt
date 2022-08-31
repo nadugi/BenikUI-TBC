@@ -1,3 +1,13 @@
+v1.15 - Sep 1st, 2022
+style tabs on Character, Spellbook, Friends (thurin)
+Fixed ElvUI version check
+Disable the old TBC version just in case
+Added Chris S. in the Donators list
+Follow ElvUI gray on "Wrath" in toc
+Removed E.TBC checks
+fix for TSM Crafting frames (thurin)
+follow ElvUI aurabar changes (thurin)
+
 v1.14 - Aug 31, 2022
 Fixed Loot/Trade chat tab not moving to the left during install
 update Benik plugin names and fix report frame (thurin)
