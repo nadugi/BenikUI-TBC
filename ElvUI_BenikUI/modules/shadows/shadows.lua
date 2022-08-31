@@ -65,21 +65,17 @@ function mod:TabShadows(tab)
 end
 hooksecurefunc(S, "HandleTab", mod.TabShadows)
 
--- SpellBook tabs shadow
-local function SpellbookTabShadows()
-	if E.private.skins.blizzard.enable ~= true or BUI.ShadowMode ~= true or E.private.skins.blizzard.spellbook ~= true then
-		return
-	end
+-- ElvUI item buttons
+function mod:ItemButtonShadows(button)
+	if not BUI.ShadowMode then return end
+	if not button then return end
 
-	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs",
-		function()
-			for i = 1, MAX_SKILLLINE_TABS do
-				local tab = _G['SpellBookSkillLineTab'..i]
-				tab.backdrop:CreateSoftShadow()
-			end
-		end)
+	if button.backdrop then
+		button.backdrop:SetTemplate("Transparent")
+		button.backdrop:CreateSoftShadow()
+	end
 end
-S:AddCallback("BenikUI_Spellbook", SpellbookTabShadows)
+hooksecurefunc(S, "HandleItemButton", mod.ItemButtonShadows)
 
 -- MicroBar
 local function MicroBarShadows()
@@ -87,6 +83,56 @@ local function MicroBarShadows()
 		if _G[MICRO_BUTTONS[i]].backdrop then
 			_G[MICRO_BUTTONS[i]].backdrop:CreateSoftShadow()
 		end
+	end
+end
+
+-- thanks to Repooc for guidance
+local function CharacterFrameShadows()
+	local i = 1
+	local tab = _G['CharacterFrameTab'..i]
+	while tab do
+		if not BUI.ShadowMode then return end
+		if not tab then return end
+
+		if tab.backdrop then
+			tab.backdrop:SetTemplate("Transparent")
+			tab.backdrop:CreateSoftShadow()
+		end
+
+		i = i + 1
+		tab = _G['CharacterFrameTab'..i]
+	end
+end
+
+local function SpellBookFrameShadows()
+	for j = 1, MAX_SKILLLINE_TABS do
+		local tab = _G['SpellBookSkillLineTab'..j]
+		tab:CreateSoftShadow()
+	end
+
+	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs",
+			function()
+				for i = 1, MAX_SKILLLINE_TABS do
+					local tab = _G['SpellBookSkillLineTab'..i]
+					tab:CreateSoftShadow()
+				end
+			end)
+end
+
+local function FriendsFrameShadows()
+	local i = 1
+	local tab = _G['FriendsFrameTab'..i]
+	while tab do
+		if not BUI.ShadowMode then return end
+		if not tab then return end
+
+		if tab.backdrop then
+			tab.backdrop:SetTemplate("Transparent")
+			tab.backdrop:CreateSoftShadow()
+		end
+
+		i = i + 1
+		tab = _G['FriendsFrameTab'..i]
 	end
 end
 
@@ -107,6 +153,9 @@ function mod:Initialize()
 	mirrorTimersShadows()
 
 	MicroBarShadows()
+	CharacterFrameShadows()
+	SpellBookFrameShadows()
+	FriendsFrameShadows()
 
 	-- AddonSkins
 	mod:AddonSkins()
