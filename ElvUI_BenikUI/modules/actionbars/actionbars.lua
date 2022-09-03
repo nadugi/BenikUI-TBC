@@ -10,6 +10,8 @@ local GetNumShapeshiftForms = GetNumShapeshiftForms
 local C_TimerAfter = C_Timer.After
 local MAX_TOTEMS = MAX_TOTEMS
 local MAX_STANCES = GetNumShapeshiftForms()
+local Masque = E.Masque
+local MasqueGroup = Masque and Masque:Group('ElvUI', 'ActionBars')
 
 -- GLOBALS: NUM_PET_ACTION_SLOTS
 -- GLOBALS: ElvUI_BarPet, ElvUI_StanceBar
@@ -28,7 +30,7 @@ function mod:StyleBackdrops()
 			end
 
 			-- Button Shadows
-			if BUI.ShadowMode then
+			if BUI.ShadowMode and not Masque then
 				for k = 1, 12 do
 					local buttonBars = {_G["ElvUI_Bar"..i.."Button"..k]}
 					for _, button in pairs(buttonBars) do
@@ -115,7 +117,7 @@ function mod:PetShadows()
 		local petButtons = {_G['PetActionButton'..i]}
 		for _, button in pairs(petButtons) do
 			if button.backdrop then
-				if BUI.ShadowMode then
+				if BUI.ShadowMode and not Masque then
 					if not button.backdrop.shadow then
 						button.backdrop:CreateSoftShadow()
 					end
@@ -128,7 +130,7 @@ end
 function mod:StancebarShadows()
 	for i = 1, MAX_STANCES do
 		local button = _G['ElvUI_StanceBarButton'..i]
-		if BUI.ShadowMode then
+		if BUI.ShadowMode and not Masque then
 			if button.backdrop and not button.backdrop.shadow then
 				button:CreateSoftShadow()
 			end
@@ -137,7 +139,7 @@ function mod:StancebarShadows()
 end
 
 function mod:TotemShadows()
-	if not BUI.ShadowMode then return end
+	if not BUI.ShadowMode or Masque then return end
 
 	for i=1, MAX_TOTEMS do
 		local button = _G["ElvUI_TotemBarTotem"..i];
