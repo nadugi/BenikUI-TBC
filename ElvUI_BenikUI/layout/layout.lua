@@ -3,7 +3,7 @@ local mod = BUI:GetModule('Layout')
 local LO = E:GetModule('Layout')
 local DT = E:GetModule('DataTexts')
 local M = E:GetModule('Minimap')
-local LSM = E.LSM
+local LSM = E.Libs.LSM
 
 local _G = _G
 local unpack = unpack

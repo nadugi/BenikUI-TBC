@@ -1,7 +1,7 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local mod = BUI:GetModule('Dashboards');
 local DT = E:GetModule('DataTexts');
-local LSM = E.LSM
+local LSM = E.Libs.LSM
 
 local getn = getn
 local pairs, ipairs = pairs, ipairs

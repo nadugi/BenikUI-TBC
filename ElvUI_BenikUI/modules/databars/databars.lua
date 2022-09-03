@@ -1,7 +1,7 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local mod = BUI:GetModule('Databars')
 local S = E:GetModule('Skins')
-local LSM = E.LSM
+local LSM = E.Libs.LSM
 
 local SPACING = (E.PixelMode and 1 or 3)
 

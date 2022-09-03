@@ -1,7 +1,7 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local UF = E:GetModule('UnitFrames');
 local BU = BUI:GetModule('Units');
-local LSM = E.LSM;
+local LSM = E.Libs.LSM
 
 function BU:Configure_Infopanel(frame)
 	if frame.ORIENTATION == "RIGHT" and not (frame.unitframeType == "arena") then
