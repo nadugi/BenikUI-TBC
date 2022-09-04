@@ -74,35 +74,19 @@ end
 
 -- Raid Shadows
 function mod:RaidShadows()
-	local header = _G['ElvUF_Raid']
+	for i = 1, 3 do
+		local header = _G['ElvUF_Raid'..i]
 
-	for i = 1, header:GetNumChildren() do
-		local group = select(i, header:GetChildren())
+		for i = 1, header:GetNumChildren() do
+			local group = select(i, header:GetChildren())
 
-		for j = 1, group:GetNumChildren() do
-			local unitbutton = select(j, group:GetChildren())
-			if unitbutton then
-				unitbutton:CreateSoftShadow()
-				unitbutton.Buffs.PostUpdateIcon = mod.PostUpdateAura
-				unitbutton.Debuffs.PostUpdateIcon = mod.PostUpdateAura
-			end
-		end
-	end
-end
-
--- Raid-40 Shadows
-function mod:Raid40Shadows()
-	local header = _G['ElvUF_Raid40']
-
-	for i = 1, header:GetNumChildren() do
-		local group = select(i, header:GetChildren())
-
-		for j = 1, group:GetNumChildren() do
-			local unitbutton = select(j, group:GetChildren())
-			if unitbutton then
-				unitbutton:CreateSoftShadow()
-				unitbutton.Buffs.PostUpdateIcon = mod.PostUpdateAura
-				unitbutton.Debuffs.PostUpdateIcon = mod.PostUpdateAura
+			for j = 1, group:GetNumChildren() do
+				local unitbutton = select(j, group:GetChildren())
+				if unitbutton then
+					unitbutton:CreateSoftShadow()
+					unitbutton.Buffs.PostUpdateIcon = mod.PostUpdateAura
+					unitbutton.Debuffs.PostUpdateIcon = mod.PostUpdateAura
+				end
 			end
 		end
 	end
@@ -207,7 +191,6 @@ function mod:Setup()
 
 	mod:InitParty()
 	mod:InitRaid()
-	mod:InitRaid40()
 
 	mod:ChangePowerBarTexture()
 	mod:ChangeHealthBarTexture()
@@ -219,11 +202,19 @@ function mod:Setup()
 		mod:UnitShadows()
 		mod:PartyShadows()
 		mod:RaidShadows()
-		mod:Raid40Shadows()
 		mod:ArenaShadows()
 		mod:TankShadows()
 		mod:TankTargetShadows()
 	end
+
+	-- Group Health textures hooks
+	hooksecurefunc(UF, 'Update_PartyFrames', mod.ChangePartyHealthBarTexture)
+	hooksecurefunc(UF, 'Update_RaidFrames', mod.ChangeRaidHealthBarTexture)
+
+	-- Group Power textures hooks
+	hooksecurefunc(UF, 'Update_AllFrames', mod.ChangeUnitPowerBarTexture)
+	hooksecurefunc(UF, 'Update_RaidFrames', mod.ChangeRaidPowerBarTexture)
+	hooksecurefunc(UF, 'Update_PartyFrames', mod.ChangePartyPowerBarTexture)
 end
 
 function mod:Initialize()

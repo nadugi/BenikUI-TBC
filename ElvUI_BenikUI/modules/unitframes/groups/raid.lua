@@ -47,6 +47,3 @@ local function HoverClassColor(self, frame, db)
 
 	frame.isMouseOverHooked = true
 end
-
-hooksecurefunc(UF, 'Update_RaidFrames', HoverClassColor)
-hooksecurefunc(UF, 'Update_Raid40Frames', HoverClassColor)

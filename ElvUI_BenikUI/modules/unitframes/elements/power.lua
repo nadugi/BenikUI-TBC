@@ -40,41 +40,25 @@ function BU:ChangeUnitPowerBarTexture()
 		end
 	end
 end
-hooksecurefunc(UF, "Update_AllFrames", BU.ChangeUnitPowerBarTexture)
 
 -- Raid
 function BU:ChangeRaidPowerBarTexture()
-	local header = _G['ElvUF_Raid']
-	local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.textures.power)
-	for i = 1, header:GetNumChildren() do
-		local group = select(i, header:GetChildren())
+	for i = 1, 3 do
+		local header = _G['ElvUF_Raid'..i]
+		local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.textures.power)
+		for j = 1, header:GetNumChildren() do
+			local group = select(j, header:GetChildren())
 
-		for j = 1, group:GetNumChildren() do
-			local unitbutton = select(j, group:GetChildren())
-			if unitbutton.Power then
-				unitbutton.Power:SetStatusBarTexture(bar)
+			for k = 1, group:GetNumChildren() do
+				local unitbutton = select(k, group:GetChildren())
+				if unitbutton and unitbutton.Power then
+					unitbutton.Power:SetStatusBarTexture(bar)
+				end
 			end
 		end
 	end
 end
-hooksecurefunc(UF, 'Update_RaidFrames', BU.ChangeRaidPowerBarTexture)
 
--- Raid-40
-function BU:ChangeRaid40PowerBarTexture()
-	local header = _G['ElvUF_Raid40']
-	local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.textures.power)
-	for i = 1, header:GetNumChildren() do
-		local group = select(i, header:GetChildren())
-
-		for j = 1, group:GetNumChildren() do
-			local unitbutton = select(j, group:GetChildren())
-			if unitbutton.Power then
-				unitbutton.Power:SetStatusBarTexture(bar)
-			end
-		end
-	end
-end
-hooksecurefunc(UF, 'Update_Raid40Frames', BU.ChangeRaid40PowerBarTexture)
 
 -- Party
 function BU:ChangePartyPowerBarTexture()
@@ -91,12 +75,10 @@ function BU:ChangePartyPowerBarTexture()
 		end
 	end
 end
-hooksecurefunc(UF, 'Update_PartyFrames', BU.ChangePartyPowerBarTexture)
 
 function BU:ChangePowerBarTexture()
 	BU:ChangeUnitPowerBarTexture()
 	BU:ChangeRaidPowerBarTexture()
-	BU:ChangeRaid40PowerBarTexture()
 	BU:ChangePartyPowerBarTexture()
 end
 hooksecurefunc(UF, 'Update_StatusBars', BU.ChangePowerBarTexture)
