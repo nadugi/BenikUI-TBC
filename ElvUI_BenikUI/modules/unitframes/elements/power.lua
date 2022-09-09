@@ -59,7 +59,6 @@ function BU:ChangeRaidPowerBarTexture()
 	end
 end
 
-
 -- Party
 function BU:ChangePartyPowerBarTexture()
 	local header = _G['ElvUF_Party']
@@ -81,4 +80,3 @@ function BU:ChangePowerBarTexture()
 	BU:ChangeRaidPowerBarTexture()
 	BU:ChangePartyPowerBarTexture()
 end
-hooksecurefunc(UF, 'Update_StatusBars', BU.ChangePowerBarTexture)
