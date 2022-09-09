@@ -74,8 +74,8 @@ end
 -- Raid
 function BU:RaidInfoPanelColor()
 	for i = 1, 3 do
-		local header = _G['ElvUF_Raid'..i]
-		local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.infoPanel.texture)
+	local header = _G['ElvUF_Raid'..i]
+	local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.infoPanel.texture)
 		for j = 1, header:GetNumChildren() do
 			local group = select(j, header:GetChildren())
 

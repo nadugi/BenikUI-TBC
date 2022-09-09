@@ -1,7 +1,7 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local BU = BUI:GetModule('Units');
 local UF = E:GetModule('UnitFrames');
-local LSM = E.Libs.LSM
+local LSM = E.LSM;
 
 local _G = _G
 local select = select
@@ -48,4 +48,3 @@ function BU:ChangeHealthBarTexture()
 	BU:ChangeRaidHealthBarTexture()
 	BU:ChangePartyHealthBarTexture()
 end
-hooksecurefunc(UF, 'Update_StatusBars', BU.ChangeHealthBarTexture)
