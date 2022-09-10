@@ -45,6 +45,7 @@ BUI.MenuList = {
 		end
 	end},
 	{text = ACHIEVEMENT_BUTTON, func = function() ToggleAchievementFrame() end},
+	{text = L["Calendar"], func = function() _G.GameTimeFrame:Click() end},
 	{text = REPUTATION, func = function() ToggleCharacter('ReputationFrame') end},
 	{text = COMMUNITIES_FRAME_TITLE, func = function() ToggleGuildFrame() end},
 	{text = MACROS, func = function() GameMenuButtonMacros:Click() end},
