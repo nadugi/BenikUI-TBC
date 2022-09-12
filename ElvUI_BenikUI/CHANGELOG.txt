@@ -1,3 +1,16 @@
+v1.16 - Sep 12, 2022
+Update raid movers in installer
+Move TopCenterWidget below LocPlus - credit Tsxy
+Add calendar to game menu
+Updated Patrons & Nitro's
+Update for ElvUI Raid changes
+Port retail changes to wrath for new raid frames
+Updated the Game menu with Achievements and LFG
+Changed the LSM reference
+Better(?) Masque handling
+Disable Actionbar button shadows and Aura shadows when Masque is enabled
+Fix error when ElvUI Ace3 skin disabled
+
 v1.15 - Sep 1st, 2022
 style tabs on Character, Spellbook, Friends (thurin)
 Fixed ElvUI version check
