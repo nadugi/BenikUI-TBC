@@ -1,7 +1,7 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local UF = E:GetModule('UnitFrames');
 local BU = BUI:GetModule('Units');
-local LSM = E.LSM;
+local LSM = E.Libs.LSM
 
 function BU:Configure_Infopanel(frame)
 	if frame.ORIENTATION == "RIGHT" and not (frame.unitframeType == "arena") then
@@ -73,41 +73,22 @@ end
 
 -- Raid
 function BU:RaidInfoPanelColor()
-	local header = _G['ElvUF_Raid']
+	for i = 1, 3 do
+	local header = _G['ElvUF_Raid'..i]
 	local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.infoPanel.texture)
-	for i = 1, header:GetNumChildren() do
-		local group = select(i, header:GetChildren())
+		for j = 1, header:GetNumChildren() do
+			local group = select(j, header:GetChildren())
 
-		for j = 1, group:GetNumChildren() do
-			local unitbutton = select(j, group:GetChildren())
-			if unitbutton.InfoPanel then
-				if not unitbutton.InfoPanel.color then
-					unitbutton.InfoPanel.color = unitbutton.InfoPanel:CreateTexture(nil, 'OVERLAY')
-					unitbutton.InfoPanel.color:SetAllPoints()
+			for k = 1, group:GetNumChildren() do
+				local unitbutton = select(k, group:GetChildren())
+				if unitbutton.InfoPanel then
+					if not unitbutton.InfoPanel.color then
+						unitbutton.InfoPanel.color = unitbutton.InfoPanel:CreateTexture(nil, 'OVERLAY')
+						unitbutton.InfoPanel.color:SetAllPoints()
+					end
+					unitbutton.InfoPanel.color:SetTexture(bar)
+					unitbutton.InfoPanel.color:SetVertexColor(BUI:unpackColor(E.db.benikui.unitframes.infoPanel.groupColor))
 				end
-				unitbutton.InfoPanel.color:SetTexture(bar)
-				unitbutton.InfoPanel.color:SetVertexColor(BUI:unpackColor(E.db.benikui.unitframes.infoPanel.groupColor))
-			end
-		end
-	end
-end
-
--- Raid-40
-function BU:Raid40InfoPanelColor()
-	local header = _G['ElvUF_Raid40']
-	local bar = LSM:Fetch("statusbar", E.db.benikui.unitframes.infoPanel.texture)
-	for i = 1, header:GetNumChildren() do
-		local group = select(i, header:GetChildren())
-
-		for j = 1, group:GetNumChildren() do
-			local unitbutton = select(j, group:GetChildren())
-			if unitbutton.InfoPanel then
-				if not unitbutton.InfoPanel.color then
-					unitbutton.InfoPanel.color = unitbutton.InfoPanel:CreateTexture(nil, 'OVERLAY')
-					unitbutton.InfoPanel.color:SetAllPoints()
-				end
-				unitbutton.InfoPanel.color:SetTexture(bar)
-				unitbutton.InfoPanel.color:SetVertexColor(BUI:unpackColor(E.db.benikui.unitframes.infoPanel.groupColor))
 			end
 		end
 	end
@@ -153,7 +134,6 @@ end
 function BU:UpdateGroupInfoPanelColor()
 	if not E.db.benikui.unitframes.infoPanel.enableColor then return end
 	self:RaidInfoPanelColor()
-	self:Raid40InfoPanelColor()
 	self:PartyInfoPanelColor()
 	self:ArenaInfoPanelColor()
 end

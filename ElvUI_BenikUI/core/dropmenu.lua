@@ -44,12 +44,14 @@ BUI.MenuList = {
 			HideUIPanel(PlayerTalentFrame)
 		end
 	end},
-	--{text = ACHIEVEMENT_BUTTON, func = function() ToggleAchievementFrame() end},
+	{text = ACHIEVEMENT_BUTTON, func = function() ToggleAchievementFrame() end},
+	{text = L["Calendar"], func = function() _G.GameTimeFrame:Click() end},
 	{text = REPUTATION, func = function() ToggleCharacter('ReputationFrame') end},
 	{text = COMMUNITIES_FRAME_TITLE, func = function() ToggleGuildFrame() end},
 	{text = MACROS, func = function() GameMenuButtonMacros:Click() end},
 	{text = TIMEMANAGER_TITLE, func = function() ToggleFrame(TimeManagerFrame) end},
 	{text = SOCIAL_BUTTON, func = function() ToggleFriendsFrame() end},
+	{text = LFG_TITLE, func = function() ToggleLFGParentFrame(); end},
 	{text = MAINMENU_BUTTON,
 	func = function()
 		if ( not GameMenuFrame:IsShown() ) then
@@ -75,7 +77,7 @@ local function sortFunction(a, b)
 	return a.text < b.text
 end
 
---table.sort(BUI.MenuList, sortFunction)
+table.sort(BUI.MenuList, sortFunction)
 
 local function OnClick(btn)
 	local parent = btn:GetParent()

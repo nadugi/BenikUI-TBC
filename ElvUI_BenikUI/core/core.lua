@@ -1,6 +1,6 @@
 local BUI, E, _, V, P, G = unpack(select(2, ...))
 local L = E.Libs.ACL:GetLocale('ElvUI', E.global.general.locale or 'enUS');
-local LSM = E.LSM
+local LSM = E.Libs.LSM
 
 local _G = _G
 local pairs, print, tinsert, strjoin, lower, next, wipe = pairs, print, table.insert, strjoin, strlower, next, wipe

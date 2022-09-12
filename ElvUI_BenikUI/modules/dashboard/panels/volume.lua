@@ -1,6 +1,6 @@
 local BUI, E, L, V, P, G = unpack(select(2, ...))
 local mod = BUI:GetModule('Dashboards');
-local LSM = E.LSM
+local LSM = E.Libs.LSM
 
 local _G = _G
 local join, tonumber, floor = string.join, tonumber, floor
