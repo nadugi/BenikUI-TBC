@@ -185,7 +185,9 @@ function mod:Setup()
 	mod:UnitDefaults()
 	mod:InitPlayer()
 	mod:InitTarget()
-	mod:InitFocus()
+	if not E.Classic then
+		mod:InitFocus()
+	end
 	mod:InitPet()
 	mod:InitTargetTarget()
 
