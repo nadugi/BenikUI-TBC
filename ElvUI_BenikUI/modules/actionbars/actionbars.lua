@@ -11,7 +11,7 @@ local C_TimerAfter = C_Timer.After
 local MAX_TOTEMS = MAX_TOTEMS
 local MAX_STANCES = GetNumShapeshiftForms()
 local Masque = E.Masque
-local MasqueGroup = Masque and Masque:Group('ElvUI', 'ActionBars')
+local MasqueGroup = Masque and E.private.actionbar.masque.actionbars
 
 -- GLOBALS: NUM_PET_ACTION_SLOTS
 -- GLOBALS: ElvUI_BarPet, ElvUI_StanceBar
