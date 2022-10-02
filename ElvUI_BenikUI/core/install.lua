@@ -285,6 +285,7 @@ local function SetupChat()
 end
 
 local function SetupActionbars(layout)
+	if E.private.actionbar.enable ~= true then return end
 	-- Actionbars
 	E.db["actionbar"]["lockActionBars"] = true
 	E.db["actionbar"]["transparent"] = true
