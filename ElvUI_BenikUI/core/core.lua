@@ -224,4 +224,7 @@ function BUI:Initialize()
 	if E:IsAddOnEnabled("ElvUI_BenikUI_TBC") then
 		DisableAddOn("ElvUI_BenikUI_TBC")
 	end
+	if E:IsAddOnEnabled("ElvUI_BenikUI_Classic") then
+		DisableAddOn("ElvUI_BenikUI_Classic")
+	end
 end
