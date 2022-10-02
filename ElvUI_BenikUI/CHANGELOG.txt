@@ -1,3 +1,13 @@
+v2.00 - Oct 2, 2022
+AiO version for Wrath and Classic
+Fixed InfoPanel color feature
+Disable Actionbar step during install, when ElvUI Actionbars are disabled
+Define game version
+Fixed double shadow on castbar
+Print the correct link
+Fixed UFs
+Fixed the dropmenu table
+
 v1.16 - Sep 12, 2022
 Update raid movers in installer
 Move TopCenterWidget below LocPlus - credit Tsxy
