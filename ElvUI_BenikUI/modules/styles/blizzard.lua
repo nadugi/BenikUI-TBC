@@ -99,7 +99,9 @@ local function LoadSkin()
 
 		_G.BNToastFrame:BuiStyle("Outside")
 		_G.GameMenuFrame:BuiStyle("Outside")
-		_G.ReportFrame:BuiStyle("Outside")
+		if not E.Classic then
+			_G.ReportFrame:BuiStyle("Outside")
+		end
 		_G.ReportCheatingDialog.backdrop:BuiStyle("Outside")
 		_G.SideDressUpFrame:BuiStyle("Outside")
 		_G.StackSplitFrame:BuiStyle("Outside")
@@ -145,10 +147,13 @@ local function LoadSkin()
 	if db.quest then
 		_G.QuestFrame.backdrop:BuiStyle("Outside")
 		_G.QuestLogFrame.backdrop:BuiStyle("Outside")
+		if E.Wrath then
+			_G.QuestLogDetailFrame.backdrop:BuiStyle("Outside")
+		end
 	end
 
 	if db.stable then
-		_G.PetStableFrame:BuiStyle("Outside")
+		_G.PetStableFrame.backdrop:BuiStyle("Outside")
 	end
 
 	if db.spellbook then

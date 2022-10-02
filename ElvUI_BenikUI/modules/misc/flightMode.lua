@@ -25,6 +25,13 @@ local UNKNOWN = UNKNOWN
 -- GLOBALS: FlightModeMenuBtn, CreateAnimationGroup, LeftChatMover, BuiDummyChat, Minimap, AddOnSkins
 -- GLOBALS: ObjectiveTrackerFrame, ZoneTextFrame
 
+local menuList
+if E.Wrath then
+	menuList = BUI.MenuList
+elseif E.Classic then
+	menuList = BUI.MenuListClassic
+end
+
 local menuFrame = CreateFrame('Frame', 'BuiGameClickMenu', E.UIParent, 'BackdropTemplate')
 menuFrame:SetTemplate('Transparent', true)
 menuFrame:CreateWideShadow()
@@ -559,7 +566,7 @@ function mod:Initialize()
 	end)
 
 	mod.FlightMode.top.menuButton:SetScript('OnClick', function()
-		BUI:Dropmenu(BUI.MenuList, menuFrame, FlightModeMenuBtn, 'bRight', (E.PixelMode and -32 or -30), (E.PixelMode and -13 or -15), 4, 36)
+		BUI:Dropmenu(menuList, menuFrame, FlightModeMenuBtn, 'bRight', (E.PixelMode and -32 or -30), (E.PixelMode and -13 or -15), 4, 36)
 		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
 	end)
 

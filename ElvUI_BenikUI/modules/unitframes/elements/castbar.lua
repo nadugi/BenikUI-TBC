@@ -174,9 +174,7 @@ function mod:Initialize()
 	end)
 
 	--Castbar was modified, re-apply settings
-	hooksecurefunc(UF, "Configure_Castbar", function(self, frame, preventLoop)
-		if preventLoop then return; end
-
+	hooksecurefunc(UF, "Configure_Castbar", function(self, frame)
 		local unit = frame.unitframeType
 		if unit and (unit == 'player' or unit == 'target') then
 			mod:UpdateSettings(unit)
@@ -184,6 +182,7 @@ function mod:Initialize()
 	end)
 
 	hooksecurefunc(UF, "LoadUnits", mod.CastBarHooks)
+	hooksecurefunc(UF, "LoadUnits", mod.UpdateAllCastbars)
 end
 
 BUI:RegisterModule(mod:GetName())
