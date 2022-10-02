@@ -36,13 +36,20 @@ local addonsIcon = 'Interface\\AddOns\\ElvUI_BenikUI\\media\\textures\\buttons\\
 local Bui_dchat = CreateFrame('Frame', 'BuiDummyChat', E.UIParent, 'BackdropTemplate')
 local Bui_deb = CreateFrame('Frame', 'BuiDummyEditBoxHolder', E.UIParent, 'BackdropTemplate')
 
+local menuList
+if E.Wrath then
+	menuList = BUI.MenuList
+elseif E.Classic then
+	menuList = BUI.MenuListClassic
+end
+
 local menuFrame = CreateFrame('Frame', 'BuiGameClickMenu', E.UIParent, 'BackdropTemplate')
 menuFrame:SetTemplate('Transparent', true)
 
 function BuiGameMenu_OnMouseUp(self)
 	if InCombatLockdown() then return end
 	GameTooltip:Hide()
-	BUI:Dropmenu(BUI.MenuList, menuFrame, self:GetName(), 'tLeft', -SPACING, SPACING, 4)
+	BUI:Dropmenu(menuList, menuFrame, self:GetName(), 'tLeft', -SPACING, SPACING, 4)
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
 end
 

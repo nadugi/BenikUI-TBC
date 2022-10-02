@@ -181,7 +181,9 @@ function mod:Setup()
 	mod:UnitDefaults()
 	mod:InitPlayer()
 	mod:InitTarget()
-	mod:InitFocus()
+	if not E.Classic then
+		mod:InitFocus()
+	end
 	mod:InitPet()
 	mod:InitTargetTarget()
 
@@ -198,7 +200,9 @@ function mod:Setup()
 		mod:UnitShadows()
 		mod:PartyShadows()
 		mod:RaidShadows()
-		mod:ArenaShadows()
+		if not E.Classic then
+			mod:ArenaShadows()
+		end
 		mod:TankShadows()
 		mod:TankTargetShadows()
 	end
