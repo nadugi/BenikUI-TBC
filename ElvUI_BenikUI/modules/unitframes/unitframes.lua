@@ -42,15 +42,11 @@ end
 
 -- Unit Shadows
 function mod:UnitShadows()
-	for _, unitName in pairs(UF.units) do
-		local frameNameUnit = E:StringTitle(unitName)
-		frameNameUnit = frameNameUnit:gsub("t(arget)", "T%1")
-
-		local unitframe = _G["ElvUF_"..frameNameUnit]
-		if unitframe then
-			unitframe:CreateSoftShadow()
-			unitframe.Buffs.PostUpdateIcon = mod.PostUpdateAura
-			unitframe.Debuffs.PostUpdateIcon = mod.PostUpdateAura
+	for _, frame in pairs(UF.units) do
+		if frame then
+			frame:CreateSoftShadow()
+			frame.Buffs.PostUpdateIcon = mod.PostUpdateAura
+			frame.Debuffs.PostUpdateIcon = mod.PostUpdateAura
 		end
 	end
 end
@@ -204,7 +200,9 @@ function mod:Setup()
 		mod:UnitShadows()
 		mod:PartyShadows()
 		mod:RaidShadows()
-		mod:ArenaShadows()
+		if not E.Classic then
+			mod:ArenaShadows()
+		end
 		mod:TankShadows()
 		mod:TankTargetShadows()
 	end
