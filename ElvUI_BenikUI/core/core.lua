@@ -39,6 +39,13 @@ BUI.AS = BUI:IsAddOnEnabled('AddOnSkins')
 BUI.IF = BUI:IsAddOnEnabled('InFlight_Load')
 BUI.ZG = BUI:IsAddOnEnabled('ZygorGuidesViewer')
 
+local linkString
+if E.Wrath then
+	linkString = 'https://github.com/Benik/BenikUI-TBC/issues'
+elseif E.Classic then
+	linkString = 'https://github.com/Benik/BenikUI-Classic/issues'
+end
+
 local classColor = E:ClassColor(E.myclass, true)
 
 local function PrintURL(url) -- Credit: Azilroka
@@ -200,7 +207,7 @@ function BUI:Initialize()
 	end
 
 	if E.db.benikui.general.loginMessage then
-		print(format('%s%s%s %s', BUI.Title, BUI:cOption('v'..BUI.Version, "orange"), L['is loaded. For any issues or suggestions, please visit'], PrintURL('https://github.com/Benik/BenikUI-TBC/issues')))
+		print(format('%s%s%s %s', BUI.Title, BUI:cOption('v'..BUI.Version, "orange"), L['is loaded. For any issues or suggestions, please visit'], PrintURL(linkString)))
 	end
 
 	if E.db.benikui.general.benikuiStyle and E.db.benikui.general.shadows then
