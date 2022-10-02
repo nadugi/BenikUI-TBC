@@ -73,11 +73,56 @@ BUI.MenuList = {
 	{text = HELP_BUTTON, func = function() ToggleHelpFrame() end},
 }
 
+BUI.MenuListClassic = {
+	{text = CHARACTER_BUTTON, func = function() ToggleCharacter("PaperDollFrame") end},
+	{text = SPELLBOOK_ABILITIES_BUTTON, func = function() if not SpellBookFrame:IsShown() then ShowUIPanel(SpellBookFrame) else HideUIPanel(SpellBookFrame) end end},
+	{text = REPUTATION, func = function() ToggleCharacter('ReputationFrame') end},
+	{text = COMMUNITIES_FRAME_TITLE, func = function() ToggleGuildFrame() end},
+	{text = MACROS, func = function() GameMenuButtonMacros:Click() end},
+	{text = SOCIAL_BUTTON, func = function() ToggleFriendsFrame() end},
+	{text = TALENTS,
+	func = function()
+		if not _G.PlayerTalentFrame then
+			_G.PlayerTalentFrame_LoadUI()
+		end
+
+		local PlayerTalentFrame = _G.PlayerTalentFrame
+		if not PlayerTalentFrame:IsShown() then
+			ShowUIPanel(PlayerTalentFrame)
+		else
+			HideUIPanel(PlayerTalentFrame)
+		end
+	end},
+	{text = MAINMENU_BUTTON,
+	func = function()
+		if ( not GameMenuFrame:IsShown() ) then
+			if ( VideoOptionsFrame:IsShown() ) then
+					VideoOptionsFrameCancel:Click();
+			elseif ( AudioOptionsFrame:IsShown() ) then
+					AudioOptionsFrameCancel:Click();
+			elseif ( InterfaceOptionsFrame:IsShown() ) then
+					InterfaceOptionsFrameCancel:Click();
+			end
+			CloseMenus();
+			CloseAllWindows()
+			ShowUIPanel(GameMenuFrame);
+		else
+			HideUIPanel(GameMenuFrame);
+			MainMenuMicroButton_SetNormal();
+		end
+	end},
+	{text = HELP_BUTTON, func = function() ToggleHelpFrame() end},
+}
+
 local function sortFunction(a, b)
 	return a.text < b.text
 end
 
-table.sort(BUI.MenuList, sortFunction)
+if E.Wrath then
+	table.sort(BUI.MenuList, sortFunction)
+elseif E.Classic then
+	table.sort(BUI.MenuListClassic, sortFunction)
+end
 
 local function OnClick(btn)
 	local parent = btn:GetParent()
