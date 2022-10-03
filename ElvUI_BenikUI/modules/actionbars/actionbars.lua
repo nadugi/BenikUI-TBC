@@ -131,7 +131,7 @@ function mod:StancebarShadows()
 	for i = 1, MAX_STANCES do
 		local button = _G['ElvUI_StanceBarButton'..i]
 		if BUI.ShadowMode and not MasqueGroup then
-			if button.backdrop and not button.backdrop.shadow then
+			if button and not button.shadow then
 				button:CreateSoftShadow()
 			end
 		end
