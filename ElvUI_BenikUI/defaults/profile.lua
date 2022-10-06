@@ -278,6 +278,19 @@ P['dashboards'] = {
 		['latency'] = 2,
 	},
 
+	['tokens'] = {
+		['enableTokens'] = true,
+		['combat'] = true,
+		['mouseover'] = false,
+		['tooltip'] = true,
+		['width'] = 150,
+		['style'] = true,
+		['transparency'] = true,
+		['backdrop'] = true,
+		['zeroamount'] = false,
+		['weekly'] = true,
+	},
+
 	['professions'] = {
 		['enableProfessions'] = true,
 		['combat'] = true,

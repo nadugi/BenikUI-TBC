@@ -13,6 +13,42 @@ local CALENDAR_TYPE_DUNGEON, CALENDAR_TYPE_RAID, PLAYER_V_PLAYER, SECONDARY_SKIL
 
 local boards = {L["FPS"], L["MS"], L["Durability"], L["Bags"], L["Volume"]}
 
+local dungeonTokens = {
+	221, -- Emblem of Conquest
+	341, -- Emblem of Frost
+	101, -- Emblem of Heroism
+	301, -- Emblem of Triumph
+	102, -- Emblem of Valor
+}
+
+local pvpTokens = {
+	121, -- Alterac Valley Mark of Honor
+	122, -- Arathi Basin Mark of Honor
+	--103, -- Arena Points
+	123, -- Eye of the Storm Mark of Honor
+	--104, -- Honor Points
+	321, -- Isle of Conquest Mark of Honor
+	161, -- Stone Keeper's Shard
+	124, -- Strand of the Ancients Mark of Honor
+	201, -- Venture Coin
+	125, -- Warsong Gulch Mark of Honor
+	126, -- Wintergrasp Mark of Honor
+}
+
+local miscTokens = {
+	42, -- Badge of Justice
+	241, -- Champion's Seal
+	81, -- Dalaran Cooking Award
+	61, -- Dalaran Jewelcrafter's Token
+}
+
+local currencyTables = {
+	-- table, option, name
+	{dungeonTokens, 'dungeonTokens', GROUP_FINDER},
+	{pvpTokens, 'pvpTokens', PLAYER_V_PLAYER},
+	{miscTokens, 'miscTokens', MISCELLANEOUS},
+}
+
 local function UpdateSystemOptions()
 	for _, boardname in pairs(boards) do
 		local optionOrder = 1
@@ -38,6 +74,41 @@ local function UpdateSystemOptions()
 		get = function(info) return E.db.dashboards.system.latency end,
 		set = function(info, value) E.db.dashboards.system.latency = value; E:StaticPopup_Show('PRIVATE_RL'); end,
 	}
+end
+
+local function UpdateTokenOptions()
+	for i, v in ipairs(currencyTables) do
+		local tableName, option, optionName = unpack(v)
+		local optionOrder = 1
+		for _, id in ipairs(tableName) do
+			E.Options.args.benikui.args.dashboards.args.tokens.args[option] = {
+				order = i,
+				type = 'group',
+				name = optionName,
+				args = {
+				},
+			}
+			for _, id in ipairs(tableName) do
+				local tname, amount, icon, _, _, isDiscovered = BUID:GetTokenInfo(id)
+				if tname then
+					E.Options.args.benikui.args.dashboards.args.tokens.args[option].args.desc = {
+						order = optionOrder + 1,
+						name = BUI:cOption(L['Tip: Grayed tokens are not yet discovered'], "blue"),
+						type = 'header',
+					}
+					E.Options.args.benikui.args.dashboards.args.tokens.args[option].args[tname] = {
+						order = optionOrder + 2,
+						type = 'toggle',
+						name = (icon and '|T'..icon..':18|t '..tname) or tname,
+						desc = format('%s %s\n\n|cffffff00%s: %s|r', L['Enable/Disable'], tname, L['Amount'], BreakUpLargeNumbers(amount)),
+						get = function(info) return E.private.dashboards.tokens.chooseTokens[id] end,
+						set = function(info, value) E.private.dashboards.tokens.chooseTokens[id] = value; BUID:UpdateTokens(); BUID:UpdateTokenSettings(); end,
+						disabled = function() return not isDiscovered end,
+					}
+				end
+			end
+		end
+	end
 end
 
 local function UpdateProfessionOptions()
@@ -114,6 +185,13 @@ local function UpdateReputationOptions()
 	end
 end
 
+local function UpdateDashboardSettings()
+	if E.db.dashboards.professions.enableProfessions then BUID:UpdateProfessionSettings(); end
+	if E.Wrath and E.db.dashboards.tokens.enableTokens then BUID:UpdateTokenSettings(); end
+	if E.db.dashboards.system.enableSystem then BUID:UpdateSystemSettings(); end
+	if E.db.dashboards.reputations.enableReputations then BUID:UpdateReputationSettings(); end
+end
+
 local function dashboardsTable()
 	E.Options.args.benikui.args.dashboards = {
 		order = 50,
@@ -141,8 +219,7 @@ local function dashboardsTable()
 						},
 						get = function(info) return E.db.dashboards[ info[#info] ] end,
 						set = function(info, value) E.db.dashboards[ info[#info] ] = value;
-							if E.db.dashboards.professions.enableProfessions then BUID:UpdateProfessionSettings(); end
-							if E.db.dashboards.system.enableSystem then BUID:UpdateSystemSettings(); end
+							UpdateDashboardSettings()
 						end,
 					},
 					customBarColor = {
@@ -160,9 +237,7 @@ local function dashboardsTable()
 							E.db.dashboards[ info[#info] ] = {}
 							local t = E.db.dashboards[ info[#info] ]
 							t.r, t.g, t.b, t.a = r, g, b, a
-							if E.db.dashboards.professions.enableProfessions then BUID:UpdateProfessionSettings(); end
-							--if E.db.dashboards.tokens.enableTokens then BUID:UpdateTokenSettings(); end
-							if E.db.dashboards.system.enableSystem then BUID:UpdateSystemSettings(); end
+							UpdateDashboardSettings()
 						end,
 					},
 					spacer = {
@@ -180,9 +255,7 @@ local function dashboardsTable()
 						},
 						get = function(info) return E.db.dashboards[ info[#info] ] end,
 						set = function(info, value) E.db.dashboards[ info[#info] ] = value;
-							if E.db.dashboards.professions.enableProfessions then BUID:UpdateProfessionSettings(); end
-							if E.db.dashboards.system.enableSystem then BUID:UpdateSystemSettings(); end
-							if E.db.dashboards.reputations.enableReputations then BUID:UpdateReputationSettings(); end
+							UpdateDashboardSettings()
 						end,
 					},
 					customTextColor = {
@@ -199,9 +272,7 @@ local function dashboardsTable()
 							E.db.dashboards[ info[#info] ] = {}
 							local t = E.db.dashboards[ info[#info] ]
 							t.r, t.g, t.b, t.a = r, g, b, a
-							if E.db.dashboards.professions.enableProfessions then BUID:UpdateProfessionSettings(); end
-							if E.db.dashboards.system.enableSystem then BUID:UpdateSystemSettings(); end
-							if E.db.dashboards.reputations.enableReputations then BUID:UpdateReputationSettings(); end
+							UpdateDashboardSettings()
 						end,
 					},
 				},
@@ -214,9 +285,7 @@ local function dashboardsTable()
 				disabled = function() return not E.db.dashboards.system.enableSystem and not E.db.dashboards.tokens.enableTokens and not E.db.dashboards.professions.enableProfessions end,
 				get = function(info) return E.db.dashboards.dashfont[ info[#info] ] end,
 				set = function(info, value) E.db.dashboards.dashfont[ info[#info] ] = value;
-					if E.db.dashboards.system.enableSystem then BUID:UpdateSystemSettings(); end;
-					if E.db.dashboards.professions.enableProfessions then BUID:UpdateProfessionSettings(); end;
-					if E.db.dashboards.reputations.enableReputations then BUID:UpdateReputations(); end;
+					UpdateDashboardSettings()
 					end,
 				args = {
 					useDTfont = {
@@ -513,7 +582,115 @@ local function dashboardsTable()
 	}
 end
 
+local function injectTokenSettings()
+	E.Options.args.benikui.args.dashboards.args.tokens = {
+		order = 4,
+		type = 'group',
+		name = TOKENS,
+		childGroups = 'select',
+		args = {
+			enableTokens = {
+				order = 1,
+				type = 'toggle',
+				name = L["Enable"],
+				width = 'full',
+				desc = L['Enable the Tokens Dashboard.'],
+				get = function(info) return E.db.dashboards.tokens.enableTokens end,
+				set = function(info, value) E.db.dashboards.tokens.enableTokens = value; E:StaticPopup_Show('PRIVATE_RL'); end,
+			},
+			combat = {
+				order = 2,
+				name = L['Combat Fade'],
+				desc = L['Show/Hide Tokens Dashboard when in combat'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.combat end,
+				set = function(info, value) E.db.dashboards.tokens.combat = value; BUID:EnableDisableCombat(BUI_TokensDashboard, 'tokens'); end,
+			},
+			mouseover = {
+				order = 3,
+				name = L['Mouse Over'],
+				desc = L['The frame is not shown unless you mouse over the frame.'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.mouseover end,
+				set = function(info, value) E.db.dashboards.tokens.mouseover = value; BUID:UpdateTokens(); BUID:UpdateTokenSettings(); end,
+			},
+			width = {
+				order = 4,
+				type = 'range',
+				name = L['Width'],
+				desc = L['Change the Tokens Dashboard width.'],
+				min = 120, max = 520, step = 1,
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.width end,
+				set = function(info, value) E.db.dashboards.tokens.width = value; BUID:UpdateHolderDimensions(BUI_TokensDashboard, 'tokens', BUI.TokensDB); BUID:UpdateTokenSettings(); end,
+			},
+			style = {
+				order = 5,
+				name = L['BenikUI Style'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.style end,
+				set = function(info, value) E.db.dashboards.tokens.style = value; BUID:ToggleStyle(BUI_TokensDashboard, 'tokens'); end,
+			},
+			transparency = {
+				order = 6,
+				name = L['Panel Transparency'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.transparency end,
+				set = function(info, value) E.db.dashboards.tokens.transparency = value; BUID:ToggleTransparency(BUI_TokensDashboard, 'tokens'); end,
+			},
+			backdrop = {
+				order = 7,
+				name = L['Backdrop'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.backdrop end,
+				set = function(info, value) E.db.dashboards.tokens.backdrop = value; BUID:ToggleTransparency(BUI_TokensDashboard, 'tokens'); end,
+			},
+			tooltip = {
+				order = 8,
+				name = L['Tooltip'],
+				desc = L['Show/Hide Tooltips'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.tooltip end,
+				set = function(info, value) E.db.dashboards.tokens.tooltip = value; BUID:UpdateTokens(); BUID:UpdateTokenSettings(); end,
+			},
+			zeroamount = {
+				order = 9,
+				name = L['Show zero amount tokens'],
+				desc = L['Show the token, even if the amount is 0'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.zeroamount end,
+				set = function(info, value) E.db.dashboards.tokens.zeroamount = value; BUID:UpdateTokens(); BUID:UpdateTokenSettings(); end,
+			},
+			weekly = {
+				order = 10,
+				name = L['Show Weekly max'],
+				desc = L['Show Weekly max tokens instead of total max'],
+				type = 'toggle',
+				disabled = function() return not E.db.dashboards.tokens.enableTokens end,
+				get = function(info) return E.db.dashboards.tokens.weekly end,
+				set = function(info, value) E.db.dashboards.tokens.weekly = value; BUID:UpdateTokens(); BUID:UpdateTokenSettings(); end,
+			},
+			spacer = {
+				order = 11,
+				type = 'header',
+				name = '',
+			},
+		},
+	}
+end
+
 tinsert(BUI.Config, dashboardsTable)
 tinsert(BUI.Config, UpdateSystemOptions)
+if E.Wrath then
+	tinsert(BUI.Config, injectTokenSettings)
+	tinsert(BUI.Config, UpdateTokenOptions)
+end
 tinsert(BUI.Config, UpdateProfessionOptions)
 tinsert(BUI.Config, UpdateReputationOptions)
