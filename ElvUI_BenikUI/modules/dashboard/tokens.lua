@@ -51,7 +51,7 @@ local function Icon_OnEnter(self)
 	local id = self:GetParent().id
 	if E.db.dashboards.tokens.tooltip then
 		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT', 3, 0);
-		GameTooltip:SetCurrencyByID(id)
+		GameTooltip:SetCurrencyTokenByID(id)
 		GameTooltip:AddLine(' ')
 		GameTooltip:AddDoubleLine(L['Shift+RightClick to remove'], format('|cffff0000%s |r%s','ID', id), 0.7, 0.7, 1)
 		GameTooltip:Show()
