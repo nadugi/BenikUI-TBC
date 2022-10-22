@@ -222,6 +222,7 @@ P['benikuiSkins'] = {
 	['variousSkins'] = {
 		['inflight'] = true,
 		['kt'] = true,
+		['rxpguides'] = true,
 	},
 }
 

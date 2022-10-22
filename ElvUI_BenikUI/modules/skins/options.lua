@@ -134,7 +134,7 @@ local function SkinTable()
 		set = function(info, value) E.db.benikuiSkins.variousSkins[ info[#info] ] = value; E:StaticPopup_Show('PRIVATE_RL') end,
 		args = {
 			inflight = {
-				order = 3,
+				order = 1,
 				type = 'toggle',
 				name = L['InFlight'],
 				set = function(info, value) E.db.benikuiSkins.variousSkins[ info[#info] ] = value;
@@ -147,10 +147,16 @@ local function SkinTable()
 				disabled = function() return not IsAddOnLoaded('InFlight_Load') end,
 			},
 			kt = {
-				order = 4,
+				order = 2,
 				type = 'toggle',
 				name = L['Kaliels Tracker'],
 				disabled = function() return not IsAddOnLoaded('!KalielsTracker') end,
+			},
+			rxpguides = {
+				order = 3,
+				type = 'toggle',
+				name = L['RXPGuides'],
+				disabled = function() return not IsAddOnLoaded('RXPGuides') end,
 			},
 		},
 	}
