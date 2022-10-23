@@ -5,7 +5,7 @@ local S = E:GetModule('Skins')
 local CreateFrame = CreateFrame
 
 local function StyleDBM_Options()
-	if not E.db.benikuiSkins.addonSkins.dbm or not BUI.AS then
+	if not E.db.benikui.Skins.addonSkins.dbm or not BUI.AS then
 		return
 	end
 
@@ -15,7 +15,7 @@ local function StyleDBM_Options()
 end
 
 local function StyleInFlight()
-	if E.db.benikuiSkins.variousSkins.inflight ~= true or E.db.benikui.misc.flightMode == true then
+	if E.db.benikui.Skins.variousSkins.inflight ~= true or E.db.benikui.misc.flightMode == true then
 		return
 	end
 
@@ -42,13 +42,13 @@ local function LoadInFlight()
 end
 
 local function KalielsTracker()
-	if BUI:IsAddOnEnabled('!KalielsTracker') and E.db.benikui.general.benikuiStyle and E.db.benikuiSkins.variousSkins.kt then
+	if BUI:IsAddOnEnabled('!KalielsTracker') and E.db.benikui.general.benikuiStyle and E.db.benikui.Skins.variousSkins.kt then
 		_G['!KalielsTrackerFrame']:BuiStyle('Outside')
 	end
 end
 
 local function RXPGuides()
-	if not E.db.benikuiSkins.variousSkins.rxpguides then return end
+	if not E.db.benikui.Skins.variousSkins.rxpguides then return end
 
 	local RXPFrame = _G.RXPFrame
 	local ItemFrame = _G.RXPItemFrame

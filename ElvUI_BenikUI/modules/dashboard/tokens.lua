@@ -49,7 +49,7 @@ local Currency = {
 
 local function Icon_OnEnter(self)
 	local id = self:GetParent().id
-	if E.db.dashboards.tokens.tooltip then
+	if E.db.benikui.dashboards.tokens.tooltip then
 		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT', 3, 0);
 		GameTooltip:SetCurrencyTokenByID(id)
 		GameTooltip:AddLine(' ')
@@ -57,13 +57,13 @@ local function Icon_OnEnter(self)
 		GameTooltip:Show()
 	end
 
-	if E.db.dashboards.tokens.mouseover then
+	if E.db.benikui.dashboards.tokens.mouseover then
 		E:UIFrameFadeIn(BUI_TokensDashboard, 0.2, BUI_TokensDashboard:GetAlpha(), 1)
 	end
 end
 
 local function Icon_OnLeave(self)
-	if E.db.dashboards.tokens.mouseover then
+	if E.db.benikui.dashboards.tokens.mouseover then
 		E:UIFrameFadeIn(BUI_TokensDashboard, 0.2, BUI_TokensDashboard:GetAlpha(), 0)
 	end
 	GameTooltip:Hide()
@@ -93,7 +93,7 @@ function mod:GetTokenInfo(id)
 end
 
 function mod:UpdateTokens()
-	local db = E.db.dashboards.tokens
+	local db = E.db.benikui.dashboards.tokens
 	local holder = _G.BUI_TokensDashboard
 
 	if(BUI.TokensDB[1]) then
@@ -145,10 +145,10 @@ function mod:UpdateTokens()
 					end
 					self.tokenFrame.Status:SetValue(amount)
 
-					if E.db.dashboards.barColor == 1 then
+					if E.db.benikui.dashboards.barColor == 1 then
 						self.tokenFrame.Status:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
 					else
-						self.tokenFrame.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
+						self.tokenFrame.Status:SetStatusBarColor(E.db.benikui.dashboards.customBarColor.r, E.db.benikui.dashboards.customBarColor.g, E.db.benikui.dashboards.customBarColor.b)
 					end
 
 					if totalMax == 0 then
@@ -161,10 +161,10 @@ function mod:UpdateTokens()
 						end
 					end
 
-					if E.db.dashboards.textColor == 1 then
+					if E.db.benikui.dashboards.textColor == 1 then
 						self.tokenFrame.Text:SetTextColor(classColor.r, classColor.g, classColor.b)
 					else
-						self.tokenFrame.Text:SetTextColor(BUI:unpackColor(E.db.dashboards.customTextColor))
+						self.tokenFrame.Text:SetTextColor(BUI:unpackColor(E.db.benikui.dashboards.customTextColor))
 					end
 
 					self.tokenFrame.IconBG:SetScript('OnMouseUp', Icon_OnMouseUp)
@@ -232,7 +232,7 @@ end
 function mod:CreateTokensDashboard()
 	self.tokenHolder = self:CreateDashboardHolder('BUI_TokensDashboard', 'tokens')
 	self.tokenHolder:Point('TOPLEFT', E.UIParent, 'TOPLEFT', 4, -123)
-	self.tokenHolder:Width(E.db.dashboards.tokens.width or 150)
+	self.tokenHolder:Width(E.db.benikui.dashboards.tokens.width or 150)
 
 	mod:UpdateTokens()
 	mod:UpdateTokenSettings()
@@ -244,7 +244,7 @@ function mod:CreateTokensDashboard()
 end
 
 function mod:LoadTokens()
-	if E.db.dashboards.tokens.enableTokens ~= true then return end
+	if E.db.benikui.dashboards.tokens.enableTokens ~= true then return end
 
 	mod:CreateTokensDashboard()
 	mod:TokenEvents()
