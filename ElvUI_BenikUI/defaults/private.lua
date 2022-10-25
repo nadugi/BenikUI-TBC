@@ -10,6 +10,13 @@ V['benikui'] = {
 
 -- Dashboards
 V['dashboards'] = {
+	['tokens'] = {
+		['chooseTokens'] = {
+			[42] = true, -- Badge of Justice
+			[81] = true, -- Dalaran Cooking Award
+		},
+	},
+
 	['professions'] = {
 		['chooseProfessions'] = {
 			[5] = true,

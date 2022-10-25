@@ -185,136 +185,150 @@ P['benikui'] = {
 		},
 	},
 
+	-- Dashboards
+	['dashboards'] = {
+		['system'] = {
+			['enableSystem'] = true,
+			['combat'] = false,
+			['width'] = 150,
+			['style'] = true,
+			['transparency'] = true,
+			['backdrop'] = true,
+			['mouseover'] = false,
+			['chooseSystem'] = {
+				['FPS'] = true,
+				['MS'] = true,
+				['Bags'] = true,
+				['Durability'] = true,
+				['Volume'] = true,
+			},
+			['latency'] = 2,
+		},
+
+		['tokens'] = {
+			['enableTokens'] = true,
+			['combat'] = true,
+			['mouseover'] = false,
+			['tooltip'] = true,
+			['width'] = 150,
+			['style'] = true,
+			['transparency'] = true,
+			['backdrop'] = true,
+			['zeroamount'] = false,
+			['weekly'] = true,
+		},
+
+		['professions'] = {
+			['enableProfessions'] = true,
+			['combat'] = true,
+			['mouseover'] = false,
+			['width'] = 150,
+			['style'] = true,
+			['transparency'] = true,
+			['backdrop'] = true,
+			['capped'] = false,
+			['iconPosition'] = 'RIGHT'
+		},
+
+		['reputations'] = {
+			['enableReputations'] = true,
+			['combat'] = true,
+			['mouseover'] = false,
+			['width'] = 200,
+			['style'] = true,
+			['transparency'] = true,
+			['backdrop'] = true,
+			['barFactionColors'] = true,
+			['textFactionColors'] = true,
+			['tooltip'] = false,
+			['textAlign'] = 'LEFT',
+		},
+
+		['dashfont'] = {
+			['useDTfont'] = true,
+			['dbfont'] = E.db.datatexts.font,
+			['dbfontsize'] = E.db.datatexts.fontSize,
+			['dbfontflags'] = E.db.datatexts.fontOutline,
+		},
+
+		['barColor'] = 1,
+		['customBarColor'] = {r = 255/255,g = 128/255,b = 0/255},
+		['textColor'] = 2,
+		['customTextColor'] = {r = 255/255,g = 255/255,b = 255/255},
+	},
+
+	-- Skins and ElvUI addons Styling
+	['Skins'] = {
+		['elvuiAddons'] = {
+			['locplus'] = true,
+			['sle'] = true,
+			['enh'] = true,
+			['pa'] = true,
+			['mer'] = true,
+			['elv'] = true,
+		},
+
+		['addonSkins'] = {
+			['skada'] = true,
+			['recount'] = true,
+			['tinydps'] = true,
+			['atlasloot'] = true,
+			['altoholic'] = true,
+			['clique'] = true,
+			['ora'] = true,
+			['pawn'] = true,
+			['dbm'] = true,
+			['bigwigs'] = true,
+			['zygor'] = true,
+			['immersion'] = true,
+			['allthethings'] = true,
+			['tinyinspect'] = true,
+			['arkinventory'] = true,
+		},
+
+		['variousSkins'] = {
+			['inflight'] = true,
+			['kt'] = true,
+			['rxpguides'] = true,
+		},
+	},
+
+	-- Databars
+	['Databars'] = {
+		['experience'] = {
+			['enable'] = true,
+			['buiStyle'] = true,
+			['buttonStyle'] = "TRANSPARENT",
+			['notifiers'] = {
+				['enable'] = true,
+				['position'] = 'RIGHT',
+			},
+		},
+
+		['reputation'] = {
+			['enable'] = true,
+			['buiStyle'] = true,
+			['buttonStyle'] = "TRANSPARENT",
+			['notifiers'] = {
+				['enable'] = true,
+				['position'] = 'LEFT',
+			},
+		},
+
+		['threat'] = {
+			['enable'] = true,
+			['buiStyle'] = false,
+			['buttonStyle'] = "TRANSPARENT",
+			['notifiers'] = {
+				['enable'] = true,
+				['position'] = 'BELOW',
+			},
+		},
+	},
+
 	['panels'] = {
 
 	},
-}
-
--- Skins and ElvUI addons Styling
-P['benikuiSkins'] = {
-	['elvuiAddons'] = {
-		['locplus'] = true,
-		['sle'] = true,
-		['enh'] = true,
-		['pa'] = true,
-		['mer'] = true,
-		['elv'] = true,
-	},
-
-	['addonSkins'] = {
-		['skada'] = true,
-		['recount'] = true,
-		['tinydps'] = true,
-		['atlasloot'] = true,
-		['altoholic'] = true,
-		['clique'] = true,
-		['ora'] = true,
-		['pawn'] = true,
-		['dbm'] = true,
-		['bigwigs'] = true,
-		['zygor'] = true,
-		['immersion'] = true,
-		['allthethings'] = true,
-		['tinyinspect'] = true,
-		['arkinventory'] = true,
-	},
-
-	['variousSkins'] = {
-		['inflight'] = true,
-		['kt'] = true,
-	},
-}
-
--- Databars
-P['benikuiDatabars'] = {
-	['experience'] = {
-		['enable'] = true,
-		['buiStyle'] = true,
-		['buttonStyle'] = "TRANSPARENT",
-		['notifiers'] = {
-			['enable'] = true,
-			['position'] = 'RIGHT',
-		},
-	},
-
-	['reputation'] = {
-		['enable'] = true,
-		['buiStyle'] = true,
-		['buttonStyle'] = "TRANSPARENT",
-		['notifiers'] = {
-			['enable'] = true,
-			['position'] = 'LEFT',
-		},
-	},
-
-	['threat'] = {
-		['enable'] = true,
-		['buiStyle'] = false,
-		['buttonStyle'] = "TRANSPARENT",
-		['notifiers'] = {
-			['enable'] = true,
-			['position'] = 'BELOW',
-		},
-	},
-}
-
--- Dashboards
-P['dashboards'] = {
-	['system'] = {
-		['enableSystem'] = true,
-		['combat'] = false,
-		['width'] = 150,
-		['style'] = true,
-		['transparency'] = true,
-		['backdrop'] = true,
-		['mouseover'] = false,
-		['chooseSystem'] = {
-			['FPS'] = true,
-			['MS'] = true,
-			['Bags'] = true,
-			['Durability'] = true,
-			['Volume'] = true,
-		},
-		['latency'] = 2,
-	},
-
-	['professions'] = {
-		['enableProfessions'] = true,
-		['combat'] = true,
-		['mouseover'] = false,
-		['width'] = 150,
-		['style'] = true,
-		['transparency'] = true,
-		['backdrop'] = true,
-		['capped'] = false,
-		['iconPosition'] = 'RIGHT'
-	},
-
-	['reputations'] = {
-		['enableReputations'] = true,
-		['combat'] = true,
-		['mouseover'] = false,
-		['width'] = 200,
-		['style'] = true,
-		['transparency'] = true,
-		['backdrop'] = true,
-		['barFactionColors'] = true,
-		['textFactionColors'] = true,
-		['tooltip'] = false,
-		['textAlign'] = 'LEFT',
-	},
-
-	['dashfont'] = {
-		['useDTfont'] = true,
-		['dbfont'] = E.db.datatexts.font,
-		['dbfontsize'] = E.db.datatexts.fontSize,
-		['dbfontflags'] = E.db.datatexts.fontOutline,
-	},
-
-	['barColor'] = 1,
-	['customBarColor'] = {r = 255/255,g = 128/255,b = 0/255},
-	['textColor'] = 2,
-	['customTextColor'] = {r = 255/255,g = 255/255,b = 255/255},
 }
 
 G['benikui'] = {

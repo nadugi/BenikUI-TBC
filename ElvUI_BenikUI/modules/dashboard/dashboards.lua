@@ -14,12 +14,13 @@ local classColor = E.myclass == 'PRIEST' and E.PriestColors or (CUSTOM_CLASS_COL
 
 -- Dashboards bar frame tables
 BUI.SystemDB = {}
+BUI.TokensDB = {}
 BUI.ProfessionsDB = {}
 BUI.FactionsDB = {}
 BUI.SecondarySkill = SECONDARY_SKILLS:gsub(":", '')
 
 function mod:EnableDisableCombat(holder, option)
-	local db = E.db.dashboards[option]
+	local db = E.db.benikui.dashboards[option]
 
 	if db.combat then
 		holder:RegisterEvent('PLAYER_REGEN_DISABLED')
@@ -31,7 +32,7 @@ function mod:EnableDisableCombat(holder, option)
 end
 
 function mod:UpdateHolderDimensions(holder, option, tableName)
-	local db = E.db.dashboards[option]
+	local db = E.db.benikui.dashboards[option]
 	holder:Width(db.width)
 
 	for _, frame in pairs(tableName) do
@@ -40,7 +41,7 @@ function mod:UpdateHolderDimensions(holder, option, tableName)
 end
 
 function mod:ToggleTransparency(holder, option)
-	local db = E.db.dashboards[option]
+	local db = E.db.benikui.dashboards[option]
 	if not db.backdrop then
 		holder.backdrop:SetTemplate("NoBackdrop")
 		if holder.backdrop.shadow then
@@ -62,7 +63,7 @@ end
 function mod:ToggleStyle(holder, option)
 	if E.db.benikui.general.benikuiStyle ~= true then return end
 
-	local db = E.db.dashboards[option]
+	local db = E.db.benikui.dashboards[option]
 	if db.style then
 		holder.backdrop.style:Show()
 	else
@@ -72,36 +73,36 @@ end
 
 function mod:FontStyle(tableName)
 	for _, frame in pairs(tableName) do
-		if E.db.dashboards.dashfont.useDTfont then
+		if E.db.benikui.dashboards.dashfont.useDTfont then
 			frame.Text:FontTemplate(LSM:Fetch('font', E.db.datatexts.font), E.db.datatexts.fontSize, E.db.datatexts.fontOutline)
 		else
-			frame.Text:FontTemplate(LSM:Fetch('font', E.db.dashboards.dashfont.dbfont), E.db.dashboards.dashfont.dbfontsize, E.db.dashboards.dashfont.dbfontflags)
+			frame.Text:FontTemplate(LSM:Fetch('font', E.db.benikui.dashboards.dashfont.dbfont), E.db.benikui.dashboards.dashfont.dbfontsize, E.db.benikui.dashboards.dashfont.dbfontflags)
 		end
 	end
 end
 
 function mod:FontColor(tableName)
 	for _, frame in pairs(tableName) do
-		if E.db.dashboards.textColor == 1 then
+		if E.db.benikui.dashboards.textColor == 1 then
 			frame.Text:SetTextColor(classColor.r, classColor.g, classColor.b)
 		else
-			frame.Text:SetTextColor(BUI:unpackColor(E.db.dashboards.customTextColor))
+			frame.Text:SetTextColor(BUI:unpackColor(E.db.benikui.dashboards.customTextColor))
 		end
 	end
 end
 
 function mod:BarColor(tableName)
 	for _, frame in pairs(tableName) do
-		if E.db.dashboards.barColor == 1 then
+		if E.db.benikui.dashboards.barColor == 1 then
 			frame.Status:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
 		else
-			frame.Status:SetStatusBarColor(E.db.dashboards.customBarColor.r, E.db.dashboards.customBarColor.g, E.db.dashboards.customBarColor.b)
+			frame.Status:SetStatusBarColor(E.db.benikui.dashboards.customBarColor.r, E.db.benikui.dashboards.customBarColor.g, E.db.benikui.dashboards.customBarColor.b)
 		end
 	end
 end
 
 function mod:CreateDashboardHolder(holderName, option)
-	local db = E.db.dashboards[option]
+	local db = E.db.benikui.dashboards[option]
 
 	local holder = CreateFrame('Frame', holderName, E.UIParent)
 	holder:CreateBackdrop('Transparent')
@@ -130,7 +131,7 @@ end
 function mod:CreateDashboard(barHolder, option, hasIcon)
 	local bar = CreateFrame('Button', nil, barHolder)
 	bar:Height(DASH_HEIGHT)
-	bar:Width(E.db.dashboards[option].width or 150)
+	bar:Width(E.db.benikui.dashboards[option].width or 150)
 	bar:Point('TOPLEFT', barHolder, 'TOPLEFT', SPACING, -SPACING)
 	bar:EnableMouse(true)
 
@@ -188,6 +189,7 @@ function mod:Initialize()
 	mod:LoadSystem()
 	mod:LoadProfessions()
 	mod:LoadReputations()
+	if E.Wrath then mod:LoadTokens() end
 end
 
 BUI:RegisterModule(mod:GetName())

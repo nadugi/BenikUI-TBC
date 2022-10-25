@@ -16,9 +16,9 @@ local SPACING = 1
 local boards = {"FPS", "MS", "Durability", "Bags", "Volume"}
 
 function mod:UpdateSystem()
-	local db = E.db.dashboards.system
+	local db = E.db.benikui.dashboards.system
 	local holder = BUI_SystemDashboard
-	local DASH_WIDTH = E.db.dashboards.system.width or 150
+	local DASH_WIDTH = db.width or 150
 
 	if(BUI.SystemDB[1]) then
 		for i = 1, getn(BUI.SystemDB) do
@@ -83,7 +83,7 @@ function mod:UpdateSystemSettings()
 end
 
 function mod:CreateSystemDashboard()
-	local DASH_WIDTH = E.db.dashboards.system.width or 150
+	local DASH_WIDTH = E.db.benikui.dashboards.system.width or 150
 
 	self.sysHolder = self:CreateDashboardHolder('BUI_SystemDashboard', 'system')
 	self.sysHolder:Point('TOPLEFT', E.UIParent, 'TOPLEFT', 2, -30)
@@ -98,8 +98,8 @@ function mod:CreateSystemDashboard()
 end
 
 function mod:LoadSystem()
-	if E.db.dashboards.system.enableSystem ~= true then return end
-	local db = E.db.dashboards.system.chooseSystem
+	if E.db.benikui.dashboards.system.enableSystem ~= true then return end
+	local db = E.db.benikui.dashboards.system.chooseSystem
 
 	if (db.FPS ~= true and db.MS ~= true and db.Bags ~= true and db.Durability ~= true and db.Volume ~= true) then return end
 
