@@ -13,7 +13,7 @@ local GetProfessionInfo = GetProfessionInfo
 local CastSpellByName = CastSpellByName
 local TRADE_SKILLS, PROFESSIONS_FISHING = TRADE_SKILLS, PROFESSIONS_FISHING
 
--- GLOBALS: hooksecurefunc, MMHolder
+-- GLOBALS: hooksecurefunc
 
 local DASH_HEIGHT = 20
 local DASH_SPACING = 3
@@ -168,13 +168,13 @@ function mod:ProfessionsEvents()
 end
 
 function mod:CreateProfessionsDashboard()
-	local mapholderWidth = E.private.general.minimap.enable and MMHolder:GetWidth() or 150
+	local mapholderWidth = E.private.general.minimap.enable and _G.ElvUI_MinimapHolder:GetWidth() or 150
 	local DASH_WIDTH = E.db.benikui.dashboards.professions.width or 150
 
 	self.proHolder = self:CreateDashboardHolder('BUI_ProfessionsDashboard', 'professions')
 
 	if E.private.general.minimap.enable then
-		self.proHolder:Point('TOPLEFT', MMHolder, 'BOTTOMLEFT', 0, -5)
+		self.proHolder:Point('TOPLEFT', _G.ElvUI_MinimapHolder, 'BOTTOMLEFT', 0, -5)
 	else
 		self.proHolder:Point('TOPLEFT', E.UIParent, 'TOPLEFT', 2, -120)
 	end
