@@ -1,3 +1,9 @@
+v2.02 - Oct 26, 2022
+The db had to be updated. This may result of some settings reset
+Added RXPGuides skin. User request
+Enabled Tokens for WotLK
+Fixed Stance bar shadows
+
 v2.01 - Oct 2, 2022
 Applied ElvUI changes that were not released yet
 
