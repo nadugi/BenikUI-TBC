@@ -1,3 +1,6 @@
+v2.03 - Oct 26, 2022
+Fixed Profession Dashboard error
+
 v2.02 - Oct 26, 2022
 The db had to be updated. This may result of some settings reset
 Added RXPGuides skin. User request
