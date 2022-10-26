@@ -56,7 +56,7 @@ local function UpdateSystemOptions()
 			order = optionOrder + 1,
 			type = 'toggle',
 			name = boardname,
-			desc = L['Enable/Disable ']..boardname,
+			desc = L['Enable/Disable']..boardname,
 			get = function(info) return E.db.benikui.dashboards.system.chooseSystem[boardname] end,
 			set = function(info, value) E.db.benikui.dashboards.system.chooseSystem[boardname] = value; E:StaticPopup_Show('PRIVATE_RL'); end,
 		}
@@ -136,7 +136,7 @@ local function UpdateProfessionOptions()
 				order = optionOrder + 1,
 				type = 'toggle',
 				name = skillName,
-				desc = L['Enable/Disable '] .. skillName,
+				desc = L['Enable/Disable'] .. skillName,
 				get = function(info)
 					return E.private.dashboards.professions.chooseProfessions[skillIndex]
 				end,
