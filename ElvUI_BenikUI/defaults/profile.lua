@@ -10,10 +10,6 @@ P['unitframe']['units']['target']['power']['vertical'] = false
 P['unitframe']['units']['party']['portrait']['height'] = 0
 P['unitframe']['units']['party']['portrait']['transparent'] = false
 
--- Databars text yOffset
-P['databars']['experience']['textYoffset'] = 0
-P['databars']['reputation']['textYoffset'] = 0
-
 -- Add Minimap styling toggle default
 P['general']['minimap']['benikuiStyle'] = true
 
