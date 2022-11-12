@@ -1,3 +1,7 @@
+v2.04 - Nov 12, 2022
+Adopt ElvUI 13.01 changes
+Updated the Patreon team
+
 v2.03 - Oct 26, 2022
 Fixed Profession Dashboard error
 

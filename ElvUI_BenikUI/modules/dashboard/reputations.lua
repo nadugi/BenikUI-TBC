@@ -32,7 +32,7 @@ local function OnMouseUp(self, btn)
 			E.private.dashboards.reputations.chooseReputations[id] = false
 			mod:UpdateReputations()
 		else
-			E:ToggleOptionsUI()
+			E:ToggleOptions()
 			local ACD = E.Libs.AceConfigDialog
 			if ACD then ACD:SelectGroup("ElvUI", "benikui") end
 		end
