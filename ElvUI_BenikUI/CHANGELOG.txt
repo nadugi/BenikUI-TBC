@@ -1,3 +1,8 @@
+v2.05 - Nov 27, 2022
+Updated the Dashboards with the Retail options
+Replaced bad vibes with good vibes
+Removed Databar text y-offset. It's in ElvUI now
+
 v2.04 - Nov 12, 2022
 Adopt ElvUI 13.01 changes
 Updated the Patreon team
