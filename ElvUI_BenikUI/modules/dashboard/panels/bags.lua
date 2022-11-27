@@ -15,7 +15,7 @@ local statusColors = {
 }
 
 local function OnEvent(self)
-	local boardName = _G['BUI_Bags']
+	local bar = _G['BUI_Bags']
 
 	local free, total = 0, 0
 	local textColor = 1
@@ -34,9 +34,9 @@ local function OnEvent(self)
 	end
 
 	local displayFormat = join("", "%s", statusColors[textColor], "%d/%d|r")
-	boardName.Text:SetFormattedText(displayFormat, L["Bags"]..': ', total - free, total)
-	boardName.Status:SetMinMaxValues(0, total)
-	boardName.Status:SetValue(total - free)
+	bar.Text:SetFormattedText(displayFormat, L["Bags"]..': ', total - free, total)
+	bar.Status:SetMinMaxValues(0, total)
+	bar.Status:SetValue(total - free)
 end
 
 local function OnClick()
@@ -44,11 +44,11 @@ local function OnClick()
 end
 
 function mod:CreateBags()
-	local boardName = _G['BUI_Bags']
+	local bar = _G['BUI_Bags']
 
-	boardName.Status:SetScript('OnEvent', OnEvent)
-	boardName:SetScript('OnMouseDown', OnClick)
+	bar.Status:SetScript('OnEvent', OnEvent)
+	bar:SetScript('OnMouseDown', OnClick)
 
-	boardName.Status:RegisterEvent('BAG_UPDATE')
-	boardName.Status:RegisterEvent('PLAYER_ENTERING_WORLD')
+	bar.Status:RegisterEvent('BAG_UPDATE')
+	bar.Status:RegisterEvent('PLAYER_ENTERING_WORLD')
 end
