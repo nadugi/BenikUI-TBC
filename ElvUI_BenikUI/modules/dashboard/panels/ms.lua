@@ -16,13 +16,15 @@ local statusColors = {
 }
 
 function mod:CreateMs()
-	local boardName = _G['BUI_MS']
+	local bar = _G['BUI_MS']
+	local db = E.db.benikui.dashboards.system
+	local holder = _G.BUI_SystemDashboard
 
-	boardName:SetScript('OnEnter', function(self)
+	bar:SetScript('OnEnter', function(self)
 		if not InCombatLockdown() then
 			local value = 0
 			local text = ""
-			GameTooltip:SetOwner(boardName, 'ANCHOR_RIGHT', 5, 0)
+			GameTooltip:SetOwner(bar, 'ANCHOR_RIGHT', 5, 0)
 			GameTooltip:ClearLines()
 			if E.db.benikui.dashboards.system.latency == 2 then
 				value = (select(3, GetNetStats())) -- Home
@@ -33,14 +35,21 @@ function mod:CreateMs()
 			end
 			GameTooltip:AddDoubleLine(text, value, 0.7, 0.7, 1, 0.84, 0.75, 0.65)
 			GameTooltip:Show()
+
+			if db.mouseover then
+				E:UIFrameFadeIn(holder, 0.2, holder:GetAlpha(), 1)
+			end
 		end
 	end)
 
-	boardName:SetScript('OnLeave', function(self)
+	bar:SetScript('OnLeave', function(self)
+		if db.mouseover then
+			E:UIFrameFadeOut(holder, 0.2, holder:GetAlpha(), 0)
+		end
 		GameTooltip:Hide()
 	end)
 
-	boardName.Status:SetScript('OnUpdate', function(self, elapsed)
+	bar.Status:SetScript('OnUpdate', function(self, elapsed)
 		if LastUpdate > 0 then
 			LastUpdate = LastUpdate - elapsed
 			return
@@ -76,7 +85,7 @@ function mod:CreateMs()
 				displayFormat = join('', 'MS (', WORLD, '): ', statusColors[mscolor], '%d|r')
 			end
 
-			boardName.Text:SetFormattedText(displayFormat, value)
+			bar.Text:SetFormattedText(displayFormat, value)
 			LastUpdate = 1
 		end
 	end)

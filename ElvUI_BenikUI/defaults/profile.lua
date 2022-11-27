@@ -187,10 +187,12 @@ P['benikui'] = {
 			['enableSystem'] = true,
 			['combat'] = false,
 			['width'] = 150,
+			['barHeight'] = 1,
 			['style'] = true,
 			['transparency'] = true,
 			['backdrop'] = true,
 			['mouseover'] = false,
+			['textAlign'] = 'LEFT',
 			['chooseSystem'] = {
 				['FPS'] = true,
 				['MS'] = true,
@@ -200,37 +202,41 @@ P['benikui'] = {
 			},
 			['latency'] = 2,
 		},
-
+	
 		['tokens'] = {
 			['enableTokens'] = true,
 			['combat'] = true,
 			['mouseover'] = false,
 			['tooltip'] = true,
 			['width'] = 150,
+			['barHeight'] = 1,
 			['style'] = true,
 			['transparency'] = true,
 			['backdrop'] = true,
 			['zeroamount'] = false,
 			['weekly'] = true,
+			['iconPosition'] = 'LEFT'
 		},
-
+	
 		['professions'] = {
 			['enableProfessions'] = true,
 			['combat'] = true,
 			['mouseover'] = false,
 			['width'] = 150,
+			['barHeight'] = 1,
 			['style'] = true,
 			['transparency'] = true,
 			['backdrop'] = true,
 			['capped'] = false,
 			['iconPosition'] = 'RIGHT'
 		},
-
+	
 		['reputations'] = {
 			['enableReputations'] = true,
 			['combat'] = true,
 			['mouseover'] = false,
 			['width'] = 200,
+			['barHeight'] = 1,
 			['style'] = true,
 			['transparency'] = true,
 			['backdrop'] = true,
