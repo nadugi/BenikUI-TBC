@@ -3,6 +3,7 @@ local mod = BUI:GetModule('Dashboards')
 local LSM = E.LSM
 
 local CreateFrame = CreateFrame
+local SECONDARY_SKILLS = SECONDARY_SKILLS
 
 local DASH_HEIGHT = 20
 local SPACING = 1
@@ -14,6 +15,7 @@ BUI.SystemDB = {}
 BUI.TokensDB = {}
 BUI.ProfessionsDB = {}
 BUI.FactionsDB = {}
+BUI.SecondarySkill = SECONDARY_SKILLS:gsub(":", '')
 
 function mod:EnableDisableCombat(holder, option)
 	local db = E.db.benikui.dashboards[option]
