@@ -1,3 +1,6 @@
+v2.07 - Dec 26, 2022
+Removed AcceptFrame from AddonSkins.
+
 v2.06 - Dec 3, 2022
 Fixed Professions Dashboards not showing the Secondary Skills. Credit: thurin
 
