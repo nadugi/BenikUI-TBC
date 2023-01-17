@@ -44,7 +44,7 @@ function BU:RecolorTargetDetachedPortraitStyle()
 	do
 		local portrait = frame.Portrait
 		local power = frame.Power
-		local r, g, b
+		local r, g, b = 0, 0, 0
 
 		if frame.USE_PORTRAIT and portrait.backdrop.style and E.db.benikui.unitframes.target.portraitStyle then
 			local maxValue = UnitPowerMax("target")
