@@ -1,3 +1,7 @@
+v2.08 - Jan 17, 2023
+Prevent a potential target error
+Fixed errors on Bags Dashboard, Fonts and a missing backdrop
+
 v2.07 - Dec 26, 2022
 Removed AcceptFrame from AddonSkins.
 
