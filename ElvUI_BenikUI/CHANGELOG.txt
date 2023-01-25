@@ -1,3 +1,7 @@
+2.09 - Jan 25, 2023
+Fixed Actionbars
+Bump toc version for Wrath
+
 v2.08 - Jan 17, 2023
 Prevent a potential target error
 Fixed errors on Bags Dashboard, Fonts and a missing backdrop
