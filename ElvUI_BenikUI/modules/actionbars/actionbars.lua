@@ -53,9 +53,11 @@ function mod:ToggleStyle()
 		end
 	end
 
-	for i = 13, 15 do
-		if _G['ElvUI_Bar'..i].backdrop.style then
-			_G['ElvUI_Bar'..i].backdrop.style:SetShown(db['bar'..i])
+	if E.Wrath then
+		for i = 13, 15 do
+			if _G['ElvUI_Bar'..i].backdrop.style then
+				_G['ElvUI_Bar'..i].backdrop.style:SetShown(db['bar'..i])
+			end
 		end
 	end
 
