@@ -22,21 +22,14 @@ local styleOtherBacks = {ElvUI_BarPet, ElvUI_StanceBar, ElvUI_MicroBar}
 
 function mod:StyleBackdrops()
 	-- Actionbar backdrops
-	for i = 1, 10 do
-		local styleBacks = {_G['ElvUI_Bar'..i]}
-		for _, frame in pairs(styleBacks) do
-			if frame.backdrop then
-				frame.backdrop:BuiStyle('Outside', nil, true, true)
-			end
+	for _, bar in pairs(AB.handledBars) do
+		if bar then
+			bar.backdrop:BuiStyle('Outside', nil, true, true)
 
-			-- Button Shadows
 			if BUI.ShadowMode and not MasqueGroup then
-				for k = 1, 12 do
-					local buttonBars = {_G["ElvUI_Bar"..i.."Button"..k]}
-					for _, button in pairs(buttonBars) do
-						if button and not button.shadow then
-							button:CreateSoftShadow()
-						end
+				for _, button in ipairs(bar.buttons) do
+					if button then
+						button:CreateSoftShadow()
 					end
 				end
 			end
@@ -52,24 +45,33 @@ function mod:StyleBackdrops()
 end
 
 function mod:ToggleStyle()
+	local db = E.db.benikui.actionbars.style
 	-- Actionbar backdrops
 	for i = 1, 10 do
 		if _G['ElvUI_Bar'..i].backdrop.style then
-			_G['ElvUI_Bar'..i].backdrop.style:SetShown(E.db.benikui.actionbars.style['bar'..i])
+			_G['ElvUI_Bar'..i].backdrop.style:SetShown(db['bar'..i])
+		end
+	end
+
+	if E.Wrath then
+		for i = 13, 15 do
+			if _G['ElvUI_Bar'..i].backdrop.style then
+				_G['ElvUI_Bar'..i].backdrop.style:SetShown(db['bar'..i])
+			end
 		end
 	end
 
 	-- Other bar backdrops
 	if _G.ElvUI_BarPet.backdrop.style then
-		_G.ElvUI_BarPet.backdrop.style:SetShown(E.db.benikui.actionbars.style.petbar)
+		_G.ElvUI_BarPet.backdrop.style:SetShown(db.petbar)
 	end
 
 	if _G.ElvUI_StanceBar.backdrop.style then
-		_G.ElvUI_StanceBar.backdrop.style:SetShown(E.db.benikui.actionbars.style.stancebar)
+		_G.ElvUI_StanceBar.backdrop.style:SetShown(db.stancebar)
 	end
 
 	if _G.ElvUI_MicroBar.backdrop.style then
-		_G.ElvUI_MicroBar.backdrop.style:SetShown(E.db.benikui.actionbars.style.microbar)
+		_G.ElvUI_MicroBar.backdrop.style:SetShown(db.microbar)
 	end
 end
 

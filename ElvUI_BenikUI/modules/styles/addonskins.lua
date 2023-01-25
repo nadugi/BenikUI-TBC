@@ -332,9 +332,3 @@ if AS:CheckAddOn('TinyInspect') then AS:RegisterSkin('TinyInspect', TinyInspectD
 if AS:CheckAddOn('ArkInventory') then AS:RegisterSkin('ArkInventory', ArkInventoryDecor, 2) end
 if AS:CheckAddOn('Storyline') then AS:RegisterSkin('Storyline', StorylineDecor, 2) end
 LibrariesDecor()
-
-hooksecurefunc(AS, 'AcceptFrame', function(self)
-	if not _G["AcceptFrame"].style then
-		_G["AcceptFrame"]:BuiStyle('Outside')
-	end
-end)

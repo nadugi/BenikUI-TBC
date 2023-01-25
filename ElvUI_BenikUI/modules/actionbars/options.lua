@@ -64,6 +64,23 @@ local function abTable()
 		}
 	end
 
+	if E.Wrath then
+		for i = 13, 15 do
+			local name = L["Bar "]..i
+			E.Options.args.benikui.args.actionbars.args.style.args['bar'..i] = {
+				order = i,
+				type = 'toggle',
+				name = name,
+				disabled = function() return not E.private.actionbar.enable end,
+				get = function(info) return E.db.benikui.actionbars.style[ info[#info] ] end,
+				set = function(info, value)
+					E.db.benikui.actionbars.style[ info[#info] ] = value;
+					mod:ToggleStyle()
+				end,
+			}
+		end
+	end
+
 	E.Options.args.benikui.args.actionbars.args.style.args.spacer = {
 		order = 20,
 		type = 'header',

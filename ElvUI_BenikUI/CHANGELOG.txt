@@ -1,3 +1,22 @@
+2.09 - Jan 25, 2023
+Fixed Actionbars
+Bump toc version for Wrath
+
+v2.08 - Jan 17, 2023
+Prevent a potential target error
+Fixed errors on Bags Dashboard, Fonts and a missing backdrop
+
+v2.07 - Dec 26, 2022
+Removed AcceptFrame from AddonSkins.
+
+v2.06 - Dec 3, 2022
+Fixed Professions Dashboards not showing the Secondary Skills. Credit: thurin
+
+v2.05 - Nov 27, 2022
+Updated the Dashboards with the Retail options
+Replaced bad vibes with good vibes
+Removed Databar text y-offset. It's in ElvUI now
+
 v2.04 - Nov 12, 2022
 Adopt ElvUI 13.01 changes
 Updated the Patreon team
