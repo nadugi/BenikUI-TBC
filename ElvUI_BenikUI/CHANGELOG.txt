@@ -1,3 +1,6 @@
+2.10 - Feb 9, 2023
+Fix for the Datatext error
+
 2.09 - Jan 25, 2023
 Fixed Actionbars
 Bump toc version for Wrath
