@@ -153,15 +153,13 @@ function BUI:Dropmenu(list, frame, parent, pos, xOffset, yOffset, delay, addedSi
 		r, g, b = BUI:unpackColor(E.db.benikui.colors.customGameMenuColor)
 	elseif db == 3 then
 		r, g, b = unpack(E.media.rgbvaluecolor)
-	else
-		r, g, b = BUI:getCovenantColor()
 	end
 
 	if not frame.buttons then
 		frame.buttons = {}
-		frame:SetParent(parent)
 		frame:SetFrameStrata('DIALOG')
 		frame:SetClampedToScreen(true)
+		frame:SetParent(parent)
 		tinsert(UISpecialFrames, frame:GetName())
 		frame:Hide()
 	end
